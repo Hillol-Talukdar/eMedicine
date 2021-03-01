@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu } from "antd";
 import {
     LoginOutlined,
@@ -10,7 +11,7 @@ import {
 const { SubMenu } = Menu;
 
 const Header = () => {
-    const [current, setCurrent] = useState("");
+    const [current, setCurrent] = useState("home");
 
     const handleClick = (e) => {
         setCurrent(e.key);
@@ -24,21 +25,21 @@ const Header = () => {
             mode="horizontal"
         >
             <Menu.Item key="home" icon={<HomeOutlined />}>
-                Home
+                <Link to="/">Home</Link>
             </Menu.Item>
             <Menu.Item
                 key="register"
                 icon={<UserAddOutlined />}
                 style={{ float: "right" }}
             >
-                Register
+                <Link to="/register">Register</Link>
             </Menu.Item>
             <Menu.Item
                 key="login"
                 icon={<LoginOutlined />}
                 style={{ float: "right" }}
             >
-                Login
+                <Link to="/login">Login</Link>
             </Menu.Item>
             <SubMenu key="SubMenu" icon={<UserOutlined />} title="UserName">
                 <Menu.Item key="setting:1">Option 1</Menu.Item>

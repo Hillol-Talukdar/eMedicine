@@ -8,13 +8,12 @@ import Header from "./components/navbar/Header";
 const App = () => {
     return (
         <>
-            <Header>
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/register" component={Register} />
-                </Switch>
-            </Header>
+            <Header />
+            <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+            </Switch>
         </>
     );
 };
