@@ -6,6 +6,7 @@ import {
     HomeOutlined,
     UserAddOutlined,
     UserOutlined,
+    LogoutOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -44,6 +45,9 @@ const Header = () => {
             <SubMenu key="SubMenu" icon={<UserOutlined />} title="UserName">
                 <Menu.Item key="setting:1">Option 1</Menu.Item>
                 <Menu.Item key="setting:2">Option 2</Menu.Item>
+                <Menu.Item key="logout" icon={<LogoutOutlined />}>
+                    <Link to="/logout">Logout</Link>
+                </Menu.Item>
             </SubMenu>
         </Menu>
     );
