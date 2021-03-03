@@ -82,13 +82,13 @@ const Login = ({ history }) => {
         </form>
     );
 
-    const googleLoginButton = () => {
+    const googleLoginButton = () => (
         <div class="d-grid gap-2 col-6 mx-auto mt-3">
             <button class="btn btn-outline-primary" type="submit">
                 Login with Google
             </button>
-        </div>;
-    };
+        </div>
+    );
 
     return (
         <div className="d-flex p-5 justify-content-center">
@@ -98,8 +98,8 @@ const Login = ({ history }) => {
                 </div>
                 <div className="mt-3">
                     {loading ? (
-                        <h4 className="d-flex justify-content-center">
-                            Loading...
+                        <h4 className="d-flex justify-content-center text-primary">
+                            Logging in...
                         </h4>
                     ) : (
                         <h4 className="d-flex justify-content-center">
@@ -108,13 +108,7 @@ const Login = ({ history }) => {
                     )}
 
                     {loginForm()}
-                    {/* {googleLoginButton()} */}
-
-                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                        <button class="btn btn-outline-primary" type="submit">
-                            Login with Google
-                        </button>
-                    </div>
+                    {googleLoginButton()}
                 </div>
             </div>
         </div>
