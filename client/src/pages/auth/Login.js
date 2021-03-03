@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 const Login = ({ history }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loaing, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     let dispatch = useDispatch();
 
@@ -40,6 +40,10 @@ const Login = ({ history }) => {
             toast.error(error.message);
             setLoading(false);
         }
+    };
+
+    const googleLogin = () => {
+        //
     };
 
     const loginForm = () => (
@@ -78,6 +82,14 @@ const Login = ({ history }) => {
         </form>
     );
 
+    const googleLoginButton = () => {
+        <div class="d-grid gap-2 col-6 mx-auto mt-3">
+            <button class="btn btn-outline-primary" type="submit">
+                Login with Google
+            </button>
+        </div>;
+    };
+
     return (
         <div className="d-flex p-5 justify-content-center">
             <div className="row align-items-center">
@@ -85,10 +97,24 @@ const Login = ({ history }) => {
                     <h1 className="text-primary">eMedicine</h1>
                 </div>
                 <div className="mt-3">
-                    <h4 className="d-flex justify-content-center">
-                        Login With Your Account
-                    </h4>
+                    {loading ? (
+                        <h4 className="d-flex justify-content-center">
+                            Loading...
+                        </h4>
+                    ) : (
+                        <h4 className="d-flex justify-content-center">
+                            Login With Your Account
+                        </h4>
+                    )}
+
                     {loginForm()}
+                    {/* {googleLoginButton()} */}
+
+                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                        <button class="btn btn-outline-primary" type="submit">
+                            Login with Google
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
