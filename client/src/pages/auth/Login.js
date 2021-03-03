@@ -3,13 +3,43 @@ import { Divider } from "antd";
 import ColumnGroup from "antd/lib/table/ColumnGroup";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
-const Login = () => {
+const Login = ({ history }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loaing, setLoading] = useState(false);
+
+    let dispatch = useDispatch();
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
+        try {
+            const result = await auth.signInWithEmailAndPassword(
+                email,
+                password
+            );
+
+            const { user } = result;
+            const idTokenResult = await user.getIdTokenResult();
+
+            dispatch({
+                type: "LOGGED_IN_USER",
+                payload: {
+                    email: user.email,
+                    token: idTokenResult.token,
+                },
+            });
+
+            history.push("/");
+
+            toast.success(`Welcome, ${email} to eMedicne.`);
+        } catch (error) {
+            toast.error(error.message);
+            setLoading(false);
+        }
     };
 
     const loginForm = () => (
