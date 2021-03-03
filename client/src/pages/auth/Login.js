@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Divider } from "antd";
 import ColumnGroup from "antd/lib/table/ColumnGroup";
-import { auth } from "../../firebase";
+import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { GoogleCircleFilled } from "@ant-design/icons";
@@ -43,8 +43,25 @@ const Login = ({ history }) => {
         }
     };
 
-    const googleLogin = () => {
-        //
+    const googleLogin = async () => {
+        auth.signInWithPopup(googleAuthProvider)
+            .then(async (result) => {
+                const { user } = result;
+                const idTokenResult = await user.getIdTokenResult();
+
+                dispatch({
+                    type: "LOGGED_IN_USER",
+                    payload: {
+                        email: user.email,
+                        token: idTokenResult.token,
+                    },
+                });
+                history.push("/");
+            })
+            .catch((error) => {
+                console.log(error.message);
+                toast.error(error.message);
+            });
     };
 
     const loginForm = () => (
@@ -95,7 +112,7 @@ const Login = ({ history }) => {
 
     const googleLoginButton = () => (
         <div class="d-grid gap-2 col-6 mx-auto mt-3">
-            <button class="btn btn-danger" type="submit">
+            <button class="btn btn-danger" type="submit" onClick={googleLogin}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
