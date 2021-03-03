@@ -44,7 +44,11 @@ const RegistrationDone = ({ history }) => {
                 const idTokenResult = await user.getIdTokenResult();
                 //deleting email
                 window.localStorage.removeItem("emailForSignIn");
-                toast.success("Registration Done! Welcome to eMedicine");
+                toast.success(
+                    `Hi ${
+                        user.email.split("@")[0]
+                    }, Your registration is done! Welcome to eMedicine!`
+                );
                 //redirecting to the expected page
                 history.push("/");
             }

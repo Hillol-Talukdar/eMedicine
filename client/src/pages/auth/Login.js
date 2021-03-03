@@ -35,8 +35,9 @@ const Login = ({ history }) => {
             });
 
             history.push("/");
-
-            toast.success(`Welcome, ${email} to eMedicne.`);
+            toast.success(
+                `Hi ${user.email.split("@")[0]}, Welcome to eMedicne again!`
+            );
         } catch (error) {
             toast.error(error.message);
             setLoading(false);
@@ -57,6 +58,9 @@ const Login = ({ history }) => {
                     },
                 });
                 history.push("/");
+                toast.success(
+                    `Hi ${user.email.split("@")[0]}, Welcome to eMedicne again!`
+                );
             })
             .catch((error) => {
                 console.log(error.message);
