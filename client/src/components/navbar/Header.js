@@ -11,6 +11,7 @@ import {
 import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const { SubMenu } = Menu;
 
@@ -32,6 +33,7 @@ const Header = () => {
             paylaod: null,
         });
         history.push("/login");
+        toast.success("Logged out successfully! See you soon!");
     };
 
     return (
