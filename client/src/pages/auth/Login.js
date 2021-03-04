@@ -133,9 +133,9 @@ const Login = ({ history }) => {
         </div>
     );
 
-    const forgotPassword = () => (
+    const resetPassword = () => (
         <div class="d-grid gap-2 col-6 mx-auto mt-3">
-            <Link class="btn btn-dark" to="/forgot/password">
+            <Link class="btn btn-dark" to="/reset/password">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="mb-1"
@@ -171,7 +171,7 @@ const Login = ({ history }) => {
                     )}
                     {loginForm()}
                     {googleLoginButton()}
-                    {forgotPassword()}
+                    {resetPassword()}
                 </div>
             </div>
         </div>
