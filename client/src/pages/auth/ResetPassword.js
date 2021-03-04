@@ -57,7 +57,7 @@ const ResetPassword = ({ history }) => {
                 title="Entering your email will make this button enabled"
             >
                 <button class="btn btn-primary" type="submit" disabled={!email}>
-                    Submit
+                    Reset
                 </button>
             </div>
         </form>
