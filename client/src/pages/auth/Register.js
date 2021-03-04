@@ -14,7 +14,7 @@ const Register = () => {
             return;
         }
         const googleConfig = {
-            url: "http://localhost:3000/register/done",
+            url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
             // This must be true.
             handleCodeInApp: true,
         };

@@ -9,6 +9,25 @@ const ResetPassword = ({ history }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
+        const googleConfig = {
+            url: process.env.REACT_APP_RESET_PASSWORD_REDIRECT_URL,
+            // This must be true.
+            handleCodeInApp: true,
+        };
+
+        await auth
+            .sendPasswordResetEmail(email, googleConfig)
+            .then(() => {
+                setEmail("");
+                setLoading(false);
+                toast.success("Check your email for password reset link");
+            })
+            .catch((error) => {
+                setLoading(false);
+                toast.error(error.message);
+            });
     };
 
     const resetForm = () => (
@@ -27,7 +46,7 @@ const ResetPassword = ({ history }) => {
                 class="d-grid gap-2 col-6 mx-auto mt-3"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Fill email to enable this button"
+                title="Entering your email will make this button enabled"
             >
                 <button class="btn btn-primary" type="submit" disabled={!email}>
                     Submit
@@ -46,7 +65,7 @@ const ResetPassword = ({ history }) => {
                 <div className="mt-3">
                     {loading ? (
                         <h4 className="d-flex justify-content-center text-primary">
-                            Reseting...
+                            Loading...
                         </h4>
                     ) : (
                         <h4 className="d-flex justify-content-center">
