@@ -5,6 +5,19 @@ import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+const createOrUpdateUser = async (authtoken) => {
+    return await axios.post(
+        `${process.env.REACT_APP_API}/user-create-or-update`,
+        {},
+        {
+            headers: {
+                authtoken,
+            },
+        }
+    );
+};
 
 const Login = ({ history }) => {
     const [email, setEmail] = useState("");
@@ -34,15 +47,19 @@ const Login = ({ history }) => {
             const { user } = result;
             const idTokenResult = await user.getIdTokenResult();
 
-            dispatch({
-                type: "LOGGED_IN_USER",
-                payload: {
-                    email: user.email,
-                    token: idTokenResult.token,
-                },
-            });
+            createOrUpdateUser(idTokenResult.token)
+                .then((res) => console.log("create or up response", res))
+                .catch();
 
-            history.push("/");
+            // dispatch({
+            //     type: "LOGGED_IN_USER",
+            //     payload: {
+            //         email: user.email,
+            //         token: idTokenResult.token,
+            //     },
+            // });
+
+            // history.push("/");
             toast.success(
                 `Hi ${user.email.split("@")[0]}, Welcome to eMedicne again!`
             );
