@@ -25,7 +25,7 @@ app.use(cors());
 //route
 app.get("/api", (req, res) => {
     res.json({
-        data: "Node API Working!",
+        data: "Congratulatons! Node API Working!",
     });
 });
 
