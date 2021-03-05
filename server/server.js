@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const filesystem = require("fs");
 require("dotenv").config();
+
+//importing routes
+// const authRoutes = require("./routes/auth");
 
 const app = express();
 
@@ -18,16 +22,17 @@ mongoose
     .catch((err) => console.log(`DB CONNECTION ERROR ${err}`));
 
 //middlewares
-app.use(morgan("dev"));
+app.use(morgan("dev")); //for tracking the requests on command prompt
 app.use(bodyParser.json({ limit: "2mb" }));
 app.use(cors());
 
+//routes middleware
+// app.use("/api", authRoutes);
+filesystem
+    .readdirSync("./routes")
+    .map((rt) => app.use("/api", require("./routes/" + rt)));
+
 //route
-app.get("/api", (req, res) => {
-    res.json({
-        data: "Congratulatons! Node API Working!",
-    });
-});
 
 //port
 const port = process.env.PORT || 8000;
