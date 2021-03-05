@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const createOrUpdateUser = async (authtoken) => {
+const userCreateOrUpdate = async (authtoken) => {
     return await axios.post(
         `${process.env.REACT_APP_API}/user-create-or-update`,
         {},
@@ -47,7 +47,7 @@ const Login = ({ history }) => {
             const { user } = result;
             const idTokenResult = await user.getIdTokenResult();
 
-            createOrUpdateUser(idTokenResult.token)
+            userCreateOrUpdate(idTokenResult.token)
                 .then((res) => console.log("create or up response", res))
                 .catch();
 
