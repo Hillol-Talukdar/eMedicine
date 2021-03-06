@@ -20,5 +20,4 @@ exports.authCheck = async (req, res, callback) => {
         });
     }
 
-    callback();
 };

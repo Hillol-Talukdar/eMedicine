@@ -80,7 +80,7 @@ const ResetPassword = ({ history }) => {
                             Reset Password
                         </h4>
                     )}
-                    {resetForm()}}
+                    {resetForm()}
                 </div>
             </div>
         </div>
