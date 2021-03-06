@@ -23,3 +23,12 @@ exports.userCreateOrUpdate = async (req, res) => {
         res.json(newUser);
     }
 };
+
+exports.currentUser = async (req, res) => {
+    User.findOne({ email: req.user.email }).exec((error, user) => {
+        if (error) {
+            throw new Error(error);
+        }
+        res.json(user);
+    });
+};
