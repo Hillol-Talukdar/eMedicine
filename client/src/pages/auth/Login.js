@@ -5,8 +5,7 @@ import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {userCreateOrUpdate} from "../../functions/auth";
-
+import { userCreateOrUpdate } from "../../functions/auth";
 
 const Login = ({ history }) => {
     const [email, setEmail] = useState("");
@@ -22,6 +21,14 @@ const Login = ({ history }) => {
     }, [user]);
 
     let dispatch = useDispatch();
+
+    const roleBaseRedirect = (res) => {
+        if (res.data.role == "admin") {
+            history.push("/admin/dashboard");
+        } else {
+            history.push("/user/history");
+        }
+    };
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -49,10 +56,12 @@ const Login = ({ history }) => {
                             _id: res.data._id,
                         },
                     });
+
+                    roleBaseRedirect(res);
                 })
                 .catch();
 
-            history.push("/");
+            // history.push("/");
             toast.success(
                 `Hi ${user.email.split("@")[0]}, Welcome to eMedicne again!`
             );
@@ -80,10 +89,11 @@ const Login = ({ history }) => {
                                 _id: res.data._id,
                             },
                         });
+                        roleBaseRedirect(res);
                     })
                     .catch();
 
-                history.push("/");
+                // history.push("/");
                 toast.success(
                     `Hi ${user.email.split("@")[0]}, Welcome to eMedicne again!`
                 );
