@@ -3,10 +3,16 @@ import ColumnGroup from "antd/lib/table/ColumnGroup";
 import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import {userCreateOrUpdate} from "../../functions/auth";
+
 
 const RegistrationDone = ({ history }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const { user } = useSelector((state) => ({ ...state }));
+    let dispatch = useDispatch();
 
     useEffect(() => {
         setEmail(window.localStorage.getItem("emailForSignIn"));
@@ -49,6 +55,22 @@ const RegistrationDone = ({ history }) => {
                         user.email.split("@")[0]
                     }, Your registration is done! Welcome to eMedicine!`
                 );
+
+                userCreateOrUpdate(idTokenResult.token)
+                    .then((res) => {
+                        dispatch({
+                            type: "LOGGED_IN_USER",
+                            payload: {
+                                name: res.data.name,
+                                email: res.data.email,
+                                token: idTokenResult.token,
+                                role: res.data.role,
+                                _id: res.data._id,
+                            },
+                        });
+                    })
+                    .catch();
+
                 //redirecting to the expected page
                 history.push("/");
             }

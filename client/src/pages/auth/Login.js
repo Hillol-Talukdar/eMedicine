@@ -5,19 +5,8 @@ import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import {userCreateOrUpdate} from "../../functions/auth";
 
-const userCreateOrUpdate = async (authtoken) => {
-    return await axios.post(
-        `${process.env.REACT_APP_API}/user-create-or-update`,
-        {},
-        {
-            headers: {
-                authtoken,
-            },
-        }
-    );
-};
 
 const Login = ({ history }) => {
     const [email, setEmail] = useState("");
@@ -48,18 +37,22 @@ const Login = ({ history }) => {
             const idTokenResult = await user.getIdTokenResult();
 
             userCreateOrUpdate(idTokenResult.token)
-                .then((res) => console.log("create or up response", res))
+                .then((res) => {
+                    // console.log("create or up response", res) // for checking if data is coming from the backend or not
+                    dispatch({
+                        type: "LOGGED_IN_USER",
+                        payload: {
+                            name: res.data.name,
+                            email: res.data.email,
+                            token: idTokenResult.token,
+                            role: res.data.role,
+                            _id: res.data._id,
+                        },
+                    });
+                })
                 .catch();
 
-            // dispatch({
-            //     type: "LOGGED_IN_USER",
-            //     payload: {
-            //         email: user.email,
-            //         token: idTokenResult.token,
-            //     },
-            // });
-
-            // history.push("/");
+            history.push("/");
             toast.success(
                 `Hi ${user.email.split("@")[0]}, Welcome to eMedicne again!`
             );
@@ -75,13 +68,21 @@ const Login = ({ history }) => {
                 const { user } = result;
                 const idTokenResult = await user.getIdTokenResult();
 
-                dispatch({
-                    type: "LOGGED_IN_USER",
-                    payload: {
-                        email: user.email,
-                        token: idTokenResult.token,
-                    },
-                });
+                userCreateOrUpdate(idTokenResult.token)
+                    .then((res) => {
+                        dispatch({
+                            type: "LOGGED_IN_USER",
+                            payload: {
+                                name: res.data.name,
+                                email: res.data.email,
+                                token: idTokenResult.token,
+                                role: res.data.role,
+                                _id: res.data._id,
+                            },
+                        });
+                    })
+                    .catch();
+
                 history.push("/");
                 toast.success(
                     `Hi ${user.email.split("@")[0]}, Welcome to eMedicne again!`
