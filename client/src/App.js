@@ -8,6 +8,7 @@ import Header from "./components/navbar/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ResetPassword from "./pages/auth/ResetPassword";
+import History from "./user/History";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -57,6 +58,7 @@ const App = () => {
                     component={RegistrationDone}
                 />
                 <Route exact path="/reset/password" component={ResetPassword} />
+                <Route exact path="/user/history" component={History} />
             </Switch>
         </>
     );
