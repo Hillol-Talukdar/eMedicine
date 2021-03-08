@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Divider } from "antd";
-import ColumnGroup from "antd/lib/table/ColumnGroup";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
@@ -14,7 +12,7 @@ const Register = ({ history }) => {
         if (user && user.token) {
             history.push("/");
         }
-    }, [user]);
+    }, [user, history]);
 
     const submitHandler = async (e) => {
         e.preventDefault();

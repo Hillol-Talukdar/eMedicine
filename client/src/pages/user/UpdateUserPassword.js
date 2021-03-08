@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import UserPageNavbar from "../../src/components/navbar/UserPageNavbar";
-import { auth } from "../firebase";
+import UserPageNavbar from "../../components/navbar/UserPageNavbar";
+import { auth } from "../../firebase";
 import { toast } from "react-toastify";
-import { AutoComplete } from "antd";
 
 const UpdateUserPassword = () => {
     const [password, setPassword] = useState("");

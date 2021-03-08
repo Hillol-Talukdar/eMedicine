@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Divider } from "antd";
-import ColumnGroup from "antd/lib/table/ColumnGroup";
 import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +16,7 @@ const Login = ({ history }) => {
         if (user && user.token) {
             history.push("/");
         }
-    }, [user]);
+    }, [user, history]);
 
     let dispatch = useDispatch();
 

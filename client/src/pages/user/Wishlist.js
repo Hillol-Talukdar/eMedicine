@@ -1,5 +1,5 @@
 import React from "react";
-import UserPageNavbar from "../../src/components/navbar/UserPageNavbar";
+import UserPageNavbar from "../../components/navbar/UserPageNavbar";
 
 const Wishlist = () => (
     <div class="container-fluid">

@@ -8,14 +8,16 @@ import Header from "./components/navbar/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ResetPassword from "./pages/auth/ResetPassword";
-import History from "./user/History";
-import UpdateUserPassword from "./user/UpdateUserPassword";
-import Wishlist from "./user/Wishlist";
+import History from "./pages/user/History";
+import UpdateUserPassword from "./pages/user/UpdateUserPassword";
+import Wishlist from "./pages/user/Wishlist";
+import AdminRoute from "./components/routes/AdminRoute";
 import UserPrivateRoute from "./components/routes/UserPrivateRoute";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
-import { currentUser, userCreateOrUpdate } from "./functions/auth";
+import { currentUser } from "./functions/auth";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -45,7 +47,7 @@ const App = () => {
 
         // cleanup
         return () => unsubscribe();
-    }, []);
+    }, [dispatch]);
 
     return (
         <>
@@ -75,6 +77,11 @@ const App = () => {
                     exact
                     path="/user/wishlist"
                     component={Wishlist}
+                />
+                <AdminRoute
+                    exact
+                    path="/admin/dashboard"
+                    component={AdminDashboard}
                 />
             </Switch>
         </>

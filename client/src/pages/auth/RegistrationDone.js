@@ -1,22 +1,19 @@
-import { Divider } from "antd";
-import ColumnGroup from "antd/lib/table/ColumnGroup";
 import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import {userCreateOrUpdate} from "../../functions/auth";
-
+import { useDispatch } from "react-redux";
+import { userCreateOrUpdate } from "../../functions/auth";
 
 const RegistrationDone = ({ history }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { user } = useSelector((state) => ({ ...state }));
+
     let dispatch = useDispatch();
 
     useEffect(() => {
         setEmail(window.localStorage.getItem("emailForSignIn"));
-    }, []);
+    }, [history]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
