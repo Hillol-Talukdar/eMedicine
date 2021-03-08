@@ -9,11 +9,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ResetPassword from "./pages/auth/ResetPassword";
 import History from "./user/History";
+import UpdateUserPassword from "./user/UpdateUserPassword";
+import Wishlist from "./user/Wishlist";
 import UserPrivateRoute from "./components/routes/UserPrivateRoute";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
-import { currentUser } from "./functions/auth";
+import { currentUser, userCreateOrUpdate } from "./functions/auth";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -63,6 +65,16 @@ const App = () => {
                     exact
                     path="/user/history"
                     component={History}
+                />
+                <UserPrivateRoute
+                    exact
+                    path="/user/password"
+                    component={UpdateUserPassword}
+                />
+                <UserPrivateRoute
+                    exact
+                    path="/user/wishlist"
+                    component={Wishlist}
                 />
             </Switch>
         </>
