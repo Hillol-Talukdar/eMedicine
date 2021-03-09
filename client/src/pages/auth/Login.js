@@ -21,7 +21,7 @@ const Login = ({ history }) => {
     let dispatch = useDispatch();
 
     const roleBaseRedirect = (res) => {
-        if (res.data.role == "admin") {
+        if (res.data.role === "admin") {
             history.push("/admin/dashboard");
         } else {
             history.push("/user/history");

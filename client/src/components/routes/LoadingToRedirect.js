@@ -9,7 +9,7 @@ const LoadingToRedirect = () => {
         const interval = setInterval(() => {
             setCount((currentCount) => --currentCount);
         }, 1000);
-        count == 0 && history.push("/");
+        count === 0 && history.push("/");
         return () => clearInterval(interval);
     }, [count, history]);
 
