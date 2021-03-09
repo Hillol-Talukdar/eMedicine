@@ -32,11 +32,29 @@ const CreateCategory = () => {
                 toast.success(
                     `${res.data.name} category is created successfully!`
                 );
+                loadAllCategories();
             })
             .catch((err) => {
                 setLoading(false);
                 if (err.response.status == 400) toast.error(err.response.data);
             });
+    };
+
+    const handleRemove = async (slug) => {
+        if (window.confirm("Are you sure, you to delete?")) {
+            setLoading(true);
+            removeACategory(slug, user.token)
+                .then((res) => {
+                    setLoading(false);
+                    toast.error(`${res.data.name} Category is Deleted!`);
+                    loadAllCategories();
+                })
+                .catch((err) => {
+                    setLoading(false);
+                    if (err.response.status == 400)
+                        toast.error(err.response.data);
+                });
+        }
     };
 
     const createCategoryForm = () => (
@@ -108,6 +126,9 @@ const CreateCategory = () => {
 
                                         <span
                                             className="btn btn-sm col-2"
+                                            onClick={() =>
+                                                handleRemove(cat.slug)
+                                            }
                                             style={{ float: "right" }}
                                         >
                                             <svg
