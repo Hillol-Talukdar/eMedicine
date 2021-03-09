@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const UserPageNavbar = () => (
     <nav>
-        <ul className="nav flex-column">
+        <ul className="nav flex-column align-items-center">
             <li className="nav-item">
                 <Link to="/user/history" className="nav-link">
                     History
@@ -11,7 +11,7 @@ const UserPageNavbar = () => (
             </li>
             <li className="nav-item">
                 <Link to="/user/password" className="nav-link">
-                    Password
+                    Change Password
                 </Link>
             </li>
             <li className="nav-item">

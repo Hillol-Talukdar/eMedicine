@@ -1,10 +1,16 @@
 import React from "react";
+import AdminPageNav from "../../components/navbar/AdminPageNavbar";
 
 const AdminDashboard = () => {
     return (
-        <>
-            <p>admin Dashboard</p>
-        </>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <AdminPageNav />
+                </div>
+                <div class="col">This Is Admin Dasboard</div>
+            </div>
+        </div>
     );
 };
 
