@@ -15,6 +15,7 @@ import AdminRoute from "./components/routes/AdminRoute";
 import UserPrivateRoute from "./components/routes/UserPrivateRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import CreateCategory from "./pages/admin/category/CreateCategory";
+import UpdateCategory from "./pages/admin/category/UpdateCategory";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -88,6 +89,11 @@ const App = () => {
                     exact
                     path="/admin/category"
                     component={CreateCategory}
+                />
+                <AdminRoute
+                    exact
+                    path="/admin/category/:slug"
+                    component={UpdateCategory}
                 />
             </Switch>
         </>
