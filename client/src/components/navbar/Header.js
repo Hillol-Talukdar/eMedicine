@@ -7,6 +7,7 @@ import {
     UserAddOutlined,
     UserOutlined,
     LogoutOutlined,
+    DashboardOutlined,
 } from "@ant-design/icons";
 import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
@@ -72,7 +73,17 @@ const Header = () => {
                     style={{ float: "right" }}
                     title={user.email && user.email.split("@")[0]}
                 >
-                    <Menu.Item key="setting:1">Option 1</Menu.Item>
+                    {user && user.role === "subscriber" && (
+                        <Menu.Item icon={<DashboardOutlined />}>
+                            <Link to="/user/history">Dashboard</Link>
+                        </Menu.Item>
+                    )}
+
+                    {user && user.role === "admin" && (
+                        <Menu.Item icon={<DashboardOutlined />}>
+                            <Link to="/admin/dashboard">Dashboard</Link>
+                        </Menu.Item>
+                    )}
                     <Menu.Item icon={<LogoutOutlined />} onClick={logout}>
                         Logout
                     </Menu.Item>
