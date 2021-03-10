@@ -15,6 +15,7 @@ const CreateCategory = () => {
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
+    const [keyword, setKeyword] = useState("");
 
     useEffect(() => {
         loadAllCategories();
@@ -58,13 +59,18 @@ const CreateCategory = () => {
         }
     };
 
+    const handleSearchBox = (e) => {
+        e.preventDefault();
+        setKeyword(e.target.value.toLowerCase());
+    };
+
     return (
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2">
                     <AdminPageNav />
                 </div>
-                <div class="col mt-5">
+                <div class="col mt-4">
                     <h1 className="text-primary text-center">eMedicine</h1>
                     <div className="mt-3">
                         {loading ? (
@@ -96,8 +102,20 @@ const CreateCategory = () => {
                                 </svg>
                             }
                         />
+                        <hr className="mt-5" />
 
-                        <hr />
+                        <div className="row m-auto">
+                            <h3 className="col text-center">All Categories</h3>
+                            <input
+                                type="search"
+                                className="form-control w-50"
+                                placeholder="Search"
+                                value={keyword}
+                                onChange={handleSearchBox}
+                            />
+                        </div>
+                        <hr className="mt-3" />
+
                         <div className="d-flex flex-wrap justify-content-start">
                             {categories.map((cat) => (
                                 <div className="m-auto">
