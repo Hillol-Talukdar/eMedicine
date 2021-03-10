@@ -7,7 +7,7 @@ const Search = ({ keyword, setKeyword, titleText }) => {
 
     return (
         <div className="row m-auto">
-            <h3 className="col text-center">{titleText}</h3>
+            <h3 className="col text-center mt-2">{titleText}</h3>
             <input
                 type="search"
                 className="form-control w-50"
