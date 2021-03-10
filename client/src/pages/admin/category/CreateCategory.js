@@ -64,13 +64,15 @@ const CreateCategory = () => {
         setKeyword(e.target.value.toLowerCase());
     };
 
+    const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+
     return (
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2">
                     <AdminPageNav />
                 </div>
-                <div class="col mt-4">
+                <div class="col mt-5">
                     <h1 className="text-primary text-center">eMedicine</h1>
                     <div className="mt-3">
                         {loading ? (
@@ -79,7 +81,7 @@ const CreateCategory = () => {
                             </h4>
                         ) : (
                             <h4 className="d-flex justify-content-center">
-                                Create Category Now
+                                Create New Category
                             </h4>
                         )}
 
@@ -117,7 +119,7 @@ const CreateCategory = () => {
                         <hr className="mt-3" />
 
                         <div className="d-flex flex-wrap justify-content-start">
-                            {categories.map((cat) => (
+                            {categories.filter(searched(keyword)).map((cat) => (
                                 <div className="m-auto">
                                     <div
                                         className="alert alert-primary text-dark m-3 row"
