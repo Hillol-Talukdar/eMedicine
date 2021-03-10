@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminPageNav from "../../../components/navbar/AdminPageNavbar";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-// import { createAProduct } from "../../../functions/product";
+import { createAProduct } from "../../../functions/product";
 import { Link } from "react-router-dom";
 import Categoryform from "../../../components/forms/Categoryform";
 import Search from "../../../components/forms/Search";
@@ -21,11 +21,11 @@ const CreateProduct = () => {
                     <div className="mt-3">
                         {loading ? (
                             <h4 className="d-flex justify-content-center text-primary">
-                                Creating Category...
+                                Creating Product...
                             </h4>
                         ) : (
                             <h4 className="d-flex justify-content-center">
-                                Create New Category
+                                Create New Product
                             </h4>
                         )}
 
