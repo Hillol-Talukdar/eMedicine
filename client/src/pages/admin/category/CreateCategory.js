@@ -9,6 +9,7 @@ import {
 } from "../../../functions/category";
 import { Link } from "react-router-dom";
 import Categoryform from "../../../components/forms/Categoryform";
+import Search from "../../../components/forms/Search";
 
 const CreateCategory = () => {
     const { user } = useSelector((state) => ({ ...state }));
@@ -59,11 +60,6 @@ const CreateCategory = () => {
         }
     };
 
-    const handleSearchBox = (e) => {
-        e.preventDefault();
-        setKeyword(e.target.value.toLowerCase());
-    };
-
     const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
     return (
@@ -105,17 +101,11 @@ const CreateCategory = () => {
                             }
                         />
                         <hr className="mt-5" />
-
-                        <div className="row m-auto">
-                            <h3 className="col text-center">All Categories</h3>
-                            <input
-                                type="search"
-                                className="form-control w-50"
-                                placeholder="Search"
-                                value={keyword}
-                                onChange={handleSearchBox}
-                            />
-                        </div>
+                        <Search
+                            titleText={"All Categories"}
+                            keyword={keyword}
+                            setKeyword={setKeyword}
+                        />
                         <hr className="mt-3" />
 
                         <div className="d-flex flex-wrap justify-content-start">
