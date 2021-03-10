@@ -11,7 +11,7 @@ exports.create = async (req, res) => {
         }).save();
         res.json(category);
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(400).send("Failed To Create Sub-category!");
     }
 };
@@ -39,7 +39,7 @@ exports.update = async (req, res) => {
         );
         res.json(updated);
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(400).send("Failed To Update Sub-Category!");
     }
 };
@@ -51,7 +51,7 @@ exports.remove = async (req, res) => {
         });
         res.json(deleted);
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(400).send("Failed To Delete Sub-Category!");
     }
 };

@@ -10,7 +10,7 @@ exports.create = async (req, res) => {
         }).save();
         res.json(category);
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(400).send("Failed To Create Category!");
     }
 };
@@ -36,7 +36,7 @@ exports.update = async (req, res) => {
         );
         res.json(updated);
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(400).send("Failed To Update Category!");
     }
 };
@@ -48,7 +48,7 @@ exports.remove = async (req, res) => {
         });
         res.json(deleted);
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(400).send("Failed To Delete Category!");
     }
 };
