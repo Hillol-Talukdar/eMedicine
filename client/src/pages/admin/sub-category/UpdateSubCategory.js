@@ -72,7 +72,7 @@ const UpdateSubCategory = ({ history, match }) => {
                             className="form-control m-auto w-50 mb-3"
                             onChange={(e) => setParent(e.target.value)}
                         >
-                            <option>Select Parent Category</option>
+                            <option disabled>Select Parent Category</option>
                             {categories.length > 0 &&
                                 categories.map((cat) => (
                                     <option
