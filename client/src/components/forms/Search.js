@@ -7,10 +7,10 @@ const Search = ({ keyword, setKeyword, titleText }) => {
 
     return (
         <div className="row m-auto">
-            <h3 className="col text-center mt-2">{titleText}</h3>
+            <h4 className="col text-center mt-2">{titleText}</h4>
             <input
                 type="search"
-                className="form-control w-50"
+                className="form-control w-50 m-auto"
                 placeholder="Search"
                 value={keyword}
                 onChange={handleSearchBox}
