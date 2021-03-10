@@ -13,7 +13,7 @@ import { Dropdown } from "antd";
 import Categoryform from "../../../components/forms/Categoryform";
 import Search from "../../../components/forms/Search";
 
-const CreateSubCategory = () => {
+const UpdateSubCategory = () => {
     const { user } = useSelector((state) => ({ ...state }));
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
@@ -85,7 +85,7 @@ const CreateSubCategory = () => {
                             </h4>
                         ) : (
                             <h4 className="d-flex justify-content-center">
-                                Create New Subcategory
+                                update Subcategory
                             </h4>
                         )}
                         {/* Category DropDown Starts From Here */}
@@ -108,7 +108,7 @@ const CreateSubCategory = () => {
                             name={name}
                             setName={setName}
                             loading={loading}
-                            btnName="Create Now"
+                            btnName="Update Now"
                             btnIcon={
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +168,7 @@ const CreateSubCategory = () => {
                                             <Link
                                                 className="btn btn-sm col-2"
                                                 style={{ float: "right" }}
-                                                to={`/admin/sub-category/${subCat.slug}`}
+                                                to={`/admin/category/${subCat.slug}`}
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -192,4 +192,4 @@ const CreateSubCategory = () => {
     );
 };
 
-export default CreateSubCategory;
+export default UpdateSubCategory;
