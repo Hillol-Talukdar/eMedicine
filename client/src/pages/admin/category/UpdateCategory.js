@@ -73,7 +73,7 @@ const UpdateCategory = ({ history, match }) => {
                             }
                         />
 
-                        <hr />
+                        <hr className="mt-5" />
                     </div>
                 </div>
             </div>

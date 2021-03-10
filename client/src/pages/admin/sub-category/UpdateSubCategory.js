@@ -105,8 +105,7 @@ const UpdateSubCategory = ({ history, match }) => {
                             }
                         />
                         <hr className="mt-5" />
-
-                        {/* <hr className="mt-3" /> */}
+                        
                     </div>
                 </div>
             </div>
