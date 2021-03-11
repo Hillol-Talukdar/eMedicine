@@ -17,7 +17,7 @@ const initState = {
     shipping: "",
     quantity: "",
     images: [],
-    colors: ["White", "Yellow", "Red", "Green", "Blue"],
+    // colors: ["White", "Yellow", "Red", "Green", "Blue"],
     brands: [
         "Antipyretic",
         "Tranquilizer",
@@ -26,13 +26,16 @@ const initState = {
         "Analgesic",
         "Antibiotic",
     ],
-    color: "",
+    // color: "",
     brand: "",
 };
 
 const CreateProduct = () => {
     const [values, setValues] = useState(initState);
     const [loading, setLoading] = useState(false);
+
+    //redux
+    const { user } = useSelector((state) => ({ ...state }));
 
     //destructure
     const {
@@ -45,18 +48,27 @@ const CreateProduct = () => {
         shipping,
         quantity,
         images,
-        colors,
+        // colors,
         brands,
-        color,
+        // color,
         brand,
     } = values;
 
     const submitHandler = (e) => {
         e.preventDefault();
+        createAProduct(values, user.token)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((error) => {
+                console.log(error);
+                if (error.response.status === 400)
+                    toast.error(error.response.data);
+            });
     };
 
     const changeHandler = (e) => {
-        //
+        setValues({ ...values, [e.target.name]: e.target.value });
     };
 
     return (
@@ -77,7 +89,7 @@ const CreateProduct = () => {
                                 Create New Product
                             </h4>
                         )}
-
+                        {/* {JSON.stringify(values)}; */}
                         <form
                             class="d-flex align-items-center flex-column"
                             onSubmit={submitHandler}
@@ -155,7 +167,6 @@ const CreateProduct = () => {
                                 </button>
                             </div>
                         </form>
-
                         {/* <Categoryform
                             submitHandler={submitHandler}
                             name={name}
