@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { createAProduct } from "../../../functions/product";
 import { Link } from "react-router-dom";
 
-
 const initState = {
     title: "",
     description: "",
@@ -49,16 +48,19 @@ const CreateProduct = () => {
         brand,
     } = values;
 
-    const submitHandler = async (e) => {
+    const submitHandler =  (e) => {
         e.preventDefault();
         createAProduct(values, user.token)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
+                window.alert(`"${res.data.title}" is created!`);
+                window.location.reload();
             })
-            .catch((error) => {
-                console.log(error);
-                if (error.response.status === 400)
-                    toast.error(error.response.data);
+            .catch((err) => {
+                // console.log(err);
+                // if (err.response.status === 400)
+                //     toast.error(err.response.data);
+                toast.error(err.response.data.err);
             });
     };
 
@@ -100,6 +102,7 @@ const CreateProduct = () => {
                                 placeholder="Title"
                                 value={title}
                                 onChange={changeHandler}
+                                required
                                 autoFocus
                             />
                             <input
@@ -108,6 +111,7 @@ const CreateProduct = () => {
                                 class="form-control text-center w-50"
                                 placeholder="Description"
                                 value={description}
+                                required
                                 onChange={changeHandler}
                             />
                             <input
@@ -116,6 +120,7 @@ const CreateProduct = () => {
                                 class="form-control text-center w-50"
                                 placeholder="Product Price"
                                 value={price}
+                                required
                                 onChange={changeHandler}
                             />
                             <select
@@ -123,7 +128,7 @@ const CreateProduct = () => {
                                 className="form-control m-auto w-50 mb-3"
                                 onChange={changeHandler}
                             >
-                                <option>shipping</option>
+                                <option>Select shipping</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
@@ -133,6 +138,7 @@ const CreateProduct = () => {
                                 class="form-control text-center w-50"
                                 placeholder="Quantity"
                                 value={quantity}
+                                required
                                 onChange={changeHandler}
                             />
                             <select
