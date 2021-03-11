@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { createAProduct } from "../../../functions/product";
 import CreateProductForm from "../../../components/forms/CreateProductForm";
+import { getAllCategories } from "../../../functions/category";
 
 const initState = {
     title: "",
@@ -16,12 +17,14 @@ const initState = {
     quantity: "",
     images: [],
     brands: [
-        "Antipyretic",
-        "Tranquilizer",
-        "Mood stabilizer",
-        "Antiseptic",
-        "Analgesic",
-        "Antibiotic",
+        "ACI Limited",
+        "ACME Laboratories Ltd.",
+        "Al-Madina Pharmaceuticals Ltd.",
+        "Beximco Pharmaceuticals Ltd.",
+        "Bengal drugs Ltd.",
+        "BioRx",
+        "Globe Pharmaceuticals Ltd.",
+        "Ibn Sina Pharmaceuticals Ltd.",
     ],
     brand: "",
 };
@@ -31,6 +34,15 @@ const CreateProduct = () => {
 
     //redux
     const { user } = useSelector((state) => ({ ...state }));
+
+    useEffect(() => {
+        loadAllCategories();
+    }, []);
+
+    const loadAllCategories = () =>
+        getAllCategories().then((cat) =>
+            setValues({ ...values, categories: cat.data })
+        );
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -53,7 +65,7 @@ const CreateProduct = () => {
     return (
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2 bg-dark">
                     <AdminPageNav />
                 </div>
                 <div class="col mt-5 mx-5">

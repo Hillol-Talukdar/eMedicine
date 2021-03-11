@@ -78,12 +78,26 @@ const CreateProductForm = ({
                 className="form-control m-auto mb-3"
                 onChange={changeHandler}
             >
-                <option>Select Category</option>
+                <option>Select Brand</option>
                 {brands.map((brnd) => (
                     <option key={brnd} value={brnd}>
                         {brnd}
                     </option>
                 ))}
+            </select>
+
+            <select
+                name="category"
+                className="form-control m-auto mb-3"
+                onChange={changeHandler}
+            >
+                <option>Select Category</option>
+                {categories.length > 0 &&
+                    categories.map((cat) => (
+                        <option key={cat._id} value={cat._id}>
+                            {cat.name}
+                        </option>
+                    ))}
             </select>
 
             <div

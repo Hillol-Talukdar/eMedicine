@@ -28,10 +28,10 @@ const productSchema = new mongoose.Schema(
             trim: true,
             maxlength: 32,
         },
-        // category: {
-        //     type: ObjectId,
-        //     ref: "Category",
-        // },
+        category: {
+            type: ObjectId,
+            ref: "Category",
+        },
         // subCategory: [
         //     {
         //         type: ObjectId,
@@ -57,12 +57,14 @@ const productSchema = new mongoose.Schema(
         brand: {
             type: String,
             enum: [
-                "Antipyretic",
-                "Tranquilizer",
-                "Mood stabilizer",
-                "Antiseptic",
-                "Analgesic",
-                "Antibiotic",
+                "ACI Limited",
+                "ACME Laboratories Ltd.",
+                "Al-Madina Pharmaceuticals Ltd.",
+                "Beximco Pharmaceuticals Ltd.",
+                "Bengal drugs Ltd.",
+                "BioRx",
+                "Globe Pharmaceuticals Ltd.",
+                "Ibn Sina Pharmaceuticals Ltd.",
             ],
         },
         // will needed later
