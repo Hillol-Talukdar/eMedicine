@@ -7,8 +7,57 @@ import { Link } from "react-router-dom";
 import Categoryform from "../../../components/forms/Categoryform";
 import Search from "../../../components/forms/Search";
 
+const initState = {
+    title: "",
+    description: "",
+    price: "",
+    categories: [],
+    category: "",
+    subCategory: [],
+    shipping: "",
+    quantity: "",
+    images: [],
+    colors: ["White", "Yellow", "Red", "Green", "Blue"],
+    brands: [
+        "Antipyretic",
+        "Tranquilizer",
+        "Mood stabilizer",
+        "Antiseptic",
+        "Analgesic",
+        "Antibiotic",
+    ],
+    color: "",
+    brand: "",
+};
+
 const CreateProduct = () => {
+    const [values, setValues] = useState(initState);
     const [loading, setLoading] = useState(false);
+
+    //destructure
+    const {
+        title,
+        description,
+        price,
+        categories,
+        category,
+        subCategory,
+        shipping,
+        quantity,
+        images,
+        colors,
+        brands,
+        color,
+        brand,
+    } = values;
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+    };
+
+    const changeHandler = (e) => {
+        //
+    };
 
     return (
         <div class="container-fluid">
@@ -28,6 +77,84 @@ const CreateProduct = () => {
                                 Create New Product
                             </h4>
                         )}
+
+                        <form
+                            class="d-flex align-items-center flex-column"
+                            onSubmit={submitHandler}
+                        >
+                            <input
+                                type="text"
+                                class="form-control text-center w-50"
+                                placeholder="Title"
+                                disabled={loading}
+                                value={title}
+                                required
+                                autoFocus
+                                onChange={changeHandler}
+                            />
+                            <input
+                                type="text"
+                                class="form-control text-center w-50"
+                                placeholder="Description"
+                                disabled={loading}
+                                value={description}
+                                required
+                                autoFocus
+                                onChange={changeHandler}
+                            />
+                            <input
+                                type="number"
+                                class="form-control text-center w-50"
+                                placeholder="Product Price"
+                                disabled={loading}
+                                value={price}
+                                required
+                                autoFocus
+                                onChange={changeHandler}
+                            />
+                            <select
+                                name="shipping"
+                                className="form-control m-auto w-50 mb-3"
+                                onChange={changeHandler}
+                            >
+                                <option>shipping</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            <input
+                                type="number"
+                                class="form-control text-center w-50"
+                                placeholder="Quantity"
+                                disabled={loading}
+                                value={quantity}
+                                required
+                                autoFocus
+                                onChange={changeHandler}
+                            />
+                            <select
+                                name="brand"
+                                className="form-control m-auto w-50 mb-3"
+                                onChange={changeHandler}
+                            >
+                                <option>Select Category</option>
+                                {brands.map((brnd) => (
+                                    <option key={brnd._id} value={brnd._id}>
+                                        {brnd}
+                                    </option>
+                                ))}
+                            </select>
+
+                            <div
+                                class="mx-auto mt-3"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="Name which contains atleast 1 character will enable this button"
+                            >
+                                <button class="btn btn-primary" type="submit">
+                                    Create Now&nbsp;&nbsp;
+                                </button>
+                            </div>
+                        </form>
 
                         {/* <Categoryform
                             submitHandler={submitHandler}
