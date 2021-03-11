@@ -56,18 +56,17 @@ const CreateProduct = () => {
                 <div class="col-md-2">
                     <AdminPageNav />
                 </div>
-                <div class="col mt-5">
-                    <h1 className="text-primary text-center">eMedicine</h1>
+                <div class="col mt-5 mx-5">
                     <div className="mt-3">
-                        <h4 className="d-flex justify-content-center">
-                            Create New Product
-                        </h4>
-
+                        <div className="d-flex justify-content-between border-bottom mb-3 border-2">
+                            <h4 className="ml-auto">Create New Product</h4>
+                            <h4 className="text-primary mr-auto">eMedicine</h4>
+                        </div>
                         <CreateProductForm
                             submitHandler={submitHandler}
                             changeHandler={changeHandler}
                             values={values}
-                            btnName="Create Now"
+                            btnName="Create The Product"
                             btnIcon={
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

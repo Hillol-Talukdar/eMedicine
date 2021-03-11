@@ -30,7 +30,7 @@ const CreateProductForm = ({
             <input
                 type="text"
                 name="title"
-                class="form-control text-center w-50"
+                class="form-control m-auto mb-3"
                 placeholder="Title"
                 value={title}
                 onChange={changeHandler}
@@ -40,7 +40,7 @@ const CreateProductForm = ({
             <input
                 type="text"
                 name="description"
-                class="form-control text-center w-50"
+                class="form-control m-auto mb-3"
                 placeholder="Description"
                 value={description}
                 required
@@ -49,7 +49,7 @@ const CreateProductForm = ({
             <input
                 type="number"
                 name="price"
-                class="form-control text-center w-50"
+                class="form-control m-auto mb-3"
                 placeholder="Product Price"
                 value={price}
                 required
@@ -57,7 +57,7 @@ const CreateProductForm = ({
             />
             <select
                 name="shipping"
-                className="form-control m-auto w-50 mb-3"
+                className="form-control m-auto mb-3"
                 onChange={changeHandler}
             >
                 <option>Select shipping</option>
@@ -67,7 +67,7 @@ const CreateProductForm = ({
             <input
                 type="number"
                 name="quantity"
-                class="form-control text-center w-50"
+                class="form-control m-auto mb-3"
                 placeholder="Quantity"
                 value={quantity}
                 required
@@ -75,7 +75,7 @@ const CreateProductForm = ({
             />
             <select
                 name="brand"
-                className="form-control m-auto w-50 mb-3"
+                className="form-control m-auto mb-3"
                 onChange={changeHandler}
             >
                 <option>Select Category</option>
@@ -87,7 +87,7 @@ const CreateProductForm = ({
             </select>
 
             <div
-                class="mx-auto mt-3"
+                class="mx-auto mt-3 d-grid gap-2 col-5"
                 data-toggle="tooltip"
                 data-placement="top"
                 title="Name which contains atleast 1 character will enable this button"
