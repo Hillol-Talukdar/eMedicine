@@ -7,6 +7,7 @@ const Categoryform = ({
     loading,
     btnName,
     btnIcon,
+    placeholder,
 }) => (
     <form
         class="d-flex align-items-center flex-column"
@@ -15,7 +16,7 @@ const Categoryform = ({
         <input
             type="text"
             class="form-control text-center w-50"
-            placeholder="Category Name"
+            placeholder={placeholder}
             disabled={loading}
             value={name}
             required

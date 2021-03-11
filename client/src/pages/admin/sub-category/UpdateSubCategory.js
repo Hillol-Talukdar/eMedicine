@@ -90,6 +90,7 @@ const UpdateSubCategory = ({ history, match }) => {
                             name={name}
                             setName={setName}
                             loading={loading}
+                            placeholder="Sub Category Name"
                             btnName="Update Now"
                             btnIcon={
                                 <svg
@@ -105,7 +106,6 @@ const UpdateSubCategory = ({ history, match }) => {
                             }
                         />
                         <hr className="mt-5" />
-                        
                     </div>
                 </div>
             </div>

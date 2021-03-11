@@ -86,6 +86,7 @@ const CreateCategory = () => {
                             name={name}
                             setName={setName}
                             loading={loading}
+                            placeholder="Category Name"
                             btnName="Create Now"
                             btnIcon={
                                 <svg

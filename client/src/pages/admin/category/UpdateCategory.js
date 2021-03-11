@@ -58,6 +58,7 @@ const UpdateCategory = ({ history, match }) => {
                             name={name}
                             setName={setName}
                             loading={loading}
+                            placeholder="Category Name"
                             btnName="Update Now"
                             btnIcon={
                                 <svg

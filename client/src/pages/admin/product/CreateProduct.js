@@ -70,7 +70,7 @@ const CreateProduct = () => {
         e.preventDefault();
         setValues({ ...values, subCategory: [], category: e.target.value });
         getSelectedSubCategory(e.target.value).then((res) => {
-            console.log("SubCategory Options OnClick", res);
+            // console.log("SubCategory Options OnClick", res);
             setSubCategoryOptions(res.data);
         });
         setShowSubCategory(true);
@@ -88,7 +88,7 @@ const CreateProduct = () => {
                             <h4 className="ml-auto">Create New Product</h4>
                             <h4 className="text-primary mr-auto">eMedicine</h4>
                         </div>
-                        {JSON.stringify(values.subCategory)}
+                        {/* {JSON.stringify(values.subCategory)} */}
                         <CreateProductForm
                             submitHandler={submitHandler}
                             changeHandler={changeHandler}
