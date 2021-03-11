@@ -1,9 +1,16 @@
 import React from "react";
+import { Select } from "antd";
+
+const { Option } = Select;
 
 const CreateProductForm = ({
     submitHandler,
     changeHandler,
+    categorySelectHandler,
+    subCategoryOptions,
+    showSubCategory,
     values,
+    setValues,
     btnName,
     btnIcon,
 }) => {
@@ -60,7 +67,7 @@ const CreateProductForm = ({
                 className="form-control m-auto mb-3"
                 onChange={changeHandler}
             >
-                <option>Select shipping</option>
+                <option>Select Shipping</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
@@ -88,8 +95,9 @@ const CreateProductForm = ({
 
             <select
                 name="category"
+                // placeholder="Select Category"
                 className="form-control m-auto mb-3"
-                onChange={changeHandler}
+                onChange={categorySelectHandler}
             >
                 <option>Select Category</option>
                 {categories.length > 0 &&
@@ -99,6 +107,26 @@ const CreateProductForm = ({
                         </option>
                     ))}
             </select>
+            {showSubCategory && (
+                <div className=" form-control m-auto mb-3">
+                    <Select
+                        mode="multiple"
+                        style={{ width: "100%" }}
+                        placeholder="Select SubCategories"
+                        value={subCategory}
+                        onChange={(value) =>
+                            setValues({ ...values, subCategory: value })
+                        }
+                    >
+                        {subCategoryOptions.length &&
+                            subCategoryOptions.map((subCat) => (
+                                <Option key={subCat._id} value={subCat._id}>
+                                    {subCat.name}
+                                </Option>
+                            ))}
+                    </Select>
+                </div>
+            )}
 
             <div
                 class="mx-auto mt-3 d-grid gap-2 col-5"

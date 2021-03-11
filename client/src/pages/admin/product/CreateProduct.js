@@ -4,7 +4,10 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { createAProduct } from "../../../functions/product";
 import CreateProductForm from "../../../components/forms/CreateProductForm";
-import { getAllCategories } from "../../../functions/category";
+import {
+    getAllCategories,
+    getSelectedSubCategory,
+} from "../../../functions/category";
 
 const initState = {
     title: "",
@@ -31,7 +34,8 @@ const initState = {
 
 const CreateProduct = () => {
     const [values, setValues] = useState(initState);
-
+    const [subCategoryOptions, setSubCategoryOptions] = useState([]);
+    const [showSubCategory, setShowSubCategory] = useState(false);
     //redux
     const { user } = useSelector((state) => ({ ...state }));
 
@@ -62,22 +66,37 @@ const CreateProduct = () => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
 
+    const categorySelectHandler = (e) => {
+        e.preventDefault();
+        setValues({ ...values, subCategory: [], category: e.target.value });
+        getSelectedSubCategory(e.target.value).then((res) => {
+            console.log("SubCategory Options OnClick", res);
+            setSubCategoryOptions(res.data);
+        });
+        setShowSubCategory(true);
+    };
+
     return (
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 bg-dark">
                     <AdminPageNav />
                 </div>
-                <div class="col mt-5 mx-5">
+                <div class="col mt-3 mx-5">
                     <div className="mt-3">
                         <div className="d-flex justify-content-between border-bottom mb-3 border-2">
                             <h4 className="ml-auto">Create New Product</h4>
                             <h4 className="text-primary mr-auto">eMedicine</h4>
                         </div>
+                        {JSON.stringify(values.subCategory)}
                         <CreateProductForm
                             submitHandler={submitHandler}
                             changeHandler={changeHandler}
                             values={values}
+                            setValues={setValues}
+                            categorySelectHandler={categorySelectHandler}
+                            subCategoryOptions={subCategoryOptions}
+                            showSubCategory={showSubCategory}
                             btnName="Create The Product"
                             btnIcon={
                                 <svg
