@@ -67,7 +67,9 @@ const CreateProductForm = ({
                 className="form-control m-auto mb-3"
                 onChange={changeHandler}
             >
-                <option>Select Shipping</option>
+                <option selected disabled>
+                    Select Shipping
+                </option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
@@ -85,7 +87,9 @@ const CreateProductForm = ({
                 className="form-control m-auto mb-3"
                 onChange={changeHandler}
             >
-                <option>Select Brand</option>
+                <option selected disabled>
+                    Select Brand
+                </option>
                 {brands.map((brnd) => (
                     <option key={brnd} value={brnd}>
                         {brnd}
@@ -99,7 +103,9 @@ const CreateProductForm = ({
                 className="form-control m-auto mb-3"
                 onChange={categorySelectHandler}
             >
-                <option>Select Category</option>
+                <option selected disabled>
+                    Select Category
+                </option>
                 {categories.length > 0 &&
                     categories.map((cat) => (
                         <option key={cat._id} value={cat._id}>
