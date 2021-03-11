@@ -3,7 +3,7 @@ import AdminPageNav from "../../../components/navbar/AdminPageNavbar";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { createAProduct } from "../../../functions/product";
-import { Link } from "react-router-dom";
+import CreateProductForm from "../../../components/forms/CreateProductForm";
 
 const initState = {
     title: "",
@@ -28,27 +28,11 @@ const initState = {
 
 const CreateProduct = () => {
     const [values, setValues] = useState(initState);
-    // const [loading, setLoading] = useState(false);
 
     //redux
     const { user } = useSelector((state) => ({ ...state }));
 
-    //destructure
-    const {
-        title,
-        description,
-        price,
-        categories,
-        category,
-        subCategory,
-        shipping,
-        quantity,
-        images,
-        brands,
-        brand,
-    } = values;
-
-    const submitHandler =  (e) => {
+    const submitHandler = (e) => {
         e.preventDefault();
         createAProduct(values, user.token)
             .then((res) => {
@@ -58,8 +42,6 @@ const CreateProduct = () => {
             })
             .catch((err) => {
                 // console.log(err);
-                // if (err.response.status === 400)
-                //     toast.error(err.response.data);
                 toast.error(err.response.data.err);
             });
     };
@@ -81,90 +63,24 @@ const CreateProduct = () => {
                             Create New Product
                         </h4>
 
-                        {/* {loading ? (
-                            <h4 className="d-flex justify-content-center text-primary">
-                                Creating Product...
-                            </h4>
-                        ) : (
-                            <h4 className="d-flex justify-content-center">
-                                Create New Product
-                            </h4>
-                        )} */}
-                        {/* {JSON.stringify(values)}; */}
-                        <form
-                            class="d-flex align-items-center flex-column"
-                            onSubmit={submitHandler}
-                        >
-                            <input
-                                type="text"
-                                name="title"
-                                class="form-control text-center w-50"
-                                placeholder="Title"
-                                value={title}
-                                onChange={changeHandler}
-                                required
-                                autoFocus
-                            />
-                            <input
-                                type="text"
-                                name="description"
-                                class="form-control text-center w-50"
-                                placeholder="Description"
-                                value={description}
-                                required
-                                onChange={changeHandler}
-                            />
-                            <input
-                                type="number"
-                                name="price"
-                                class="form-control text-center w-50"
-                                placeholder="Product Price"
-                                value={price}
-                                required
-                                onChange={changeHandler}
-                            />
-                            <select
-                                name="shipping"
-                                className="form-control m-auto w-50 mb-3"
-                                onChange={changeHandler}
-                            >
-                                <option>Select shipping</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                            <input
-                                type="number"
-                                name="quantity"
-                                class="form-control text-center w-50"
-                                placeholder="Quantity"
-                                value={quantity}
-                                required
-                                onChange={changeHandler}
-                            />
-                            <select
-                                name="brand"
-                                className="form-control m-auto w-50 mb-3"
-                                onChange={changeHandler}
-                            >
-                                <option>Select Category</option>
-                                {brands.map((brnd) => (
-                                    <option key={brnd} value={brnd}>
-                                        {brnd}
-                                    </option>
-                                ))}
-                            </select>
-
-                            <div
-                                class="mx-auto mt-3"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                title="Name which contains atleast 1 character will enable this button"
-                            >
-                                <button class="btn btn-primary" type="submit">
-                                    Create Now&nbsp;&nbsp;
-                                </button>
-                            </div>
-                        </form>
+                        <CreateProductForm
+                            submitHandler={submitHandler}
+                            changeHandler={changeHandler}
+                            values={values}
+                            btnName="Create Now"
+                            btnIcon={
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="bi bi-plus-square-fill mb-1"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+                                </svg>
+                            }
+                        />
                     </div>
                 </div>
             </div>
