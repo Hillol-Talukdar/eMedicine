@@ -1,14 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminPageNav from "../../components/navbar/AdminPageNavbar";
+import { getProductByCount } from "../../functions/product";
+import AdminProductCard from "../../components/cards/AdminProductCard";
 
 const AdminDashboard = () => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        loadAllProducts();
+    }, []);
+
+    const loadAllProducts = () => {
+        setLoading(true);
+        getProductByCount(100)
+            .then((res) => {
+                //console.log(res.data)
+                setProducts(res.data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                // console.log(err);
+                setLoading(false);
+            });
+    };
+
     return (
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-2">
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-md-2">
                     <AdminPageNav />
                 </div>
-                <div class="col">This Is Admin Dasboard</div>
+                <div className="col mt-4 mx-5">
+                    <div className="">
+                        <div className="d-flex justify-content-between border-bottom mb-3 border-2">
+                            {loading ? (
+                                <h4 className="ml-auto text-primary">
+                                    Loading.....
+                                </h4>
+                            ) : (
+                                <h4 className="ml-auto">All Products</h4>
+                            )}
+                            <h4 className="text-primary mr-auto">eMedicine</h4>
+                        </div>
+                        {/* <div className="mb-3">{JSON.stringify(products)}</div> */}
+                        <div className="mb-3">
+                            {products.map((product) => (
+                                <AdminProductCard
+                                    product={product}
+                                    key={product._id}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
