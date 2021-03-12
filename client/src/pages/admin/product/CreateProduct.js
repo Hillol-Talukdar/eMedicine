@@ -8,6 +8,7 @@ import {
     getAllCategories,
     getSelectedSubCategory,
 } from "../../../functions/category";
+import UploadFile from "../../../components/forms/UploadFile";
 
 const initState = {
     title: "",
@@ -89,6 +90,9 @@ const CreateProduct = () => {
                             <h4 className="text-primary mr-auto">eMedicine</h4>
                         </div>
                         {/* {JSON.stringify(values.subCategory)} */}
+                        <div className="mb-3">
+                            <UploadFile />
+                        </div>
                         <CreateProductForm
                             submitHandler={submitHandler}
                             changeHandler={changeHandler}
