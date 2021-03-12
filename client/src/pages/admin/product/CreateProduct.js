@@ -9,7 +9,6 @@ import {
     getSelectedSubCategory,
 } from "../../../functions/category";
 import UploadFile from "../../../components/forms/UploadFile";
-import { LoadingOutlined } from "@ant-design/icons";
 
 const initState = {
     title: "",
@@ -89,7 +88,9 @@ const CreateProduct = () => {
                     <div className="">
                         <div className="d-flex justify-content-between border-bottom mb-3 border-2">
                             {loading ? (
-                                <LoadingOutlined className="text-primary" />
+                                <h4 className="ml-auto text-primary">
+                                    Loading Image.....
+                                </h4>
                             ) : (
                                 <h4 className="ml-auto">Create New Product</h4>
                             )}

@@ -135,7 +135,7 @@ const CreateProductForm = ({
             )}
 
             <div
-                class="mx-auto mt-3 d-grid gap-2 col-5"
+                class="mx-auto mt-3 d-grid gap-2 col-5 mb-3"
                 data-toggle="tooltip"
                 data-placement="top"
                 title="Name which contains atleast 1 character will enable this button"
