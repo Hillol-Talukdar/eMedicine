@@ -5,13 +5,12 @@ import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 
-const AdminProductCard = ({ product }) => {
+const AdminProductCard = ({ product, handleRemove }) => {
     //destructure
-    const { title, description, images } = product;
+    const { title, description, images, slug } = product;
     return (
         <Card
             size="small"
-            //  style={{ height: 250 }}
             cover={
                 <img
                     src={
@@ -19,7 +18,7 @@ const AdminProductCard = ({ product }) => {
                             ? images[0].url
                             : defaultCoverImage
                     }
-                    style={{ height: "120px", objectFit: "cover" }}
+                    style={{ height: "125px", objectFit: "cover" }}
                     className="p-2"
                 />
             }
@@ -28,9 +27,7 @@ const AdminProductCard = ({ product }) => {
             actions={[
                 <span
                     className="btn btn-sm col-2"
-                    // onClick={() =>
-                    //     //
-                    // }
+                    onClick={() => handleRemove(slug)}
                     style={{ float: "center" }}
                 >
                     <svg
@@ -70,7 +67,7 @@ const AdminProductCard = ({ product }) => {
             <Meta
                 title={title}
                 description={`${
-                    description && description.substring(0, 35)
+                    description && description.substring(0, 37)
                 }...`}
             />
         </Card>

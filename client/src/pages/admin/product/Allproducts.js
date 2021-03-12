@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import AdminPageNav from "../../../components/navbar/AdminPageNavbar";
 import { getProductByCount } from "../../../functions/product";
 import AdminProductCard from "../../../components/cards/AdminProductCard";
+import { removeAProduct } from "../../../functions/product";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const AllProducts = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    const { user } = useSelector((state) => ({ ...state }));
 
     useEffect(() => {
         loadAllProducts();
@@ -23,6 +28,22 @@ const AllProducts = () => {
                 // console.log(err);
                 setLoading(false);
             });
+    };
+
+    const handleRemove = (slug) => {
+        if (window.confirm("Are you sure, you want to delete?")) {
+            // console.log("send delete req", slug);
+            removeAProduct(slug, user.token)
+                .then((res) => {
+                    toast.error(`"${res.data.title}" is deleted.`);
+                    loadAllProducts();
+                })
+                .catch((err) => {
+                    if (err.response.status === 400)
+                        toast.error(err.response.data);
+                    // console.log(err);
+                });
+        }
     };
 
     return (
@@ -47,8 +68,14 @@ const AllProducts = () => {
                         <div className="col">
                             <div className="row">
                                 {products.map((product) => (
-                                    <div key={product._id} className="col-md-4 pb-2">
-                                        <AdminProductCard product={product} />
+                                    <div
+                                        key={product._id}
+                                        className="col-md-4 pb-2"
+                                    >
+                                        <AdminProductCard
+                                            product={product}
+                                            handleRemove={handleRemove}
+                                        />
                                     </div>
                                 ))}
                             </div>

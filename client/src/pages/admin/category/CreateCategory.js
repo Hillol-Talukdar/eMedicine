@@ -44,7 +44,7 @@ const CreateCategory = () => {
     };
 
     const handleRemove = async (slug) => {
-        if (window.confirm("Are you sure, you to delete?")) {
+        if (window.confirm("Are you sure, you want to delete?")) {
             setLoading(true);
             removeACategory(slug, user.token)
                 .then((res) => {
