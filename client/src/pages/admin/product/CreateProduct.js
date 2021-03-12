@@ -39,6 +39,7 @@ const CreateProduct = () => {
     const [showSubCategory, setShowSubCategory] = useState(false);
     //redux
     const { user } = useSelector((state) => ({ ...state }));
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         loadAllCategories();
@@ -89,9 +90,13 @@ const CreateProduct = () => {
                             <h4 className="ml-auto">Create New Product</h4>
                             <h4 className="text-primary mr-auto">eMedicine</h4>
                         </div>
-                        {/* {JSON.stringify(values.subCategory)} */}
+                        {JSON.stringify(values.images)}
                         <div className="mb-3">
-                            <UploadFile />
+                            <UploadFile
+                                values={values}
+                                setValues={setValues}
+                                setLoading={setLoading}
+                            />
                         </div>
                         <CreateProductForm
                             submitHandler={submitHandler}

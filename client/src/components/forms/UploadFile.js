@@ -3,11 +3,14 @@ import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const UploadFile = () => {
+const UploadFile = ({ values, setValues, setLoading }) => {
     const { user } = useSelector((state) => ({ ...state }));
     const uploadFileAndResize = (e) => {
         let files = e.target.files;
+        let allFileUploaded = values.images;
         if (files) {
+            console.log("YES GOT IT!" + files.length);
+            setLoading(true);
             for (let i = 0; i < files.length; i++) {
                 Resizer.imageFileResizer(
                     files[i],
@@ -17,9 +20,31 @@ const UploadFile = () => {
                     100,
                     0,
                     (uri) => {
-                        //
+                        axios
+                            .post(
+                                `${process.env.REACT_APP_API}/uploadimages`,
+                                { image: uri },
+                                {
+                                    headers: {
+                                        authToken: user ? user.token : "",
+                                    },
+                                }
+                            )
+                            .then((res) => {
+                                console.log("IMAGE UPLOAD RESPONSE", res);
+                                setLoading(false);
+                                allFileUploaded.push(res.data);
+                                setValues({
+                                    ...values,
+                                    images: allFileUploaded,
+                                });
+                            })
+                            .catch((err) => {
+                                setLoading(false);
+                                console.log("Cloudinary Upload Error", err);
+                            });
                     },
-                    "base54"
+                    "base64"
                 );
             }
         }
