@@ -84,13 +84,13 @@ const CreateProduct = () => {
                 <div class="col-md-2 bg-dark">
                     <AdminPageNav />
                 </div>
-                <div class="col mt-3 mx-5">
-                    <div className="mt-3">
+                <div class="col mt-4 mx-5">
+                    <div className="">
                         <div className="d-flex justify-content-between border-bottom mb-3 border-2">
                             <h4 className="ml-auto">Create New Product</h4>
                             <h4 className="text-primary mr-auto">eMedicine</h4>
                         </div>
-                        {JSON.stringify(values.images)}
+                        {/* {JSON.stringify(values.images)} */}
                         <div className="mb-3">
                             <UploadFile
                                 values={values}
