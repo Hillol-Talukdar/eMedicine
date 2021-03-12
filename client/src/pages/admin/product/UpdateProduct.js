@@ -14,7 +14,6 @@ const initState = {
     title: "",
     description: "",
     price: "",
-    categories: [],
     category: "",
     subCategory: [],
     shipping: "",
@@ -36,6 +35,7 @@ const initState = {
 
 const UpdateProduct = ({ match }) => {
     const [values, setValues] = useState(initState);
+    const [categories, setcategories] = useState([]);
     const [subCategoryOptions, setSubCategoryOptions] = useState([]);
     const [showSubCategory, setShowSubCategory] = useState(false);
     //redux
@@ -51,9 +51,7 @@ const UpdateProduct = ({ match }) => {
     }, []);
 
     const loadAllCategories = () =>
-        getAllCategories().then((cat) =>
-            setValues({ ...values, categories: cat.data })
-        );
+        getAllCategories().then((cat) => setcategories(cat.data));
 
     const loadProduct = () =>
         getAProduct(slug).then((product) =>
@@ -62,16 +60,16 @@ const UpdateProduct = ({ match }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        // createAProduct(values, user.token)
-        //     .then((res) => {
-        //         // console.log(res);
-        //         window.alert(`Product is Updated!`);
-        //         window.location.reload();
-        //     })
-        //     .catch((err) => {
-        //         // console.log(err);
-        //         toast.error(err.response.data.err);
-        //     });
+        createAProduct(values, user.token)
+            .then((res) => {
+                // console.log(res);
+                window.alert(`Product is Updated!`);
+                window.location.reload();
+            })
+            .catch((err) => {
+                // console.log(err);
+                toast.error(err.response.data.err);
+            });
     };
 
     const changeHandler = (e) => {
@@ -120,6 +118,7 @@ const UpdateProduct = ({ match }) => {
                             changeHandler={changeHandler}
                             values={values}
                             setValues={setValues}
+                            categories={categories}
                             categorySelectHandler={categorySelectHandler}
                             subCategoryOptions={subCategoryOptions}
                             showSubCategory={showSubCategory}

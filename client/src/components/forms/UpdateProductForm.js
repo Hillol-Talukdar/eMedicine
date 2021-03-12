@@ -6,6 +6,7 @@ const { Option } = Select;
 const UpdateProductForm = ({
     submitHandler,
     changeHandler,
+    categories,
     categorySelectHandler,
     subCategoryOptions,
     showSubCategory,
@@ -19,7 +20,6 @@ const UpdateProductForm = ({
         title,
         description,
         price,
-        categories,
         category,
         subCategory,
         shipping,
@@ -100,14 +100,25 @@ const UpdateProductForm = ({
             </select>
 
             <select
+                value={category.name}
                 name="category"
-                // placeholder="Select Category"
                 className="form-control m-auto mb-3"
                 onChange={categorySelectHandler}
             >
+                {/* <option>{category ? category.name : "Select Category"}</option> */}
+
                 <option selected disabled>
                     Select Category
                 </option>
+
+                {category ? (
+                    <option>{category.name}</option>
+                ) : (
+                    <option selected disabled>
+                        Select Category
+                    </option>
+                )}
+
                 {categories.length > 0 &&
                     categories.map((cat) => (
                         <option key={cat._id} value={cat._id}>
