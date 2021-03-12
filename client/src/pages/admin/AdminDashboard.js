@@ -44,13 +44,14 @@ const AdminDashboard = () => {
                             <h4 className="text-primary mr-auto">eMedicine</h4>
                         </div>
                         {/* <div className="mb-3">{JSON.stringify(products)}</div> */}
-                        <div className="mb-3">
-                            {products.map((product) => (
-                                <AdminProductCard
-                                    product={product}
-                                    key={product._id}
-                                />
-                            ))}
+                        <div className="col">
+                            <div className="row">
+                                {products.map((product) => (
+                                    <div key={product._id} className="col-md-4">
+                                        <AdminProductCard product={product} />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

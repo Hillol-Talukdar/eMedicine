@@ -29,6 +29,7 @@ const initState = {
         "BioRx",
         "Globe Pharmaceuticals Ltd.",
         "Ibn Sina Pharmaceuticals Ltd.",
+        "Square Pharmaceuticals Ltd.",
     ],
     brand: "",
 };

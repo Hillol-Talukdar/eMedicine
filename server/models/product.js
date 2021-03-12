@@ -65,6 +65,7 @@ const productSchema = new mongoose.Schema(
                 "BioRx",
                 "Globe Pharmaceuticals Ltd.",
                 "Ibn Sina Pharmaceuticals Ltd.",
+                "Square Pharmaceuticals Ltd.",
             ],
         },
         // will needed later
