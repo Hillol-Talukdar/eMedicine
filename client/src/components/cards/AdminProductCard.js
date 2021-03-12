@@ -10,7 +10,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
     const { title, description, images, slug } = product;
     return (
         <Card
-            size="small"
+            // size="small"
             cover={
                 <img
                     src={
@@ -49,7 +49,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
                 <Link
                     className="btn btn-sm col-2"
                     style={{ float: "center" }}
-                    to={`/admin/category/`}
+                    to={`/admin/product/${slug}`}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

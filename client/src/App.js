@@ -20,6 +20,7 @@ import CreateSubCategory from "./pages/admin/sub-category/CreateSubCategory";
 import UpdateSubCategory from "./pages/admin/sub-category/UpdateSubCategory";
 import CreateProduct from "./pages/admin/product/CreateProduct";
 import AllProducts from "./pages/admin/product/Allproducts";
+import UpdateProduct from "./pages/admin/product/UpdateProduct";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -118,6 +119,11 @@ const App = () => {
                     exact
                     path="/admin/products"
                     component={AllProducts}
+                />
+                <AdminRoute
+                    exact
+                    path="/admin/product/:slug"
+                    component={UpdateProduct}
                 />
             </Switch>
         </>
