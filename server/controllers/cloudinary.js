@@ -13,7 +13,7 @@ exports.upload = async (req, res) => {
         resource_type: "auto",
     });
 
-    res.Json({
+    res.json({
         public_id: result.public_id,
         url: result.secure_url,
     });
@@ -24,7 +24,7 @@ exports.remove = (req, res) => {
 
     cloudinary.uploader.destroy(image_id, (err, result) => {
         if (err) {
-            return res.Json({
+            return res.json({
                 success: false,
                 err,
             });
