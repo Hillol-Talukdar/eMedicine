@@ -2,7 +2,8 @@ import React from "react";
 import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Avatar } from "antd";
+import { Avatar, Badge } from "antd";
+import Item from "antd/lib/list/Item";
 
 const UploadFile = ({ values, setValues, setLoading }) => {
     const { user } = useSelector((state) => ({ ...state }));
@@ -50,17 +51,53 @@ const UploadFile = ({ values, setValues, setLoading }) => {
             }
         }
     };
+    const handleRemove = (image_id) => {
+        setLoading(true);
+        axios
+            .post(
+                `${process.env.REACT_APP_API}/removeimage`,
+                { public_id: image_id },
+                {
+                    headers: {
+                        authtoken: user ? user.token : "",
+                    },
+                }
+            )
+            .then((res) => {
+                setLoading(false);
+                const { images } = values;
+                let filteredImages = images.filter((img) => {
+                    return img.public_id !== image_id;
+                });
+                setValues({
+                    ...values,
+                    images: filteredImages,
+                });
+            })
+            .catch((err) => {
+                setLoading(false);
+                console.log("Cloudinary Remove Error", err);
+            });
+    };
     return (
         <>
-            <div className="row m-auto">
+            <div className="row">
                 {values.images &&
                     values.images.map((image) => (
-                        <Avatar
-                            key={image.public_id}
-                            src={image.url}
-                            size={50}
-                            className="mx-2 mb-3"
-                        />
+                        <div className="mb-3 mt-1 col-auto">
+                            <Badge
+                                count="X"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => handleRemove(image.public_id)}
+                            >
+                                <Avatar
+                                    key={image.public_id}
+                                    src={image.url}
+                                    size={60}
+                                    shape="circle"
+                                />
+                            </Badge>
+                        </div>
                     ))}
             </div>
             <div className="row m-auto">
