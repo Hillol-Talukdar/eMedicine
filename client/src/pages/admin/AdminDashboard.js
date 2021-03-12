@@ -11,7 +11,7 @@ const AdminDashboard = () => {
                 <div className="col mt-4 mx-5">
                     <div className="">
                         <div className="d-flex justify-content-between border-bottom mb-3 border-2">
-                            <h4 className="ml-auto">All Products</h4>
+                            <h4 className="ml-auto">Dash Board</h4>
 
                             <h4 className="text-primary mr-auto">eMedicine</h4>
                         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "antd";
+import defaultCoverImage from "../../images/defaultCoverImage.png";
 
 const { Meta } = Card;
 
@@ -10,7 +11,11 @@ const AdminProductCard = ({ product }) => {
         <Card
             cover={
                 <img
-                    src={images && images.length ? images[0].url : ""}
+                    src={
+                        images && images.length
+                            ? images[0].url
+                            : defaultCoverImage
+                    }
                     style={{ height: "150px", objectFit: "cover" }}
                     className="p-2"
                 />
