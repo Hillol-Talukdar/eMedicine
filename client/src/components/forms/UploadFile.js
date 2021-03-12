@@ -26,7 +26,7 @@ const UploadFile = ({ values, setValues, setLoading }) => {
                                 { image: uri },
                                 {
                                     headers: {
-                                        authToken: user ? user.token : "",
+                                        authtoken: user ? user.token : "",
                                     },
                                 }
                             )
