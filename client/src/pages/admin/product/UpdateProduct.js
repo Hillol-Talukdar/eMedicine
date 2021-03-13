@@ -37,11 +37,12 @@ const UpdateProduct = ({ match }) => {
     const [values, setValues] = useState(initState);
     const [categories, setcategories] = useState([]);
     const [subCategoryOptions, setSubCategoryOptions] = useState([]);
-    const [showSubCategory, setShowSubCategory] = useState(false);
-    //redux
-    const { user } = useSelector((state) => ({ ...state }));
     const [loading, setLoading] = useState(false);
     const [arrayOfSubCategory, setArrayOfSubCategory] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("");
+
+    //redux
+    const { user } = useSelector((state) => ({ ...state }));
 
     //router
     const { slug } = match.params;
@@ -93,12 +94,22 @@ const UpdateProduct = ({ match }) => {
 
     const categorySelectHandler = (e) => {
         e.preventDefault();
-        setValues({ ...values, subCategory: [], category: e.target.value });
+        setValues({ ...values, subCategory: [] });
+
+        setSelectedCategory(e.target.value);
+
         getSelectedSubCategory(e.target.value).then((res) => {
             // console.log("SubCategory Options OnClick", res);
             setSubCategoryOptions(res.data);
         });
-        setShowSubCategory(true);
+
+        // if user clicks nack to the original category then it's sub-categories will show in default
+        if (values.category._id === e.target.value) {
+            loadProduct();
+        }
+
+        //clear old sub-categories
+        setArrayOfSubCategory([]);
     };
 
     return (
@@ -136,9 +147,10 @@ const UpdateProduct = ({ match }) => {
                             categories={categories}
                             categorySelectHandler={categorySelectHandler}
                             subCategoryOptions={subCategoryOptions}
-                            showSubCategory={showSubCategory}
                             arrayOfSubCategory={arrayOfSubCategory}
                             setArrayOfSubCategory={setArrayOfSubCategory}
+                            setSelectedCategory={setSelectedCategory}
+                            selectedCategory={selectedCategory}
                             btnName="Update The Product"
                             btnIcon={
                                 <svg

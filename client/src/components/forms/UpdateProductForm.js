@@ -10,8 +10,9 @@ const UpdateProductForm = ({
     categorySelectHandler,
     subCategoryOptions,
     arrayOfSubCategory,
-    showSubCategory,
     setArrayOfSubCategory,
+    setSelectedCategory,
+    selectedCategory,
     values,
     setValues,
     btnName,
@@ -102,24 +103,14 @@ const UpdateProductForm = ({
             </select>
 
             <select
-                value={category.name}
+                value={selectedCategory ? selectedCategory : category._id}
                 name="category"
                 className="form-control m-auto mb-3"
                 onChange={categorySelectHandler}
             >
-                {/* <option>{category ? category.name : "Select Category"}</option> */}
-
                 <option selected disabled>
                     Select Category
                 </option>
-
-                {category ? (
-                    <option>{category.name}</option>
-                ) : (
-                    <option selected disabled>
-                        Select Category
-                    </option>
-                )}
 
                 {categories.length > 0 &&
                     categories.map((cat) => (
