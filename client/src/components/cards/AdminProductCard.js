@@ -10,7 +10,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
     const { title, description, images, slug } = product;
     return (
         <Card
-            // size="small"
+            size="small"
             cover={
                 <img
                     src={

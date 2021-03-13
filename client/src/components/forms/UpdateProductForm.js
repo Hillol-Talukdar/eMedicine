@@ -9,7 +9,9 @@ const UpdateProductForm = ({
     categories,
     categorySelectHandler,
     subCategoryOptions,
+    arrayOfSubCategory,
     showSubCategory,
+    setArrayOfSubCategory,
     values,
     setValues,
     btnName,
@@ -126,26 +128,23 @@ const UpdateProductForm = ({
                         </option>
                     ))}
             </select>
-            {showSubCategory && (
-                <div className=" form-control m-auto mb-3">
-                    <Select
-                        mode="multiple"
-                        style={{ width: "100%" }}
-                        placeholder="Select SubCategories"
-                        value={subCategory}
-                        onChange={(value) =>
-                            setValues({ ...values, subCategory: value })
-                        }
-                    >
-                        {subCategoryOptions.length &&
-                            subCategoryOptions.map((subCat) => (
-                                <Option key={subCat._id} value={subCat._id}>
-                                    {subCat.name}
-                                </Option>
-                            ))}
-                    </Select>
-                </div>
-            )}
+
+            <div className=" form-control m-auto mb-3">
+                <Select
+                    mode="multiple"
+                    style={{ width: "100%" }}
+                    placeholder="Select SubCategories"
+                    value={arrayOfSubCategory}
+                    onChange={(value) => setArrayOfSubCategory(value)}
+                >
+                    {subCategoryOptions.length &&
+                        subCategoryOptions.map((subCat) => (
+                            <Option key={subCat._id} value={subCat._id}>
+                                {subCat.name}
+                            </Option>
+                        ))}
+                </Select>
+            </div>
 
             <div
                 class="mx-auto mt-3 d-grid gap-2 col-5 mb-3"

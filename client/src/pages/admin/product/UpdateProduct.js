@@ -41,6 +41,7 @@ const UpdateProduct = ({ match }) => {
     //redux
     const { user } = useSelector((state) => ({ ...state }));
     const [loading, setLoading] = useState(false);
+    const [arrayOfSubCategory, setArrayOfSubCategory] = useState([]);
 
     //router
     const { slug } = match.params;
@@ -53,10 +54,24 @@ const UpdateProduct = ({ match }) => {
     const loadAllCategories = () =>
         getAllCategories().then((cat) => setcategories(cat.data));
 
-    const loadProduct = () =>
-        getAProduct(slug).then((product) =>
-            setValues({ ...values, ...product.data })
-        );
+    const loadProduct = () => {
+        getAProduct(slug).then((product) => {
+            setValues({ ...values, ...product.data });
+
+            // load sub-category for single product
+            getSelectedSubCategory(product.data.category._id).then((res) => {
+                setSubCategoryOptions(res.data);
+            });
+
+            // array of sub-category ids to show as default sub-category values in antd select box
+            let arr = [];
+            product.data.subCategory.map((sub) => {
+                arr.push(sub._id);
+            });
+
+            setArrayOfSubCategory((prev) => arr); // update prev state. Required to work antd Select
+        });
+    };
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -122,6 +137,8 @@ const UpdateProduct = ({ match }) => {
                             categorySelectHandler={categorySelectHandler}
                             subCategoryOptions={subCategoryOptions}
                             showSubCategory={showSubCategory}
+                            arrayOfSubCategory={arrayOfSubCategory}
+                            setArrayOfSubCategory={setArrayOfSubCategory}
                             btnName="Update The Product"
                             btnIcon={
                                 <svg
