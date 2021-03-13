@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminPageNav from "../../../components/navbar/AdminPageNavbar";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { createAProduct, getAProduct } from "../../../functions/product";
+import { updateAProduct, getAProduct } from "../../../functions/product";
 import UpdateProductForm from "../../../components/forms/UpdateProductForm";
 import {
     getAllCategories,
@@ -33,13 +33,13 @@ const initState = {
     brand: "",
 };
 
-const UpdateProduct = ({ match }) => {
+const UpdateProduct = ({ history, match }) => {
     const [values, setValues] = useState(initState);
     const [categories, setcategories] = useState([]);
     const [subCategoryOptions, setSubCategoryOptions] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [arrayOfSubCategory, setArrayOfSubCategory] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const [arrayOfSubCategory, setArrayOfSubCategory] = useState([]); //All sub-categories are here
+    const [selectedCategory, setSelectedCategory] = useState(""); // current selected Category is here
 
     //redux
     const { user } = useSelector((state) => ({ ...state }));
@@ -76,14 +76,21 @@ const UpdateProduct = ({ match }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        createAProduct(values, user.token)
+        setLoading(true);
+
+        values.subCategory = arrayOfSubCategory;
+        values.category = selectedCategory ? selectedCategory : values.category;
+
+        updateAProduct(slug, values, user.token)
             .then((res) => {
                 // console.log(res);
-                window.alert(`Product is Updated!`);
-                window.location.reload();
+                setLoading(false);
+                toast.success(`Product is Updated!`);
+                history.push("/admin/products")
             })
             .catch((err) => {
                 // console.log(err);
+                setLoading(false);
                 toast.error(err.response.data.err);
             });
     };
