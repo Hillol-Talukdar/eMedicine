@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Divider } from "antd";
+import { Card } from "antd";
 import defaultCoverImage from "../../images/defaultCoverImage.png";
 import { Link } from "react-router-dom";
 

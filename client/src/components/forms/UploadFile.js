@@ -3,7 +3,6 @@ import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Avatar, Badge } from "antd";
-import Item from "antd/lib/list/Item";
 
 const UploadFile = ({ values, setValues, setLoading }) => {
     const { user } = useSelector((state) => ({ ...state }));
@@ -11,7 +10,7 @@ const UploadFile = ({ values, setValues, setLoading }) => {
         let files = e.target.files;
         let allFileUploaded = values.images;
         if (files) {
-            console.log("YES GOT IT!" + files.length);
+            // console.log("YES GOT IT!" + files.length);
             setLoading(true);
             for (let i = 0; i < files.length; i++) {
                 Resizer.imageFileResizer(
@@ -33,7 +32,7 @@ const UploadFile = ({ values, setValues, setLoading }) => {
                                 }
                             )
                             .then((res) => {
-                                console.log("IMAGE UPLOAD RESPONSE", res);
+                                // console.log("IMAGE UPLOAD RESPONSE", res);
                                 setLoading(false);
                                 allFileUploaded.push(res.data);
                                 setValues({
@@ -43,7 +42,7 @@ const UploadFile = ({ values, setValues, setLoading }) => {
                             })
                             .catch((err) => {
                                 setLoading(false);
-                                console.log("Cloudinary Upload Error", err);
+                                // console.log("Cloudinary Upload Error", err);
                             });
                     },
                     "base64"
@@ -76,7 +75,7 @@ const UploadFile = ({ values, setValues, setLoading }) => {
             })
             .catch((err) => {
                 setLoading(false);
-                console.log("Cloudinary Remove Error", err);
+                // console.log("Cloudinary Remove Error", err);
             });
     };
     return (

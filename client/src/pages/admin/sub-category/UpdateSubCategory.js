@@ -7,8 +7,6 @@ import {
     getASubCategory,
 } from "../../../functions/sub-category";
 import { getAllCategories } from "../../../functions/category";
-import { Link } from "react-router-dom";
-import { Dropdown } from "antd";
 import Categoryform from "../../../components/forms/Categoryform";
 
 const UpdateSubCategory = ({ history, match }) => {

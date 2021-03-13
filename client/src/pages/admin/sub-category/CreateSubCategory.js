@@ -9,7 +9,6 @@ import {
 } from "../../../functions/sub-category";
 import { getAllCategories } from "../../../functions/category";
 import { Link } from "react-router-dom";
-import { Dropdown } from "antd";
 import Categoryform from "../../../components/forms/Categoryform";
 import Search from "../../../components/forms/Search";
 
