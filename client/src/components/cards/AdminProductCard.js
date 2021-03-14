@@ -22,7 +22,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
                             : defaultCoverImage
                     }
                     style={{
-                        height: "125px",
+                        height: "150px",
                         objectFit: "cover",
                     }}
                     className="p-2"
@@ -32,7 +32,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
 
             actions={[
                 <span
-                    className="btn btn-sm col-2"
+                    className="btn btn-sm col-6"
                     onClick={() => handleRemove(slug)}
                     style={{ float: "center" }}
                 >
@@ -53,7 +53,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
                 </span>,
 
                 <Link
-                    className="btn btn-sm col-2"
+                    className="btn btn-sm col-6"
                     style={{ float: "center" }}
                     to={`/admin/product/${slug}`}
                 >

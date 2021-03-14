@@ -5,7 +5,6 @@ import AdminProductCard from "../../../components/cards/AdminProductCard";
 import { removeAProduct } from "../../../functions/product";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-
 const AllProducts = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
