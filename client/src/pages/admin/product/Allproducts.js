@@ -66,7 +66,7 @@ const AllProducts = () => {
                         </div>
                         {/* <div className="mb-3">{JSON.stringify(products)}</div> */}
                         <div className="col">
-                            <div className="row">
+                            <div className="row mx-auto">
                                 {products.map((product) => (
                                     <div
                                         key={product._id}

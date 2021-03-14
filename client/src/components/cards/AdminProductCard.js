@@ -11,6 +11,9 @@ const AdminProductCard = ({ product, handleRemove }) => {
     return (
         <Card
             size="small"
+            style={{
+                border: "1px solid #dddddd",
+            }}
             cover={
                 <img
                     src={
@@ -18,7 +21,10 @@ const AdminProductCard = ({ product, handleRemove }) => {
                             ? images[0].url
                             : defaultCoverImage
                     }
-                    style={{ height: "125px", objectFit: "cover" }}
+                    style={{
+                        height: "125px",
+                        objectFit: "cover",
+                    }}
                     className="p-2"
                 />
             }
