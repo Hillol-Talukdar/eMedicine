@@ -33,7 +33,7 @@ const UserProductCard = ({ product }) => {
                 <Link to={`/product/${slug}`}>
                     <EyeOutlined className="text-primary" />
                     <br />
-                    <p className="h6 small">Add to Cart</p>
+                    <p className="h6 small">View Details</p>
                 </Link>,
                 <>
                     <ShoppingCartOutlined className="text-danger" />
