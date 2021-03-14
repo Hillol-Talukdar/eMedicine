@@ -10,9 +10,9 @@ const AdminProductCard = ({ product, handleRemove }) => {
     const { title, description, images, slug } = product;
     return (
         <Card
-            size="small"
             style={{
-                border: "1px solid #dddddd",
+                border: "1px solid #e7e6e1",
+                borderRadius: "3px",
             }}
             cover={
                 <img
@@ -22,10 +22,11 @@ const AdminProductCard = ({ product, handleRemove }) => {
                             : defaultCoverImage
                     }
                     style={{
-                        height: "150px",
+                        height: "200px",
+                        // width: "286px",
                         objectFit: "cover",
                     }}
-                    className="p-2"
+                    className="pt-2 px-2"
                 />
             }
             // actions={[<i class="bi bi-trash"></i>]}
@@ -73,7 +74,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
             <Meta
                 title={title}
                 description={`${
-                    description && description.substring(0, 37)
+                    description && description.substring(0, 30)
                 }...`}
             />
         </Card>

@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import { getProductByCount } from "../functions/product";
+import UserProductCard from "../components/cards/UserProductCard";
+const Home = () => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-const Home = () => (
-    <div>
-        <h1> This is Home Page </h1>
-    </div>
-);
+    useEffect(() => {
+        loadAllProducts();
+    }, []);
+
+    const loadAllProducts = () => {
+        setLoading(true);
+        getProductByCount(3).then((res) => {
+            setProducts(res.data);
+            setLoading(false);
+        });
+    };
+
+    return (
+        <>
+            <div className="jumbotron">
+                {loading ? <h4>Loading</h4> : <h4>All Products</h4>}
+            </div>
+            <div className="container">
+                <div className="row">
+                    {products.map((product) => (
+                        <div key={product._id} className="col-md-3">
+                            <UserProductCard product={product} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </>
+    );
+};
 
 export default Home;
