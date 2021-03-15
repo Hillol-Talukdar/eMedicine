@@ -71,10 +71,11 @@ exports.list = async (req, res) => {
         const { sort, order, limit } = req.body;
         const products = await Product.find({})
             .populate("category")
-            .populate("sub-category")
+            .populate("subCategory")
             .sort([[sort, order]])
             .limit(limit)
             .exec();
+        res.json(products);
     } catch (err) {
         console.log(err);
     }
