@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { getProductByCount } from "../functions/product";
 import UserProductCard from "../components/cards/UserProductCard";
 import Jumbotron from "../components/cards/Jumbotron";
+import CardLoading from "../components/cards/CardLoading";
 const Home = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -35,13 +36,17 @@ const Home = () => {
                 </div>
             </div>
             <div className="container">
-                <div className="row">
-                    {products.map((product) => (
-                        <div key={product._id} className="col-md-3">
-                            <UserProductCard product={product} />
-                        </div>
-                    ))}
-                </div>
+                {loading ? (
+                    <CardLoading cardCount={4} />
+                ) : (
+                    <div className="row">
+                        {products.map((product) => (
+                            <div key={product._id} className="col-md-3">
+                                <UserProductCard product={product} />
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

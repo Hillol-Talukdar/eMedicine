@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import { Card, Skeleton } from "antd";
 import React from "react";
 import defaultCoverImage from "../../images/defaultCoverImage.png";
 import { Link } from "react-router-dom";
