@@ -5,8 +5,8 @@ import BestSellers from "../components/home_components/BestSellers";
 const Home = () => {
     return (
         <div>
-            <div className="jumbotron text-center bg-secondary mb-3">
-                <div className="container pb-3 pt-4">
+            <div className="jumbotron text-center bg-secondary">
+                <div className="container pb-1 pt-3">
                     <h1 className="text-light">
                         <Jumbotron
                             text={[
@@ -18,7 +18,7 @@ const Home = () => {
                     </h1>
                 </div>
             </div>
-            <h3 className="text-light text-center pt-3 pb-3 mt-4 mb-3 jumbotron bg-secondary">
+            <h3 className="text-light text-center pt-2 pb-3 mt-3 mb-3 jumbotron bg-secondary">
                 Feature Products
             </h3>
             <FeatureProducts />

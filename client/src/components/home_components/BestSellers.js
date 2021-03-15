@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
-import { getProducts } from "../../functions/product";
+import { getProducts, getProductsCount } from "../../functions/product";
 import UserProductCard from "../cards/UserProductCard";
 import Jumbotron from "../cards/Jumbotron";
 import CardLoading from "../cards/CardLoading";
+
+import { Pagination } from "antd";
+
 const BestSellers = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [productsCount, setProductsCount] = useState(0);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         loadAllProducts();
+    }, [page]);
+
+    useEffect(() => {
+        getProductsCount().then((res) => setProductsCount(res.data));
     }, []);
 
     const loadAllProducts = () => {
         setLoading(true);
-        getProducts("sold", "desc", 4)
+        getProducts("sold", "desc", page)
             .then((res) => {
                 setProducts(res.data);
                 setLoading(false);
@@ -36,6 +45,15 @@ const BestSellers = () => {
                         ))}
                     </div>
                 )}
+            </div>
+            <div className="row w-100">
+                <nav className="col-md-4 offset-md-4 text-center pt-3">
+                    <Pagination
+                        current={page}
+                        total={(productsCount / 4) * 10}
+                        onChange={(value) => setPage(value)}
+                    />
+                </nav>
             </div>
         </div>
     );
