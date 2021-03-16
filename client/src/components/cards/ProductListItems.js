@@ -13,7 +13,7 @@ const ProductListItems = ({ product }) => {
     } = product;
     return (
         <ul className="list-group">
-            <li className="list-group-item">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
                 Price{" "}
                 <span className="label label-default label-pill pull-xs-right">
                     &#2547; {price}
@@ -21,7 +21,7 @@ const ProductListItems = ({ product }) => {
             </li>
 
             {category && (
-                <li className="list-group-item">
+                <li className="list-group-item d-flex justify-content-between align-items-center">
                     Category{" "}
                     <Link
                         to={`/category/${category.slug}`}
@@ -33,7 +33,7 @@ const ProductListItems = ({ product }) => {
             )}
 
             {subCategory && (
-                <li className="list-group-item">
+                <li className="list-group-item  d-flex justify-content-between align-items-center">
                     sub Categories
                     {subCategory.map((subCat) => (
                         <Link
@@ -47,28 +47,28 @@ const ProductListItems = ({ product }) => {
                 </li>
             )}
 
-            <li className="list-group-item">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
                 Shipping{" "}
                 <span className="label label-default label-pill pull-xs-right">
                     {shipping}
                 </span>
             </li>
 
-            <li className="list-group-item">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
                 Brand{" "}
                 <span className="label label-default label-pill pull-xs-right">
                     {brand}
                 </span>
             </li>
 
-            <li className="list-group-item">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
                 Available{" "}
                 <span className="label label-default label-pill pull-xs-right">
                     {quantity}
                 </span>
             </li>
 
-            <li className="list-group-item">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
                 Sold{" "}
                 <span className="label label-default label-pill pull-xs-right">
                     {sold}
