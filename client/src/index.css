@@ -1,0 +1,9 @@
+.slider img {
+    height:450px;
+    object-fit: cover;
+}
+/* .carousel {
+    width:640px;
+    height:500px;
+    object-fit: cover;
+  } */
