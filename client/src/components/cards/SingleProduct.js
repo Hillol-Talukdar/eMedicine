@@ -6,11 +6,12 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import defaultCoverImage from "../../images/defaultCoverImage.png";
 import ProductListItems from "./ProductListItems";
+import Rating from "react-star-ratings";
 
 const { TabPane } = Tabs;
 
 const SingleProduct = ({ product }) => {
-    const { title, images, description } = product;
+    const { title, images, description, _id } = product;
 
     return (
         <>
@@ -67,6 +68,21 @@ const SingleProduct = ({ product }) => {
                     ]}
                 >
                     <ProductListItems product={product} />
+                    <ul className="list-group">
+                        <li className="list-group-item d-flex justify-content-between align-items-center border-0">
+                            Rating
+                            <span className="label label-default label-pill pull-xs-right">
+                                <Rating
+                                    name={_id}
+                                    numberOfStars={5}
+                                    rating={4}
+                                    isSelectable={true}
+                                    starRatedColor="red"
+                                    // changeRating = {(givenRating, name)=>()}
+                                />
+                            </span>
+                        </li>
+                    </ul>
                 </Card>
             </div>
         </>
