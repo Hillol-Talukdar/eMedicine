@@ -31,12 +31,18 @@ const UserProductCard = ({ product }) => {
             }
             actions={[
                 <Link to={`/product/${slug}`}>
-                    <EyeOutlined className="text-primary" />
+                    <EyeOutlined
+                        style={{ fontSize: "15px" }}
+                        className="text-primary"
+                    />
                     <br />
-                    <p className="h6 small">View Details</p>
+                    <p className="h6 small">View in Detail</p>
                 </Link>,
                 <>
-                    <ShoppingCartOutlined className="text-danger" />
+                    <ShoppingCartOutlined
+                        style={{ fontSize: "18px" }}
+                        className="text-danger"
+                    />
                     <br />
                     <p className="h6 small">Add to Cart</p>
                 </>,

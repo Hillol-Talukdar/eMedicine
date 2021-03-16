@@ -45,18 +45,24 @@ const SingleProduct = ({ product }) => {
             </div>
 
             <div className="col-md-5">
-                <h1 className="bg-secondary text-light p-3">{title}</h1>
+                <h2 className="bg-secondary text-light p-3">{title}</h2>
                 <Card
                     actions={[
                         <>
-                            <ShoppingCartOutlined className="text-primary" />
+                            <ShoppingCartOutlined
+                                style={{ fontSize: "25px" }}
+                                className="text-danger"
+                            />
                             <br />
-                            <p className="h6 small">Add to Cart</p>
+                            <p className="h6 small mt-1">Add to Cart</p>
                         </>,
                         <Link to="/">
-                            <HeartOutlined className="text-danger" />
+                            <HeartOutlined
+                                style={{ fontSize: "21px" }}
+                                className="text-success"
+                            />
                             <br />
-                            <p className="h6 small">Add to WishList</p>
+                            <p className="h6 small mt-1">Add to WishList</p>
                         </Link>,
                     ]}
                 >

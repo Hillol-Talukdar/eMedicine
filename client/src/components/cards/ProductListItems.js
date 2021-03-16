@@ -13,19 +13,19 @@ const ProductListItems = ({ product }) => {
     } = product;
     return (
         <ul className="list-group">
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-                Price{" "}
+            <li className="list-group-item d-flex justify-content-between align-items-center border-0">
+                Price
                 <span className="label label-default label-pill pull-xs-right">
                     &#2547; {price}
                 </span>
             </li>
 
             {category && (
-                <li className="list-group-item d-flex justify-content-between align-items-center">
-                    Category{" "}
+                <li className="list-group-item d-flex justify-content-between align-items-center border-0">
+                    Category
                     <Link
                         to={`/category/${category.slug}`}
-                        className="label label-default label-pill pull-xs-right"
+                        className="label label-default label-pill pull-xs-right border-0"
                     >
                         {category.name}
                     </Link>
@@ -33,8 +33,8 @@ const ProductListItems = ({ product }) => {
             )}
 
             {subCategory && (
-                <li className="list-group-item  d-flex justify-content-between align-items-center">
-                    sub Categories
+                <li className="list-group-item  d-flex justify-content-between align-items-center border-0">
+                    Sub Categories
                     {subCategory.map((subCat) => (
                         <Link
                             key={subCat._id}
@@ -47,28 +47,28 @@ const ProductListItems = ({ product }) => {
                 </li>
             )}
 
-            <li className="list-group-item d-flex justify-content-between align-items-center">
+            <li className="list-group-item d-flex justify-content-between align-items-center border-0">
                 Shipping{" "}
                 <span className="label label-default label-pill pull-xs-right">
                     {shipping}
                 </span>
             </li>
 
-            <li className="list-group-item d-flex justify-content-between align-items-center">
+            <li className="list-group-item d-flex justify-content-between align-items-center border-0">
                 Brand{" "}
                 <span className="label label-default label-pill pull-xs-right">
                     {brand}
                 </span>
             </li>
 
-            <li className="list-group-item d-flex justify-content-between align-items-center">
+            <li className="list-group-item d-flex justify-content-between align-items-center border-0">
                 Available{" "}
                 <span className="label label-default label-pill pull-xs-right">
                     {quantity}
                 </span>
             </li>
 
-            <li className="list-group-item d-flex justify-content-between align-items-center">
+            <li className="list-group-item d-flex justify-content-between align-items-center border-0">
                 Sold{" "}
                 <span className="label label-default label-pill pull-xs-right">
                     {sold}
