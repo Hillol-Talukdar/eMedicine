@@ -7,6 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import defaultCoverImage from "../../images/defaultCoverImage.png";
 import ProductListItems from "./ProductListItems";
 import Rating from "react-star-ratings";
+import RatingModal from "../modal/RatingModal";
 
 const { TabPane } = Tabs;
 
@@ -60,11 +61,23 @@ const SingleProduct = ({ product }) => {
                         <Link to="/">
                             <HeartOutlined
                                 style={{ fontSize: "21px" }}
-                                className="text-success"
+                                className="text-info"
                             />
                             <br />
                             <p className="h6 small mt-1">Add to WishList</p>
                         </Link>,
+                        <RatingModal>
+                            <Rating
+                                name={_id}
+                                numberOfStars={5}
+                                rating={4}
+                                isSelectable={true}
+                                starRatedColor="red"
+                                changeRating={(givenRating, name) =>
+                                    console.log("Hello")
+                                }
+                            />
+                        </RatingModal>,
                     ]}
                 >
                     <ProductListItems product={product} />
@@ -72,14 +85,7 @@ const SingleProduct = ({ product }) => {
                         <li className="list-group-item d-flex justify-content-between align-items-center border-0">
                             Rating
                             <span className="label label-default label-pill pull-xs-right">
-                                <Rating
-                                    name={_id}
-                                    numberOfStars={5}
-                                    rating={4}
-                                    isSelectable={true}
-                                    starRatedColor="red"
-                                    // changeRating = {(givenRating, name)=>()}
-                                />
+                                Rating Will Show Here
                             </span>
                         </li>
                     </ul>
