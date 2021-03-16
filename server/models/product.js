@@ -68,13 +68,12 @@ const productSchema = new mongoose.Schema(
                 "Square Pharmaceuticals Ltd.",
             ],
         },
-        // will needed later
-        // rating: [
-        //     {
-        //         star: Number,
-        //         postedBy: { type: ObjectId, ref: "User" },
-        //     },
-        // ],
+        ratings: [
+            {
+                star: Number,
+                postedBy: { type: ObjectId, ref: "User" },
+            },
+        ],
     },
 
     { timestamps: true }

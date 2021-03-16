@@ -54,7 +54,7 @@ const SingleProduct = ({ product }) => {
                             <p className="h6 small">Add to Cart</p>
                         </>,
                         <Link to="/">
-                            <HeartOutlined className="text-info" />
+                            <HeartOutlined className="text-danger" />
                             <br />
                             <p className="h6 small">Add to WishList</p>
                         </Link>,
