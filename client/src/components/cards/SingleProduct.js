@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import defaultCoverImage from "../../images/defaultCoverImage.png";
 
 const { Meta } = Card;
 
@@ -13,12 +14,23 @@ const SingleProduct = ({ product }) => {
     return (
         <>
             <div className="col-md-7">
-                <Carousel showArrows={true} autoPlay infiniteLoop >
-                    {images &&
-                        images.map((image) => (
-                            <img src={image.url} key={image.public_id} />
-                        ))}
-                </Carousel>
+                {images && images.length ? (
+                    <Carousel showArrows={true} autoPlay infiniteLoop>
+                        {images &&
+                            images.map((image) => (
+                                <img src={image.url} key={image.public_id} />
+                            ))}
+                    </Carousel>
+                ) : (
+                    <Card
+                        cover={
+                            <img
+                                src={defaultCoverImage}
+                                className="mb-3 card-image"
+                            />
+                        }
+                    ></Card>
+                )}
             </div>
 
             <div className="col-md-5">
