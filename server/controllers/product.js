@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const User = require("../models/user");
 const slugify = require("slugify");
 
 exports.create = async (req, res) => {
@@ -108,7 +109,7 @@ exports.productsCount = async (req, res) => {
 exports.productStar = async (req, res) => {
     const product = await Product.findById(req.params.productId).exec();
     const user = await User.findOne({ email: req.user.email }).exec();
-    const { star } = res.body;
+    const { star } = req.body;
 
     //check if logged in uuser habe already added rating to this product
     let existingRatingObject = product.ratings.find(
@@ -120,7 +121,7 @@ exports.productStar = async (req, res) => {
         let ratingAdded = await Product.findByIdAndUpdate(
             product._id,
             {
-                $push: { ratings: { star, postedBy: user_id } },
+                $push: { ratings: { star, postedBy: user._id } },
             },
             { new: true }
         ).exec();
@@ -133,7 +134,7 @@ exports.productStar = async (req, res) => {
             {
                 ratings: { $elemeMatch: existingRatingObject },
             },
-            { $set: { "ratings.&.star": star } },
+            { $set: { "ratings.$.star": star } },
             { new: true }
         ).exec();
 
