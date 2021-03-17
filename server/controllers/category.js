@@ -2,7 +2,6 @@ const Category = require("../models/category");
 const Product = require("../models/product");
 const SubCategory = require("../models/sub-category");
 const slugify = require("slugify");
-const { default: Product } = require("../../client/src/pages/Product");
 
 exports.create = async (req, res) => {
     try {
