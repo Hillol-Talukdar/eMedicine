@@ -13,7 +13,7 @@ export const showAverage = (product) => {
         let result = (totalReduced * 5) / heighest;
 
         return (
-            <div className="text-center d-flex pt-3">
+            <div className="text-center d-flex">
                 <span>
                     <Rating
                         starDimension="20px"

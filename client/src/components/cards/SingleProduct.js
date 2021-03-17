@@ -84,12 +84,14 @@ const SingleProduct = ({ product, onClickStart, star }) => {
                     <ul className="list-group">
                         <li className="list-group-item d-flex justify-content-between align-items-center border-0">
                             Rating
-                            <span className="label label-default label-pill pull-xs-right">
+                            <span className="label label-default label-pill pull-xs-right pt-3">
                                 {product &&
                                 product.ratings &&
-                                product.ratings.length > 0
-                                    ? showAverage(product)
-                                    : "No Rating Yet"}
+                                product.ratings.length > 0 ? (
+                                    showAverage(product)
+                                ) : (
+                                    <p className="text-muted">No Rating Yet</p>
+                                )}
                             </span>
                         </li>
                     </ul>
