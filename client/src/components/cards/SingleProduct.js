@@ -8,6 +8,7 @@ import defaultCoverImage from "../../images/defaultCoverImage.png";
 import ProductListItems from "./ProductListItems";
 import Rating from "react-star-ratings";
 import RatingModal from "../modal/RatingModal";
+import { showAverage } from "../../functions/rating";
 
 const { TabPane } = Tabs;
 
@@ -84,7 +85,11 @@ const SingleProduct = ({ product, onClickStart, star }) => {
                         <li className="list-group-item d-flex justify-content-between align-items-center border-0">
                             Rating
                             <span className="label label-default label-pill pull-xs-right">
-                                Rating Will Show Here
+                                {product &&
+                                product.ratings &&
+                                product.ratings.length > 0
+                                    ? showAverage(product)
+                                    : "No Rating Yet"}
                             </span>
                         </li>
                     </ul>
