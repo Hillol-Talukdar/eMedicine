@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Jumbotron from "../components/cards/Jumbotron";
 import FeatureProducts from "../components/home_components/FeatureProducts";
 import BestSellers from "../components/home_components/BestSellers";
+import Categorylist from "../components/Category/Categorylist";
+
 const Home = () => {
     return (
         <div>
@@ -27,6 +29,12 @@ const Home = () => {
                 Best Sellers
             </h3>
             <BestSellers />
+
+            <h3 className="text-light text-center pt-3 pb-3 mt-4 mb-3 jumbotron bg-secondary">
+                Categories
+            </h3>
+            <Categorylist />
+
             <br />
         </div>
     );
