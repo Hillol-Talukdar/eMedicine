@@ -132,13 +132,13 @@ exports.productStar = async (req, res) => {
         //if use already left rating
         const ratingUpdated = await Product.updateOne(
             {
-                ratings: { $elemeMatch: existingRatingObject },
+                ratings: { $elemMatch: existingRatingObject },
             },
             { $set: { "ratings.$.star": star } },
             { new: true }
         ).exec();
 
-        // console.log("RatingUpdated", ratingUpdated);
+        console.log("RatingUpdated", ratingUpdated);
         res.json(ratingUpdated);
     }
 };
