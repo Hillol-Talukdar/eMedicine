@@ -24,7 +24,7 @@ const UserProductCard = ({ product }) => {
                                 : defaultCoverImage
                         }
                         style={{
-                            height: "150px",
+                            height: "170px",
                             // width: "286px",
                             objectFit: "cover",
                         }}

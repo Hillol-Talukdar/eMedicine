@@ -1,4 +1,4 @@
-import React from "react";
+import React, { setState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { SearchOutlined } from "@ant-design/icons";
@@ -13,7 +13,7 @@ const SearchForm = () => {
     const handleChange = (e) => {
         dispatch({
             type: "SEARCH_QUERY",
-            paylaod: { text: e.target.value },
+            payload: { text: e.target.value },
         });
     };
 
@@ -23,7 +23,7 @@ const SearchForm = () => {
     };
 
     return (
-        <form className="form-inline my my-lg-0" onSubmit={handleSubmit}>
+        <form className="form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
             <div className="d-flex">
                 <input
                     onChange={handleChange}
