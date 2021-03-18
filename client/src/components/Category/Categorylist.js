@@ -19,9 +19,9 @@ const Categorylist = () => {
             <Link
                 to={`/category/${cat.slug}`}
                 key={cat._id}
-                className="col btn btn-outline-secondary btn-lg btn-block btn-raised m-2"
+                className="col btn btn-outline-secondary btn-md m-2 d-flex align-items-center justify-content-center"
             >
-                <div className="m-2">{cat.name}</div>
+                <p className="h6 small">{cat.name}</p>
             </Link>
 
             // <div
@@ -35,7 +35,7 @@ const Categorylist = () => {
         ));
 
     return (
-        <div className="container">
+        <div className="d-flex justify-content-center">
             <div className="row">
                 {loading ? (
                     <h2 className="text-center">Laoding...</h2>

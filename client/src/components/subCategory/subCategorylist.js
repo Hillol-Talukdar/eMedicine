@@ -19,22 +19,10 @@ const SubCategorylist = () => {
             <Link
                 to={`/sub-category/${sub.slug}`}
                 key={sub._id}
-                className="col btn btn-outline-secondary btn-lg btn-block btn-raised m-2"
+                className="col btn btn-outline-secondary btn-md btn-raised m-2 d-flex align-items-center justify-content-center"
             >
-                <div className="m-2">
-                    {sub.name}
-                </div>
-                
+                <p className="h6 small">{sub.name}</p>
             </Link>
-
-            // <div
-            //     key={sub._id}
-            //     className="col btn btn-outline-secondary btn-lg btn-block btn-raised m-2"
-            // >
-            //     <Link to={`/sub-category/${sub.slug}`} className="text-dark">
-            //         {sub.name}
-            //     </Link>
-            // </div>
         ));
 
     return (
