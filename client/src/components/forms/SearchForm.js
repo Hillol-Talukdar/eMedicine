@@ -29,7 +29,7 @@ const SearchForm = () => {
                     onChange={handleChange}
                     type="search"
                     value={text}
-                    className="form-control mr-sm-2 mt-1"
+                    className="form-control mr-sm-2 mt-2 form-control-sm"
                     placeholder="Search"
                 />
                 <SearchOutlined
@@ -37,7 +37,7 @@ const SearchForm = () => {
                     style={{
                         cursor: "pointer",
                         fontSize: "23px",
-                        marginLeft: "4px",
+                        marginLeft: "10px",
                         marginTop: "10px",
                     }}
                 />

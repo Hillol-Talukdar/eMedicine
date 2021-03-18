@@ -91,7 +91,7 @@ const Header = () => {
                 </SubMenu>
             )}
 
-            <span style={{ float: "right", padding: "1px" }}>
+            <span className="w-25" style={{ float: "right" }}>
                 <SearchForm />
             </span>
         </Menu>
