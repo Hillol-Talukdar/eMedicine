@@ -16,14 +16,25 @@ const SubCategorylist = () => {
 
     const showsubCategories = () =>
         subCategories.map((sub) => (
-            <div
+            <Link
+                to={`/sub-category/${sub.slug}`}
                 key={sub._id}
                 className="col btn btn-outline-secondary btn-lg btn-block btn-raised m-2"
             >
-                <Link to={`/sub-category/${sub.slug}`} className="text-dark">
+                <div className="m-2">
                     {sub.name}
-                </Link>
-            </div>
+                </div>
+                
+            </Link>
+
+            // <div
+            //     key={sub._id}
+            //     className="col btn btn-outline-secondary btn-lg btn-block btn-raised m-2"
+            // >
+            //     <Link to={`/sub-category/${sub.slug}`} className="text-dark">
+            //         {sub.name}
+            //     </Link>
+            // </div>
         ));
 
     return (

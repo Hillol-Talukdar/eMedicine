@@ -16,14 +16,22 @@ const Categorylist = () => {
 
     const showCategories = () =>
         categories.map((cat) => (
-            <div
+            <Link
+                to={`/category/${cat.slug}`}
                 key={cat._id}
                 className="col btn btn-outline-secondary btn-lg btn-block btn-raised m-2"
             >
-                <Link to={`/category/${cat.slug}`} className="text-dark">
-                    {cat.name}
-                </Link>
-            </div>
+                <div className="m-2">{cat.name}</div>
+            </Link>
+
+            // <div
+            //     key={cat._id}
+            //     className="col btn btn-outline-secondary btn-lg btn-block btn-raised m-2"
+            // >
+            //     <Link to={`/category/${cat.slug}`} className="text-dark">
+            //         {cat.name}
+            //     </Link>
+            // </div>
         ));
 
     return (

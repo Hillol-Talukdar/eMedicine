@@ -28,7 +28,7 @@ const CategoryHome = ({ match }) => {
                         </h3>
                     ) : (
                         <h3 className="text-light text-center pt-3 pb-3 mb-3 jumbotron bg-secondary">
-                            {products.length} Products in "{category.name}"{" "}
+                            {products.length} Product(s) in "{category.name}"{" "}
                             category
                         </h3>
                     )}

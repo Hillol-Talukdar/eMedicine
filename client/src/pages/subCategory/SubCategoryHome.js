@@ -28,8 +28,8 @@ const SubCategoryHome = ({ match }) => {
                         </h3>
                     ) : (
                         <h3 className="text-light text-center pt-3 pb-3 mb-3 jumbotron bg-secondary">
-                            {products.length} Products in "{subcategory.name}"
-                            sub category
+                            {products.length} Product(s) in "{subcategory.name}"
+                            Sub Category
                         </h3>
                     )}
                 </div>
