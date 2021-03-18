@@ -162,7 +162,7 @@ exports.listRelated = async (req, res) => {
 //search filters
 
 const handleQuery = async (req, res, query) => {
-    const products = await Product.find({ $Text: { $search: query } })
+    const products = await Product.find({ $text: { $search: query } })
         .populate("category", "_id name")
         .populate("subCategory", "_id name")
         .populate("postedBy", "_id name")

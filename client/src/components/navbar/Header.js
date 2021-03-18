@@ -13,6 +13,7 @@ import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import SearchForm from "../forms/SearchForm";
 
 const { SubMenu } = Menu;
 
@@ -89,6 +90,10 @@ const Header = () => {
                     </Menu.Item>
                 </SubMenu>
             )}
+
+            <span style={{ float: "right", padding: "1px" }}>
+                <SearchForm />
+            </span>
         </Menu>
     );
 };
