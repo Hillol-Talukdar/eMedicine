@@ -3,6 +3,7 @@ import Jumbotron from "../components/cards/Jumbotron";
 import FeatureProducts from "../components/home_components/FeatureProducts";
 import BestSellers from "../components/home_components/BestSellers";
 import Categorylist from "../components/Category/Categorylist";
+import SubCategorylist from "../components/subCategory/subCategorylist";
 
 const Home = () => {
     return (
@@ -34,6 +35,11 @@ const Home = () => {
                 Categories
             </h3>
             <Categorylist />
+
+            <h3 className="text-light text-center pt-3 pb-3 mt-4 mb-3 jumbotron bg-secondary">
+                Sub Categories
+            </h3>
+            <SubCategorylist />
 
             <br />
         </div>
