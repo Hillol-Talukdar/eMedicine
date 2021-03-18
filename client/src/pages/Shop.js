@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { getProductByCount } from "../functions/product";
+import { getProductByCount, fetchProductsByFilter } from "../functions/product";
 import { useSelector, useDispatch } from "react-redux";
 import UserProductCard from "../components/cards/UserProductCard";
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    let { search } = useSelector((state) => ({ ...state }));
+    const { text } = search;
 
     useEffect(() => {
         loadAllProducts();
@@ -23,6 +26,19 @@ const Shop = () => {
                 // console.log(err);
                 setLoading(false);
             });
+    };
+
+    useEffect(() => {
+        const delayed = setTimeout(() => {
+            fetchProducts({ query: text });
+        }, 300);
+        return () => clearTimeout(delayed);
+    }, [text]);
+
+    const fetchProducts = (arg) => {
+        fetchProductsByFilter(arg).then((res) => {
+            setProducts(res.data);
+        });
     };
 
     return (
