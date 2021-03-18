@@ -8,6 +8,7 @@ import {
     UserOutlined,
     LogoutOutlined,
     DashboardOutlined,
+    ShopOutlined,
 } from "@ant-design/icons";
 import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,7 +47,10 @@ const Header = () => {
             mode="horizontal"
         >
             <Menu.Item key="home" icon={<HomeOutlined />}>
-                <Link to="/">Home</Link>
+                <Link to="/">eMedicine</Link>
+            </Menu.Item>
+            <Menu.Item key="shop" icon={<ShopOutlined />}>
+                <Link to="/shop">Shop</Link>
             </Menu.Item>
             {!user && (
                 <Menu.Item

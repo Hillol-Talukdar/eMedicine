@@ -62,7 +62,7 @@ const UserProductCard = ({ product }) => {
                     product.ratings.length > 0 ? (
                         showAverage(product)
                     ) : (
-                        <p className="text-muted">No Rating Yet</p>
+                        <p className="text-muted mb-3">No Rating Yet</p>
                     )}
                 </div>
             </Card>
