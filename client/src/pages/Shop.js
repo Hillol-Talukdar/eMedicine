@@ -65,6 +65,7 @@ const Shop = () => {
             payload: { text: "" },
         });
         setCategoryIds([]);
+        setStar("");
 
         setPrice(value);
         setTimeout(() => {
@@ -96,7 +97,8 @@ const Shop = () => {
             type: "SEARCH_QUERY",
             payload: { text: "" },
         });
-        setProducts([0, 0]);
+        setPrice([0, 0]);
+        setStar("");
 
         // console.log(e.target.value);
         let inTheState = [...categoryIds];
@@ -130,6 +132,15 @@ const Shop = () => {
 
     const handleStarClick = (num) => {
         // console.log(num);
+        dispatch({
+            type: "SEARCH_QUERY",
+            payload: { text: "" },
+        });
+        setPrice([0, 0]);
+        setCategoryIds([]);
+
+        setStar(num);
+        fetchProducts({ stars: num });
     };
 
     return (

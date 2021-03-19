@@ -10,6 +10,7 @@ const Star = ({ starClick, numberOfStars }) => (
             starSpecing="2px"
             starHoverColor="#ffd700"
             starEmptyColor="#ffd700"
+            starRatedColor="red"
         />
         <br />
     </>
