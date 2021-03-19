@@ -18,6 +18,12 @@ const Shop = () => {
         loadAllProducts();
     }, []);
 
+    const fetchProducts = (arg) => {
+        fetchProductsByFilter(arg).then((res) => {
+            setProducts(res.data);
+        });
+    };
+
     // load products by default on laod
     const loadAllProducts = () => {
         setLoading(true);
@@ -41,11 +47,6 @@ const Shop = () => {
         return () => clearTimeout(delayed);
     }, [text]);
 
-    const fetchProducts = (arg) => {
-        fetchProductsByFilter(arg).then((res) => {
-            setProducts(res.data);
-        });
-    };
 
     // load products on price range
     useEffect(() => {
@@ -79,7 +80,7 @@ const Shop = () => {
                         >
                             <div>
                                 <Slider
-                                    tipFormatter={(val) => `${val}`}
+                                    tipFormatter={(val) => `৳${val}`}
                                     range
                                     value={price}
                                     onChange={handlePriceSlider}
