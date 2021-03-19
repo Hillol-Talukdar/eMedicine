@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { getProductByCount, fetchProductsByFilter } from "../functions/product";
 import { useSelector, useDispatch } from "react-redux";
 import UserProductCard from "../components/cards/UserProductCard";
-import { Menu, Slider } from "antd";
+import { Menu, Slider, Checkbox } from "antd";
+import { getAllCategories } from "../functions/category";
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [price, setPrice] = useState([0, 0]);
     const [okay, setOkay] = useState(false);
+    const [categories, setCategories] = useState([]);
 
     let dispatch = useDispatch();
     let { search } = useSelector((state) => ({ ...state }));
@@ -16,6 +18,8 @@ const Shop = () => {
 
     useEffect(() => {
         loadAllProducts();
+        //fetch categories
+        getAllCategories().then((res) => setCategories(res.data));
     }, []);
 
     const fetchProducts = (arg) => {
@@ -24,7 +28,7 @@ const Shop = () => {
         });
     };
 
-    // load products by default on laod
+    // load products by Default on Laod
     const loadAllProducts = () => {
         setLoading(true);
         getProductByCount(12)
@@ -39,7 +43,7 @@ const Shop = () => {
             });
     };
 
-    // load products on user search input
+    // load products on user Search input
     useEffect(() => {
         const delayed = setTimeout(() => {
             fetchProducts({ query: text });
@@ -47,8 +51,7 @@ const Shop = () => {
         return () => clearTimeout(delayed);
     }, [text]);
 
-
-    // load products on price range
+    // load products on Price Range
     useEffect(() => {
         fetchProducts({ price });
     }, [okay]);
@@ -64,6 +67,22 @@ const Shop = () => {
         }, 300);
     };
 
+    // Load products base on Category
+    // showing categories ina a list of checkbox
+    const showCategories = () =>
+        categories.map((cat) => (
+            <div key={cat._id}>
+                <Checkbox
+                    className="pb-2 pl-4 pr-4"
+                    value={cat._id}
+                    name="category"
+                >
+                    {cat.name}
+                    <br />
+                </Checkbox>
+            </div>
+        ));
+
     return (
         <div className="container.fluid">
             <div className="row">
@@ -72,6 +91,7 @@ const Shop = () => {
                         Search
                     </h4>
                     <Menu defaultOpenKeys={["1", "2"]} mode="inline">
+                        {/* Price */}
                         <Menu.SubMenu
                             key="1"
                             title={
@@ -90,6 +110,21 @@ const Shop = () => {
                                         marginRight: "30px",
                                     }}
                                 />
+                            </div>
+                        </Menu.SubMenu>
+
+                        {/* Categories */}
+                        <Menu.SubMenu
+                            key="2"
+                            title={<span className="h6 small">Categories</span>}
+                        >
+                            <div
+                                style={{
+                                    marginTop: "10px",
+                                    marginLeft: "22px",
+                                }}
+                            >
+                                {showCategories()}
                             </div>
                         </Menu.SubMenu>
                     </Menu>
