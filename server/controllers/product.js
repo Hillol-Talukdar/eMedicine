@@ -161,6 +161,19 @@ exports.listRelated = async (req, res) => {
 
 //search filters
 
+const handleCategory = async (req, res, category) => {
+    try {
+        let products = await Product.find({ category })
+            .populate("category", "_id name")
+            .populate("subCategory", "_id name")
+            .populate("postedBy", "_id name")
+            .exec();
+        res.json(products);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 const handleQuery = async (req, res, query) => {
     const products = await Product.find({ $text: { $search: query } })
         .populate("category", "_id name")
@@ -176,7 +189,7 @@ const handlePrice = async (req, res, query) => {
         let products = await Product.find({
             price: {
                 $greaterThan: price[0],
-                $lessThan: price[1], 
+                $lessThan: price[1],
             },
         })
             .populate("category", "_id name")
@@ -185,13 +198,13 @@ const handlePrice = async (req, res, query) => {
             .exec();
 
         res.json(products);
-    }catch(err){
+    } catch (err) {
         console.log(err);
     }
 };
 
 exports.searchFilters = async (req, res) => {
-    const { query, price } = req.body;
+    const { query, price, category } = req.body;
 
     if (query) {
         // console.log('query', query);
@@ -199,5 +212,9 @@ exports.searchFilters = async (req, res) => {
     }
     if (price !== undefined) {
         await handlePrice(req, res, price);
+    }
+    if (category) {
+        // console.log('query', query);
+        await handleCategory(req, res, category);
     }
 };
