@@ -4,10 +4,35 @@ import defaultCoverImage from "../../images/defaultCoverImage.png";
 import { Link } from "react-router-dom";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { showAverage } from "../../functions/rating";
+import _ from "lodash";
 
 const { Meta } = Card;
 
 const UserProductCard = ({ product }) => {
+    const handleAddToCart = (p) => {
+        //create cart Array
+        let cart = [];
+        if (typeof window !== "undefined") {
+            //if cart is in Local-Storage
+            if (localStorage.getItem("cart")) {
+                cart = JSON.parse(localStorage.getItem("cart"));
+            }
+
+            //push new item to cart
+            cart.push({
+                ...product,
+                count: 1,
+            });
+
+            //remove duplicate
+            let unique = _.uniqWith(cart, _.isEqual);
+
+            //save to local storage
+            localStorage.setItem("cart", JSON.stringify(unique));
+            
+        }
+    };
+
     const { title, description, images, slug, price } = product;
     return (
         <>
@@ -40,21 +65,21 @@ const UserProductCard = ({ product }) => {
                         <br />
                         <p className="h6 small">View in Detail</p>
                     </Link>,
-                    <>
+                    <a onClick={handleAddToCart}>
                         <ShoppingCartOutlined
                             style={{ fontSize: "18px" }}
                             className="text-danger"
                         />
                         <br />
                         <p className="h6 small">Add to Cart</p>
-                    </>,
+                    </a>,
                 ]}
             >
                 <Meta
                     title={`${title} - ৳${price}`}
-                    description={
-                        `${description && description.substring(0, 25)}...`
-                    }
+                    description={`${
+                        description && description.substring(0, 25)
+                    }...`}
                 />
                 <div className="mt-3">
                     {product &&
