@@ -1,4 +1,4 @@
-import React, { setState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { SearchOutlined } from "@ant-design/icons";

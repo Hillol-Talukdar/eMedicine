@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Provider } from "react-redux";
 import { getProducts, getProductsCount } from "../../functions/product";
 import UserProductCard from "../cards/UserProductCard";
-import Jumbotron from "../cards/Jumbotron";
 import CardLoading from "../cards/CardLoading";
 import { Pagination } from "antd";
 

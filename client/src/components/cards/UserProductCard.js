@@ -1,4 +1,4 @@
-import { Card, Skeleton } from "antd";
+import { Card } from "antd";
 import React from "react";
 import defaultCoverImage from "../../images/defaultCoverImage.png";
 import { Link } from "react-router-dom";
@@ -53,7 +53,7 @@ const UserProductCard = ({ product }) => {
                 <Meta
                     title={`${title} - ৳${price}`}
                     description={
-                        `${description && description.substring(0, 25)}...` + ``
+                        `${description && description.substring(0, 25)}...`
                     }
                 />
                 <div className="mt-3">

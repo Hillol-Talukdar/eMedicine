@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Jumbotron from "../components/cards/Jumbotron";
 import FeatureProducts from "../components/home_components/FeatureProducts";
 import BestSellers from "../components/home_components/BestSellers";

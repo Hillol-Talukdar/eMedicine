@@ -24,10 +24,8 @@ const UpdateProductForm = ({
         description,
         price,
         category,
-        subCategory,
         shipping,
         quantity,
-        images,
         brands,
         brand,
     } = values;
