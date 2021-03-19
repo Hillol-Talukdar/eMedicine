@@ -1,5 +1,5 @@
-import { Card } from "antd";
-import React from "react";
+import { Card, Tooltip } from "antd";
+import React, { useState } from "react";
 import defaultCoverImage from "../../images/defaultCoverImage.png";
 import { Link } from "react-router-dom";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
@@ -9,7 +9,9 @@ import _ from "lodash";
 const { Meta } = Card;
 
 const UserProductCard = ({ product }) => {
-    const handleAddToCart = (p) => {
+    const [tooltip, setTooltip] = useState("click to add");
+
+    const handleAddToCart = () => {
         //create cart Array
         let cart = [];
         if (typeof window !== "undefined") {
@@ -29,7 +31,9 @@ const UserProductCard = ({ product }) => {
 
             //save to local storage
             localStorage.setItem("cart", JSON.stringify(unique));
-            
+
+            //show Tooltip
+            setTooltip("Added");
         }
     };
 
@@ -65,14 +69,17 @@ const UserProductCard = ({ product }) => {
                         <br />
                         <p className="h6 small">View in Detail</p>
                     </Link>,
-                    <a onClick={handleAddToCart}>
-                        <ShoppingCartOutlined
-                            style={{ fontSize: "18px" }}
-                            className="text-danger"
-                        />
-                        <br />
-                        <p className="h6 small">Add to Cart</p>
-                    </a>,
+
+                    <Tooltip title={tooltip}>
+                        <a onClick={handleAddToCart}>
+                            <ShoppingCartOutlined
+                                style={{ fontSize: "18px" }}
+                                className="text-danger"
+                            />
+                            <br />
+                            <p className="h6 small">Add to Cart</p>
+                        </a>
+                    </Tooltip>,
                 ]}
             >
                 <Meta
