@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { getProductByCount, fetchProductsByFilter } from "../functions/product";
 import { useSelector, useDispatch } from "react-redux";
 import UserProductCard from "../components/cards/UserProductCard";
+import { Menu, Slider } from "antd";
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [price, setPrice] = useState([0, 0]);
 
     let { search } = useSelector((state) => ({ ...state }));
     const { text } = search;
@@ -44,7 +46,33 @@ const Shop = () => {
     return (
         <div className="container.fluid">
             <div className="row">
-                <div className="col-md-3">Search Menu</div>
+                <div className="col-md-3">
+                    <h4 className="text-center pt-2 pb-2 mt-3 mb-3 jumbotron">
+                        Search
+                    </h4>
+                    <Menu defaultOpenKeys={["1", "2"]} mode="inline">
+                        <Menu.SubMenu
+                            key="1"
+                            title={
+                                <span className="h6 small">Price Range</span>
+                            }
+                        >
+                            <div>
+                                <Slider
+                                    tipFormatter={(val) => `${val}`}
+                                    range
+                                    value={price}
+                                    onChange={(val) => setPrice(val)}
+                                    max="3000"
+                                    style={{
+                                        marginLeft: "30px",
+                                        marginRight: "30px",
+                                    }}
+                                />
+                            </div>
+                        </Menu.SubMenu>
+                    </Menu>
+                </div>
                 <div className="col-md-9">
                     {loading ? (
                         <h4 className="ml-auto text-primary">Loading.....</h4>
