@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import UserProductCard from "../components/cards/UserProductCard";
 import { Menu, Slider, Checkbox } from "antd";
 import { getAllCategories } from "../functions/category";
+import Star from "../components/forms/Star";
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
@@ -12,6 +13,7 @@ const Shop = () => {
     const [okay, setOkay] = useState(false);
     const [categories, setCategories] = useState([]);
     const [categoryIds, setCategoryIds] = useState([]);
+    const [star, setStar] = useState("");
 
     let dispatch = useDispatch();
     let { search } = useSelector((state) => ({ ...state }));
@@ -115,6 +117,21 @@ const Shop = () => {
         fetchProducts({ category: inTheState });
     };
 
+    //show products by Star Ratings
+    const showStars = () => (
+        <div className="pr-4 pl-4 pb-2">
+            <Star starClick={handleStarClick} numberOfStars={5} />
+            <Star starClick={handleStarClick} numberOfStars={4} />
+            <Star starClick={handleStarClick} numberOfStars={3} />
+            <Star starClick={handleStarClick} numberOfStars={2} />
+            <Star starClick={handleStarClick} numberOfStars={1} />
+        </div>
+    );
+
+    const handleStarClick = (num) => {
+        // console.log(num);
+    };
+
     return (
         <div className="container.fluid">
             <div className="row">
@@ -122,7 +139,7 @@ const Shop = () => {
                     <h4 className="text-center pt-2 pb-2 mt-3 mb-3 jumbotron">
                         Search
                     </h4>
-                    <Menu defaultOpenKeys={["1", "2"]} mode="inline">
+                    <Menu defaultOpenKeys={["1", "2", "3"]} mode="inline">
                         {/* Price */}
                         <Menu.SubMenu
                             key="1"
@@ -157,6 +174,21 @@ const Shop = () => {
                                 }}
                             >
                                 {showCategories()}
+                            </div>
+                        </Menu.SubMenu>
+
+                        {/* Star Rating */}
+                        <Menu.SubMenu
+                            key="3"
+                            title={<span className="h6 small">Rating</span>}
+                        >
+                            <div
+                                style={{
+                                    marginTop: "10px",
+                                    marginLeft: "22px",
+                                }}
+                            >
+                                {showStars()}
                             </div>
                         </Menu.SubMenu>
                     </Menu>
