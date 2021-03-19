@@ -184,12 +184,12 @@ const handleQuery = async (req, res, query) => {
     res.json(products);
 };
 
-const handlePrice = async (req, res, query) => {
+const handlePrice = async (req, res, price) => {
     try {
         let products = await Product.find({
             price: {
-                $greaterThan: price[0],
-                $lessThan: price[1],
+                $gte: price[0],
+                $lte: price[1],
             },
         })
             .populate("category", "_id name")

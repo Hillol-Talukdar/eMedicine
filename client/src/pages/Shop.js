@@ -18,6 +18,7 @@ const Shop = () => {
         loadAllProducts();
     }, []);
 
+    // load products by default on laod
     const loadAllProducts = () => {
         setLoading(true);
         getProductByCount(12)
@@ -32,6 +33,7 @@ const Shop = () => {
             });
     };
 
+    // load products on user search input
     useEffect(() => {
         const delayed = setTimeout(() => {
             fetchProducts({ query: text });
@@ -45,6 +47,7 @@ const Shop = () => {
         });
     };
 
+    // load products on price range
     useEffect(() => {
         fetchProducts({ price });
     }, [okay]);
