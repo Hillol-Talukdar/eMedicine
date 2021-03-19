@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import UserProductCard from "../components/cards/UserProductCard";
 import { Menu, Slider, Checkbox } from "antd";
 import { getAllCategories } from "../functions/category";
+import { getAllSubCategories } from "../functions/sub-category";
 import Star from "../components/forms/Star";
 
 const Shop = () => {
@@ -12,8 +13,10 @@ const Shop = () => {
     const [price, setPrice] = useState([0, 0]);
     const [okay, setOkay] = useState(false);
     const [categories, setCategories] = useState([]);
+    const [subCategories, setSubCategories] = useState([]);
     const [categoryIds, setCategoryIds] = useState([]);
     const [star, setStar] = useState("");
+    const [subCategory, setSubCategory] = useState("");
 
     let dispatch = useDispatch();
     let { search } = useSelector((state) => ({ ...state }));
@@ -21,8 +24,12 @@ const Shop = () => {
 
     useEffect(() => {
         loadAllProducts();
+
         //fetch categories
         getAllCategories().then((res) => setCategories(res.data));
+
+        //fetch sub-categories
+        getAllSubCategories().then((res) => setSubCategories(res.data));
     }, []);
 
     const fetchProducts = (arg) => {
@@ -66,6 +73,7 @@ const Shop = () => {
         });
         setCategoryIds([]);
         setStar("");
+        setSubCategory("");
 
         setPrice(value);
         setTimeout(() => {
@@ -99,6 +107,7 @@ const Shop = () => {
         });
         setPrice([0, 0]);
         setStar("");
+        setSubCategory("");
 
         // console.log(e.target.value);
         let inTheState = [...categoryIds];
@@ -138,9 +147,37 @@ const Shop = () => {
         });
         setPrice([0, 0]);
         setCategoryIds([]);
+        setSubCategory("");
 
         setStar(num);
         fetchProducts({ stars: num });
+    };
+
+    //show products by Sub Categories
+    const showSubCategories = () =>
+        subCategories.map((sub) => (
+            <div
+                key={sub._id}
+                onClick={() => handleSubCategory(sub)}
+                className="p-1 m-1 badge bg-secondary"
+                style={{ cursor: "pointer"}}
+            >
+                {sub.name}
+            </div>
+        ));
+
+    const handleSubCategory = (sub) => {
+        // console.log("SUB ", sub);
+        dispatch({
+            type: "SEARCH_QUERY",
+            payload: { text: "" },
+        });
+        setPrice([0, 0]);
+        setCategoryIds([]);
+        setStar("");
+
+        setSubCategory(sub);
+        fetchProducts({ subCategory: sub });
     };
 
     return (
@@ -150,7 +187,7 @@ const Shop = () => {
                     <h4 className="text-center pt-2 pb-2 mt-3 mb-3 jumbotron">
                         Search
                     </h4>
-                    <Menu defaultOpenKeys={["1", "2", "3"]} mode="inline">
+                    <Menu defaultOpenKeys={["1", "2", "3", "4"]} mode="inline">
                         {/* Price */}
                         <Menu.SubMenu
                             key="1"
@@ -200,6 +237,23 @@ const Shop = () => {
                                 }}
                             >
                                 {showStars()}
+                            </div>
+                        </Menu.SubMenu>
+
+                        {/* Sub-Categories */}
+                        <Menu.SubMenu
+                            key="4"
+                            title={
+                                <span className="h6 small">Sub Categories</span>
+                            }
+                        >
+                            <div
+                                style={{
+                                    marginTop: "10px",
+                                    marginLeft: "21px",
+                                }}
+                            >
+                                {showSubCategories()}
                             </div>
                         </Menu.SubMenu>
                     </Menu>
