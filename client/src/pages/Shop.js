@@ -6,6 +6,7 @@ import { Menu, Slider, Checkbox, Radio } from "antd";
 import { getAllCategories } from "../functions/category";
 import { getAllSubCategories } from "../functions/sub-category";
 import Star from "../components/forms/Star";
+import { changeConfirmLocale } from "antd/lib/modal/locale";
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
@@ -29,6 +30,7 @@ const Shop = () => {
         "Square Pharmaceuticals Ltd.",
     ]);
     const [brand, setBrand] = useState("");
+    const [shipping, setShipping] = useState("");
 
     let dispatch = useDispatch();
     let { search } = useSelector((state) => ({ ...state }));
@@ -87,6 +89,7 @@ const Shop = () => {
         setStar("");
         setSubCategory("");
         setBrand("");
+        setShipping("");
 
         setPrice(value);
         setTimeout(() => {
@@ -122,6 +125,7 @@ const Shop = () => {
         setStar("");
         setSubCategory("");
         setBrand("");
+        setShipping("");
 
         // console.log(e.target.value);
         let inTheState = [...categoryIds];
@@ -163,6 +167,7 @@ const Shop = () => {
         setCategoryIds([]);
         setSubCategory("");
         setBrand("");
+        setShipping("");
 
         setStar(num);
         fetchProducts({ stars: num });
@@ -191,6 +196,7 @@ const Shop = () => {
         setCategoryIds([]);
         setStar("");
         setBrand("");
+        setShipping("");
 
         setSubCategory(sub);
         fetchProducts({ subCategory: sub });
@@ -199,15 +205,19 @@ const Shop = () => {
     //show products based on Brands
     const showBrands = () =>
         brands.map((brnd) => (
-            <Radio
-                value={brnd}
-                name={brnd}
-                checked={brnd === brand}
-                onChange={handleBrand}
-                className="pb-1 pl-10 pr-10"
-            >
-                {brnd}
-            </Radio>
+            <>
+                <Radio
+                    value={brnd}
+                    name={brnd}
+                    checked={brnd === brand}
+                    onChange={handleBrand}
+                    className="pb-1 pl-4 pr-4"
+                >
+                    {brnd}
+                </Radio>
+
+                <br />
+            </>
         ));
 
     const handleBrand = (e) => {
@@ -219,9 +229,50 @@ const Shop = () => {
         setCategoryIds([]);
         setStar("");
         setSubCategory("");
+        setShipping("");
 
         setBrand(e.target.value);
         fetchProducts({ brand: e.target.value });
+    };
+
+    //show products based on shipping
+    const showShipping = () => (
+        <>
+            <Checkbox
+                onChange={handleCheckShipping}
+                className="pb-2 pl-4 pr-4"
+                value="Yes"
+                checked={shipping === "Yes"}
+            >
+                Yes
+            </Checkbox>
+
+            <br />
+
+            <Checkbox
+                onChange={handleCheckShipping}
+                className="pb-2 pl-4 pr-8"
+                value="No"
+                checked={shipping === "No"}
+            >
+                No
+            </Checkbox>
+        </>
+    );
+
+    const handleCheckShipping = (e) => {
+        dispatch({
+            type: "SEARCH_QUERY",
+            payload: { text: "" },
+        });
+        setPrice([0, 0]);
+        setCategoryIds([]);
+        setStar("");
+        setSubCategory("");
+        setBrand("");
+
+        setShipping(e.target.value);
+        fetchProducts({ shipping: e.target.value });
     };
 
     return (
@@ -232,7 +283,7 @@ const Shop = () => {
                         Search
                     </h4>
                     <Menu
-                        defaultOpenKeys={["1", "2", "3", "4", "5"]}
+                        defaultOpenKeys={["1", "2", "3", "4", "5", "6"]}
                         mode="inline"
                     >
                         {/* Price */}
@@ -297,7 +348,7 @@ const Shop = () => {
                             <div
                                 style={{
                                     marginTop: "10px",
-                                    marginLeft: "21px",
+                                    marginLeft: "22px",
                                 }}
                             >
                                 {showSubCategories()}
@@ -312,10 +363,25 @@ const Shop = () => {
                             <div
                                 style={{
                                     marginTop: "10px",
-                                    marginLeft: "21px",
+                                    marginLeft: "22px",
                                 }}
                             >
                                 {showBrands()}
+                            </div>
+                        </Menu.SubMenu>
+
+                        {/* Shipping */}
+                        <Menu.SubMenu
+                            key="6"
+                            title={<span className="h6 small">Shipping</span>}
+                        >
+                            <div
+                                style={{
+                                    marginTop: "10px",
+                                    marginLeft: "22px",
+                                }}
+                            >
+                                {showShipping()}
                             </div>
                         </Menu.SubMenu>
                     </Menu>
