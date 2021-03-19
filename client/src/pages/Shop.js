@@ -11,6 +11,7 @@ const Shop = () => {
     const [price, setPrice] = useState([0, 0]);
     const [okay, setOkay] = useState(false);
     const [categories, setCategories] = useState([]);
+    const [categoryIds, setCategoryIds] = useState([]);
 
     let dispatch = useDispatch();
     let { search } = useSelector((state) => ({ ...state }));
@@ -61,6 +62,8 @@ const Shop = () => {
             type: "SEARCH_QUERY",
             payload: { text: "" },
         });
+        setCategoryIds([]);
+
         setPrice(value);
         setTimeout(() => {
             setOkay(!okay);
@@ -73,15 +76,44 @@ const Shop = () => {
         categories.map((cat) => (
             <div key={cat._id}>
                 <Checkbox
+                    onChange={handleCheckCategory}
                     className="pb-2 pl-4 pr-4"
                     value={cat._id}
                     name="category"
+                    checked={categoryIds.includes(cat._id)}
                 >
                     {cat.name}
                     <br />
                 </Checkbox>
             </div>
         ));
+
+    // Handle ccheck for Categories
+    const handleCheckCategory = (e) => {
+        dispatch({
+            type: "SEARCH_QUERY",
+            payload: { text: "" },
+        });
+        setProducts([0, 0]);
+
+        // console.log(e.target.value);
+        let inTheState = [...categoryIds];
+        let justChecked = e.target.value;
+        let foundInTheState = inTheState.indexOf(justChecked);
+
+        //removes duplicate ids from states
+        //if not found returns -1 else returns index
+        if (foundInTheState === -1) {
+            let justChecked = e.target.value;
+            inTheState.push(justChecked);
+        } else {
+            // pull out the item
+            inTheState.splice(foundInTheState, 1);
+        }
+
+        setCategoryIds(inTheState);
+        fetchProducts({ category: inTheState });
+    };
 
     return (
         <div className="container.fluid">
@@ -137,7 +169,9 @@ const Shop = () => {
                             Products
                         </h3>
                     )}
-                    {products.length < 1 && <p>No Products Found!</p>}
+                    {products.length < 1 && (
+                        <p className="text-center">No Products Found!</p>
+                    )}
                     <div className="row">
                         {products.map((pr) => (
                             <div key={pr._id} className="col-md-4 mb-2">
