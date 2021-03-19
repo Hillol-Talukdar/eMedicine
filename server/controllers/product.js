@@ -243,8 +243,36 @@ const handleSubCategory = async (req, res, subCategory) => {
     res.json(products);
 };
 
+const handleShipping = async (req, res, shipping) => {
+    const products = await Product.find({ shipping })
+        .populate("category", "_id name")
+        .populate("subCategory", "_id name")
+        .populate("postedBy", "_id name")
+        .exec();
+
+    res.json(products);
+};
+
+const handleBrand = async (req, res, brand) => {
+    const products = await Product.find({ brand })
+        .populate("category", "_id name")
+        .populate("subCategory", "_id name")
+        .populate("postedBy", "_id name")
+        .exec();
+
+    res.json(products);
+};
+
 exports.searchFilters = async (req, res) => {
-    const { query, price, category, stars, subCategory } = req.body;
+    const {
+        query,
+        price,
+        category,
+        stars,
+        subCategory,
+        shipping,
+        brand,
+    } = req.body;
 
     if (query) {
         // console.log('query', query);
@@ -264,5 +292,13 @@ exports.searchFilters = async (req, res) => {
     if (subCategory) {
         // console.log("subCategory ", subCategory);
         await handleSubCategory(req, res, subCategory);
+    }
+    if (shipping) {
+        // console.log("shipping ", shipping);
+        await handleShipping(req, res, shipping);
+    }
+    if (brand) {
+        // console.log("shipping ", brand);
+        await handleBrand(req, res, brand);
     }
 };
