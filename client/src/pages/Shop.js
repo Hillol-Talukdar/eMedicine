@@ -8,7 +8,9 @@ const Shop = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [price, setPrice] = useState([0, 0]);
+    const [okay, setOkay] = useState(false);
 
+    let dispatch = useDispatch();
     let { search } = useSelector((state) => ({ ...state }));
     const { text } = search;
 
@@ -43,6 +45,21 @@ const Shop = () => {
         });
     };
 
+    useEffect(() => {
+        fetchProducts({ price });
+    }, [okay]);
+
+    const handlePriceSlider = (value) => {
+        dispatch({
+            type: "SEARCH_QUERY",
+            payload: { text: "" },
+        });
+        setPrice(value);
+        setTimeout(() => {
+            setOkay(!okay);
+        }, 300);
+    };
+
     return (
         <div className="container.fluid">
             <div className="row">
@@ -62,7 +79,7 @@ const Shop = () => {
                                     tipFormatter={(val) => `${val}`}
                                     range
                                     value={price}
-                                    onChange={(val) => setPrice(val)}
+                                    onChange={handlePriceSlider}
                                     max="3000"
                                     style={{
                                         marginLeft: "30px",
