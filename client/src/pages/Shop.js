@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getProductByCount, fetchProductsByFilter } from "../functions/product";
 import { useSelector, useDispatch } from "react-redux";
 import UserProductCard from "../components/cards/UserProductCard";
-import { Menu, Slider, Checkbox } from "antd";
+import { Menu, Slider, Checkbox, Radio } from "antd";
 import { getAllCategories } from "../functions/category";
 import { getAllSubCategories } from "../functions/sub-category";
 import Star from "../components/forms/Star";
@@ -17,6 +17,18 @@ const Shop = () => {
     const [categoryIds, setCategoryIds] = useState([]);
     const [star, setStar] = useState("");
     const [subCategory, setSubCategory] = useState("");
+    const [brands, setBrands] = useState([
+        "ACI Limited",
+        "ACME Laboratories Ltd.",
+        "Al-Madina Pharmaceuticals Ltd.",
+        "Beximco Pharmaceuticals Ltd.",
+        "Bengal drugs Ltd.",
+        "BioRx",
+        "Globe Pharmaceuticals Ltd.",
+        "Ibn Sina Pharmaceuticals Ltd.",
+        "Square Pharmaceuticals Ltd.",
+    ]);
+    const [brand, setBrand] = useState("");
 
     let dispatch = useDispatch();
     let { search } = useSelector((state) => ({ ...state }));
@@ -74,6 +86,7 @@ const Shop = () => {
         setCategoryIds([]);
         setStar("");
         setSubCategory("");
+        setBrand("");
 
         setPrice(value);
         setTimeout(() => {
@@ -108,6 +121,7 @@ const Shop = () => {
         setPrice([0, 0]);
         setStar("");
         setSubCategory("");
+        setBrand("");
 
         // console.log(e.target.value);
         let inTheState = [...categoryIds];
@@ -148,6 +162,7 @@ const Shop = () => {
         setPrice([0, 0]);
         setCategoryIds([]);
         setSubCategory("");
+        setBrand("");
 
         setStar(num);
         fetchProducts({ stars: num });
@@ -160,7 +175,7 @@ const Shop = () => {
                 key={sub._id}
                 onClick={() => handleSubCategory(sub)}
                 className="p-1 m-1 badge bg-secondary"
-                style={{ cursor: "pointer"}}
+                style={{ cursor: "pointer" }}
             >
                 {sub.name}
             </div>
@@ -175,9 +190,38 @@ const Shop = () => {
         setPrice([0, 0]);
         setCategoryIds([]);
         setStar("");
+        setBrand("");
 
         setSubCategory(sub);
         fetchProducts({ subCategory: sub });
+    };
+
+    //show products based on Brands
+    const showBrands = () =>
+        brands.map((brnd) => (
+            <Radio
+                value={brnd}
+                name={brnd}
+                checked={brnd === brand}
+                onChange={handleBrand}
+                className="pb-1 pl-10 pr-10"
+            >
+                {brnd}
+            </Radio>
+        ));
+
+    const handleBrand = (e) => {
+        dispatch({
+            type: "SEARCH_QUERY",
+            payload: { text: "" },
+        });
+        setPrice([0, 0]);
+        setCategoryIds([]);
+        setStar("");
+        setSubCategory("");
+
+        setBrand(e.target.value);
+        fetchProducts({ brand: e.target.value });
     };
 
     return (
@@ -187,7 +231,10 @@ const Shop = () => {
                     <h4 className="text-center pt-2 pb-2 mt-3 mb-3 jumbotron">
                         Search
                     </h4>
-                    <Menu defaultOpenKeys={["1", "2", "3", "4"]} mode="inline">
+                    <Menu
+                        defaultOpenKeys={["1", "2", "3", "4", "5"]}
+                        mode="inline"
+                    >
                         {/* Price */}
                         <Menu.SubMenu
                             key="1"
@@ -254,6 +301,21 @@ const Shop = () => {
                                 }}
                             >
                                 {showSubCategories()}
+                            </div>
+                        </Menu.SubMenu>
+
+                        {/* Brands */}
+                        <Menu.SubMenu
+                            key="5"
+                            title={<span className="h6 small">Brands</span>}
+                        >
+                            <div
+                                style={{
+                                    marginTop: "10px",
+                                    marginLeft: "21px",
+                                }}
+                            >
+                                {showBrands()}
                             </div>
                         </Menu.SubMenu>
                     </Menu>
