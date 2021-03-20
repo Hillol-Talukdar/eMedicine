@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import SideDrawer from "./components/drawer/SideDrawer";
 import Register from "./pages/auth/Register";
 import RegistrationDone from "./pages/auth/RegistrationDone";
 import Login from "./pages/auth/Login";
@@ -64,6 +65,7 @@ const App = () => {
     return (
         <>
             <Header />
+            <SideDrawer />
             <ToastContainer />
             <Switch>
                 <Route exact path="/" component={Home} />
