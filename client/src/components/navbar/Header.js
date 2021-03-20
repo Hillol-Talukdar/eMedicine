@@ -97,7 +97,7 @@ const Header = () => {
             )}
 
             <Menu.Item
-                key="shop"
+                key="cart"
                 style={{ float: "right", marginRight: "1px" }}
                 icon={<ShoppingCartOutlined />}
             >
