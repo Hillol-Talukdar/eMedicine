@@ -12,6 +12,10 @@ const Cart = () => {
         }, 0);
     };
 
+    const saveOrderNow = () => {
+        //
+    };
+
     return (
         <div>
             <div className="row w-100">
@@ -52,12 +56,23 @@ const Cart = () => {
                     </div>
                     <hr />
                     {user ? (
-                        <button className="btn btn-primary btn-sm">
+                        <button
+                            onClick={saveOrderNow}
+                            disabled={!cart.length}
+                            className="btn btn-primary btn-sm"
+                        >
                             Proceed to Checkout
                         </button>
                     ) : (
                         <button className="btn btn-primary btn-sm">
-                            Login to Checkout
+                            <Link
+                                to={{
+                                    pathname: "/login",
+                                    state: { from: "cart" },
+                                }}
+                            >
+                                Login to Checkout
+                            </Link>
                         </button>
                     )}
                 </div>
