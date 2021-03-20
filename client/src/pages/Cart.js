@@ -18,7 +18,7 @@ const Cart = ({ history }) => {
         // console.log("cart", JSON.stringify(cart, null, 4));
         userCart(cart, user.token)
             .then((res) => {
-                console.log("cart POST RES", res);
+                // console.log("cart POST RES", res);
                 if (res.data.ok) {
                     history.push("/checkout");
                 }

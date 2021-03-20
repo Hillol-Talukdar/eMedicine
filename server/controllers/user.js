@@ -17,7 +17,7 @@ exports.userCart = async (req, res) => {
 
     for (let i = 0; i < cart.length; i++) {
         let object = {};
-        object.Product = cart[i]._id;
+        object.product = cart[i]._id;
         object.count = cart[i].count;
 
         //get price for creating Total
