@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, Tabs } from "antd";
+import React, { useState } from "react";
+import { Card, Tabs, Tooltip } from "antd";
 import { Link } from "react-router-dom";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Carousel } from "react-responsive-carousel";
@@ -9,11 +9,48 @@ import ProductListItems from "./ProductListItems";
 import Rating from "react-star-ratings";
 import RatingModal from "../modal/RatingModal";
 import { showAverage } from "../../functions/rating";
+import _ from "lodash";
+import { useSelector, useDispatch } from "react-redux";
 
 const { TabPane } = Tabs;
 
 const SingleProduct = ({ product, onClickStart, star }) => {
     const { title, images, description, _id } = product;
+    const [tooltip, setTooltip] = useState("click to add");
+
+    const { user, cart } = useSelector((state) => ({ ...state }));
+    const dispatch = useDispatch();
+
+    const handleAddToCart = () => {
+        //create cart Array
+        let cart = [];
+        if (typeof window !== "undefined") {
+            //if cart is in Local-Storage
+            if (localStorage.getItem("cart")) {
+                cart = JSON.parse(localStorage.getItem("cart"));
+            }
+
+            //push new item to cart
+            cart.push({
+                ...product,
+                count: 1,
+            });
+
+            //remove duplicate
+            let unique = _.uniqWith(cart, _.isEqual);
+
+            //save to local storage
+            localStorage.setItem("cart", JSON.stringify(unique));
+
+            //show Tooltip
+            setTooltip("Added");
+
+            dispatch({
+                type: "ADD_TO_CART",
+                payload: cart,
+            });
+        }
+    };
 
     return (
         <>
@@ -52,12 +89,16 @@ const SingleProduct = ({ product, onClickStart, star }) => {
                 <Card
                     actions={[
                         <>
-                            <ShoppingCartOutlined
-                                style={{ fontSize: "25px" }}
-                                className="text-danger"
-                            />
-                            <br />
-                            <p className="h6 small mt-1">Add to Cart</p>
+                            <Tooltip title={tooltip}>
+                                <a onClick={handleAddToCart}>
+                                    <ShoppingCartOutlined
+                                        style={{ fontSize: "25px" }}
+                                        className="text-danger mt-1"
+                                    />
+                                    <br />
+                                    <p className="h6 small">Add to Cart</p>
+                                </a>
+                            </Tooltip>
                         </>,
                         <Link to="/">
                             <HeartOutlined

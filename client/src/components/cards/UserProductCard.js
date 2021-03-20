@@ -5,11 +5,15 @@ import { Link } from "react-router-dom";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { showAverage } from "../../functions/rating";
 import _ from "lodash";
+import { useSelector, useDispatch } from "react-redux";
 
 const { Meta } = Card;
 
 const UserProductCard = ({ product }) => {
     const [tooltip, setTooltip] = useState("click to add");
+
+    const { user, cart } = useSelector((state) => ({ ...state }));
+    const dispatch = useDispatch();
 
     const handleAddToCart = () => {
         //create cart Array
@@ -34,6 +38,11 @@ const UserProductCard = ({ product }) => {
 
             //show Tooltip
             setTooltip("Added");
+
+            dispatch({
+                type: "ADD_TO_CART",
+                payload: cart,
+            });
         }
     };
 
