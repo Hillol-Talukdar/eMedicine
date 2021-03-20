@@ -18,16 +18,30 @@ const Cart = () => {
     };
 
     const showCartItems = () => (
-        <table className="table">
+        <table className="table table-bordered">
             <thead className="thead-light">
-                <tr>
-                    <th scope="col">Image</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Brand</th>
-                    <th scope="col">Count</th>
-                    <th scope="col">Shipping</th>
-                    <th scope="col">Remove</th>
+                <tr className="table-dark">
+                    <th className="text-center" scope="col">
+                        Product Image
+                    </th>
+                    <th className="text-center" scope="col">
+                        Name
+                    </th>
+                    <th className="text-center" scope="col">
+                        Price
+                    </th>
+                    <th className="text-center" scope="col">
+                        Brand
+                    </th>
+                    <th className="text-center" scope="col">
+                        Quantity
+                    </th>
+                    <th className="text-center" scope="col">
+                        Shipping
+                    </th>
+                    <th className="text-center" scope="col">
+                        Remove
+                    </th>
                 </tr>
             </thead>
             {cart.map((prod) => (
@@ -39,9 +53,9 @@ const Cart = () => {
     return (
         <div>
             <div className="row w-100">
-                <div className="col-md-8">
-                    <h4 className="text-light text-center pt-3 pb-3 mb-3 jumbotron bg-secondary d-flex flex-row">
-                        Cart
+                <div className="col-md-9 text-center">
+                    <h4 className="text-light text-center pt-4 pb-3 mb-0 jumbotron bg-secondary d-flex flex-row">
+                        &nbsp;Cart
                         <h6 className="text-light mt-2">
                             &nbsp;({cart.length} items)
                         </h6>
@@ -55,8 +69,8 @@ const Cart = () => {
                         showCartItems()
                     )}
                 </div>
-                <div className="col-md-4">
-                    <h4 className="pt-3 pb-3 mb-3 jumbotron">Order Summary</h4>
+                <div className="col-md-3">
+                    <h4 className="pt-4 pb-2 mb-3 jumbotron">Order Summary</h4>
                     <hr />
                     <p>Product</p>
                     {cart.map((c, i) => (

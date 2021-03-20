@@ -1,6 +1,7 @@
 import React from "react";
 import ImageModal from "react-modal-image";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import defaultCoverImage from "../../images/defaultCoverImage.png";
 
 const ProductCartCard = ({ prod }) => {
@@ -8,6 +9,12 @@ const ProductCartCard = ({ prod }) => {
 
     const handleQuantityChange = (e) => {
         let count = e.target.value < 1 ? 1 : e.target.value;
+
+        if (count > prod.quantity) {
+            toast.error(`Max available quantity: " ${prod.quantity}`);
+            return;
+        }
+
         let cart = [];
         if (typeof window !== undefined) {
             if (localStorage.getItem("cart")) {
@@ -44,19 +51,19 @@ const ProductCartCard = ({ prod }) => {
                         )}
                     </div>
                 </td>
-                <td>{prod.title}</td>
-                <td>{prod.price}</td>
-                <td>{prod.brand}</td>
+                <td className="text-center">{prod.title}</td>
+                <td className="text-center">{prod.price}</td>
+                <td className="text-center">{prod.brand}</td>
                 <td className="text-center">
                     <input
                         type="number"
-                        className="form-control"
+                        className="form-control btn-sm"
                         value={prod.count}
                         onChange={handleQuantityChange}
                     ></input>
                 </td>
-                <td>Shipping</td>
-                <td>Delete</td>
+                <td className="text-center">Shipping</td>
+                <td className="text-center">Delete</td>
             </tr>
         </tbody>
     );
