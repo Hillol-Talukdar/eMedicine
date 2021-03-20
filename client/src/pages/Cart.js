@@ -5,6 +5,13 @@ import { Link } from "react-router-dom";
 const Cart = () => {
     const { cart, user } = useSelector((state) => ({ ...state }));
     const dispatch = useDispatch();
+
+    const getTotalAmount = () => {
+        return cart.reduce((currentValue, nextValue) => {
+            return currentValue + nextValue.count * nextValue.price;
+        }, 0);
+    };
+
     return (
         <div>
             <div className="row w-100">
@@ -30,9 +37,19 @@ const Cart = () => {
                     <p>Product</p>
                     {cart.map((c, i) => (
                         <div key={i}>
-                            <p>Title x quantity = total amount</p>
+                            <p>
+                                {c.title} x {c.count} = {c.price * c.count}
+                                &nbsp;৳
+                            </p>
                         </div>
                     ))}
+                    <hr />
+
+                    <div className="d-flex flex-row">
+                        Total:&nbsp;
+                        <b className="h6">৳&nbsp;</b>
+                        <b>{getTotalAmount()}</b>
+                    </div>
                     <hr />
                     {user ? (
                         <button className="btn btn-primary btn-sm">
