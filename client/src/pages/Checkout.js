@@ -8,7 +8,7 @@ import "react-quill/dist/quill.snow.css";
 const Checkout = () => {
     const [products, setProducts] = useState([]);
     const [total, setTotal] = useState(0);
-    const [address, setAddress] = useState("");
+    const [address, setAddress] = useState("Enter Shipping Address Here");
     const [addressSaveStatus, setAddressSaveStatus] = useState(false);
 
     const dispatch = useDispatch();
@@ -48,32 +48,41 @@ const Checkout = () => {
 
     return (
         <div className="row">
-            <div className="col-md-6">
-                <h4>Delivery adress</h4>
+            <div className="col-md-8">
+                <h4 className="text-light text-center pt-3 pb-3 mb-0 jumbotron bg-secondary">
+                    Shipping Address
+                </h4>
                 <br />
                 <br />
                 <ReactQuill
                     theme="snow"
                     value={address}
                     onChange={setAddress}
+                    className="mx-2"
+                    onFocus={() => setAddress("")}
                 />
-                <button
-                    className="btn btn-primary mt-2"
-                    onClick={saveAddressToDb}
-                >
-                    Save
-                </button>
+                <div className="d-grid gap-2 col-4 mx-auto">
+                    <button
+                        className="btn btn-outline-primary mt-3"
+                        onClick={saveAddressToDb}
+                    >
+                        Confirm Address
+                    </button>
+                </div>
                 <hr />
-                <h4>Got Coupon?</h4>
+                <h4 className="text-light text-center pt-3 pb-3 mb-0 mt-3 jumbotron bg-secondary">
+                    Have Coupon?
+                </h4>
                 <br />
-                Coupon input and apply Button
+                {/* Coupon input and apply Button */}
             </div>
 
-            <div className="col-md-6">
-                <h4>Order Summary</h4>
+            <div className="col-md-4">
+                <h4 className="pt-3 jumbotron">Order Summary</h4>
                 <hr />
-                <p>Products {products.length}</p>
-                <hr />
+                <p>
+                    <strong>Products ({products.length})</strong>
+                </p>
                 {products.map((p, i) => (
                     <div key={i}>
                         <p>
@@ -83,27 +92,33 @@ const Checkout = () => {
                     </div>
                 ))}
                 <hr />
-                <p>Cart Total: ৳ {total}</p>
-
                 <div className="row">
                     <div className="col-md-6">
+                        <div className="d-flex flex-row mt-2">
+                            <b>Total Amount:&nbsp;</b>
+                            <b className="h6">৳&nbsp;</b>
+                            {total}
+                        </div>
+                    </div>
+
+                    <div className="col-md-6">
                         <button
-                            className="btn btn-primary"
+                            className="btn btn-outline-primary w-75"
                             disabled={!saveAddressToDb || !products.length}
                         >
                             Place Order
                         </button>
                     </div>
-
-                    <div className="col-md-6">
-                        <button
-                            disabled={!products.length}
-                            onClick={clearCart}
-                            className="btn btn-primary"
-                        >
-                            Clear Cart
-                        </button>
-                    </div>
+                </div>
+                <hr />
+                <div className="mx-auto row">
+                    <button
+                        disabled={!products.length}
+                        onClick={clearCart}
+                        className="btn btn-outline-danger w-75 m-auto"
+                    >
+                        Clear Cart
+                    </button>
                 </div>
             </div>
         </div>

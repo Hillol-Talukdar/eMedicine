@@ -17,7 +17,7 @@ const SideDrawer = () => {
     return (
         <Drawer
             className="text-center"
-            title={`Cart (${cart.length} Product(s))`}
+            title={`Cart (${cart.length} items)`}
             placement="right"
             closable={false}
             onClose={() => {
@@ -29,15 +29,15 @@ const SideDrawer = () => {
             visible={drawer}
         >
             {cart.map((product) => (
-                <div key={product._id} className="row">
-                    <div className="row">
+                <div key={product._id} className="row mb-2 mx-auto">
+                    <div className="row mx-auto">
                         {product.images[0] ? (
                             <>
                                 <img
                                     src={product.images[0].url}
                                     style={imageStyle}
                                 />
-                                <p className="text-center bg-secondary text-light">
+                                <p className="text-center bg-secondary text-light h6 small pb-2 pt-1">
                                     {product.title} * {product.count}
                                 </p>
                             </>
@@ -47,7 +47,7 @@ const SideDrawer = () => {
                                     src={defaultCoverImage}
                                     style={imageStyle}
                                 />
-                                <p className="text-center bg-secondary text-light">
+                                <p className="text-center bg-secondary text-light h6 small pb-2 pt-1">
                                     {product.title} * {product.count}
                                 </p>
                             </>
@@ -56,7 +56,7 @@ const SideDrawer = () => {
                 </div>
             ))}
 
-            <Link to="/cart">
+            <Link to="/cart" className="d-grid gap-2 col-8 mx-auto">
                 <button
                     onClick={() =>
                         dispatch({
@@ -64,7 +64,7 @@ const SideDrawer = () => {
                             payload: false,
                         })
                     }
-                    className="text-center btn btn-success btn-raised btn-block"
+                    className="text-center btn btn-outline-primary btn-sm"
                 >
                     Go To Cart
                 </button>
