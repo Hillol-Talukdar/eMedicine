@@ -48,3 +48,15 @@ exports.userCart = async (req, res) => {
     console.log("new Cart", newCart);
     res.json({ ok: true });
 };
+
+exports.getUserCart = async (req, res) => {
+    const user = await User.findOne({ email: req.user.email }).exec();
+
+    let cart = await new Cart.findOne({ orderdBy: user._id })
+        .populate("products.product", "_id title price totalAfterDiscount")
+        .exec();
+
+    const { products, cartTotal, totalAfterDiscount } = cart;
+
+    res.json({ products, cartTotal, totalAfterDiscount });
+};

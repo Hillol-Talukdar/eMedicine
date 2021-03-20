@@ -3,15 +3,14 @@ const express = require("express");
 const router = express.Router();
 
 //middlewares
-const { authCheck, adminCheck } = require("../middlewares/auth");
+const { authCheck } = require("../middlewares/auth");
 
 //controller
-const {
-    userCart
-} = require("../controllers/user");
+const { userCart, getUserCart } = require("../controllers/user");
 
 //save cart
 router.post("/user/cart", authCheck, userCart);
+router.get("/user/cart", authCheck, getUserCart);
 
 // router.get("/user", (req, res) => {
 //     res.json({
