@@ -47,7 +47,7 @@ const SingleProduct = ({ product, onClickStart, star }) => {
 
             dispatch({
                 type: "ADD_TO_CART",
-                payload: cart,
+                payload: unique,
             });
         }
     };

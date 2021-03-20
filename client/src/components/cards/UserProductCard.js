@@ -41,7 +41,7 @@ const UserProductCard = ({ product }) => {
 
             dispatch({
                 type: "ADD_TO_CART",
-                payload: cart,
+                payload: unique,
             });
         }
     };

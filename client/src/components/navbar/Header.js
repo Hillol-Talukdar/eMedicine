@@ -9,6 +9,7 @@ import {
     LogoutOutlined,
     DashboardOutlined,
     ShopOutlined,
+    ShoppingCartOutlined,
 } from "@ant-design/icons";
 import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +23,7 @@ const Header = () => {
     const [current, setCurrent] = useState("home");
 
     let dispatch = useDispatch();
-    let { user } = useSelector((state) => ({ ...state }));
+    let { user, cart } = useSelector((state) => ({ ...state }));
     let history = useHistory();
 
     const handleClick = (e) => {
@@ -95,7 +96,18 @@ const Header = () => {
                 </SubMenu>
             )}
 
-            <span className="w-25" style={{ float: "right" }}>
+            <Menu.Item
+                key="shop"
+                style={{ float: "right", marginRight: "1px" }}
+                icon={<ShoppingCartOutlined />}
+            >
+                <Link to="/cart">
+                    Cart&nbsp;
+                    <span className="badge bg-danger">{cart.length}</span>
+                </Link>
+            </Menu.Item>
+
+            <span className="w-25 center" style={{ float: "right" }}>
                 <SearchForm />
             </span>
         </Menu>
