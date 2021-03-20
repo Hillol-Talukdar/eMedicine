@@ -11,7 +11,7 @@ const {
 } = require("../controllers/user");
 
 //save cart
-router.post("/cart", authCheck, userCart);
+router.post("/user/cart", authCheck, userCart);
 
 // router.get("/user", (req, res) => {
 //     res.json({

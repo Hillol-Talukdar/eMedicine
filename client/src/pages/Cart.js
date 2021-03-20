@@ -85,8 +85,8 @@ const Cart = ({ history }) => {
                     {cart.map((c, i) => (
                         <div key={i}>
                             <p>
-                                {c.title} x {c.count} = {c.price * c.count}
-                                &nbsp;৳
+                                {c.title} x {c.count} = &nbsp;৳ {c.price * c.count}
+                                
                             </p>
                         </div>
                     ))}
