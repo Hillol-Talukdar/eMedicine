@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserCart, emptyUserCart } from "../functions/user";
+import { getUserCart, emptyCart } from "../functions/user";
 import { toast } from "react-toastify";
 
 const Checkout = () => {
@@ -22,7 +22,7 @@ const Checkout = () => {
         //
     };
 
-    const emptyCart = () => {
+    const clearCart = () => {
         if (typeof window !== "undefined") {
             localStorage.removeItem("cart");
         }
@@ -30,7 +30,7 @@ const Checkout = () => {
             type: "ADD_TO_CART",
             payload: [],
         });
-        emptyUserCart(user.token).then((res) => {
+        emptyCart(user.token).then((res) => {
             setProducts([]);
             setTotal(0);
             toast.success(`Cart is cleared. Continue Shopping!"`);
@@ -80,7 +80,7 @@ const Checkout = () => {
                     <div className="col-md-6">
                         <button
                             disabled={!products.length}
-                            onClick={emptyCart}
+                            onClick={clearCart}
                             className="btn btn-primary"
                         >
                             Clear Cart
