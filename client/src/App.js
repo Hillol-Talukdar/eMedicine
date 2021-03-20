@@ -5,6 +5,7 @@ import RegistrationDone from "./pages/auth/RegistrationDone";
 import Login from "./pages/auth/Login";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
+import Cart from "./pages/Cart";
 import Header from "./components/navbar/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -137,6 +138,7 @@ const App = () => {
                     component={SubCategoryHome}
                 />
                 <Route exact path="/shop" component={Shop} />
+                <Route exact path="/cart" component={Cart} />
             </Switch>
         </>
     );
