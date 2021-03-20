@@ -81,7 +81,7 @@ const ProductCartCard = ({ prod }) => {
                 <td className="text-center">
                     <input
                         type="number"
-                        className="form-control btn-sm"
+                        className="form-control w-50 m-auto text-center"
                         value={prod.count}
                         onChange={handleQuantityChange}
                     ></input>
