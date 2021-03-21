@@ -122,13 +122,13 @@ const Checkout = ({ history }) => {
                 }}
                 value={coupon}
                 type="text"
-                className="form-control text-center"
-                placeholder="Coupon"
+                className="form-control text-center w-50 mx-auto"
+                placeholder="Coupon Code"
             />
             <div className="d-grid gap-2 col-4 mx-auto">
                 <button
                     onClick={applyDiscountCoupon}
-                    className="btn btn-outline-primary mt-3"
+                    className="btn btn-outline-primary mt-3 mx-auto w-50"
                 >
                     Apply
                 </button>
