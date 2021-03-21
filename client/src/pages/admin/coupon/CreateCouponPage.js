@@ -21,20 +21,39 @@ const CreateCouponPage = () => {
     const { user } = useSelector((state) => ({ ...state }));
 
     useEffect(() => {
-        getCoupons().then((res) => setCoupons(res.data));
+        loadAllCoupons();
     }, []);
+
+    const loadAllCoupons = () =>
+        getCoupons().then((res) => setCoupons(res.data));
 
     const handleSubmit = (e) => {
         e.preventDefault();
         createCoupon({ name, expiry, discount }, user.token)
             .then((res) => {
                 setLoading(false);
+                loadAllCoupons();
                 setName("");
                 setDiscount("");
                 setExpiry("");
                 toast.success(`Coupon ${res.data.name} is created!`);
             })
             .catch((err) => console.log("Creating Coupon Error", err));
+    };
+
+    const handleRemove = (couponId) => {
+        if (window.confirm("Delete?")) {
+            setLoading(true);
+
+            removeCoupon(couponId, user.token)
+                .then((res) => {
+                    loadAllCoupons();
+                    setLoading(false);
+
+                    toast.error(` Coupon "${res.data.name}" deleted`);
+                })
+                .catch((err) => console.log(err));
+        }
     };
 
     return (
@@ -84,24 +103,30 @@ const CreateCouponPage = () => {
                                     value={expiry}
                                     placeholderText="Choose Expiry Date"
                                 />
-
-                                <button
-                                    class="btn btn-primary form-control w-25 mx-auto mt-3"
-                                    type="submit"
-                                    disabled={loading || name.length < 5}
+                                <div
+                                    class="d-grid col-8 w-45 mx-auto mt-3"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Name which contains atleast 5 character will enable this button"
                                 >
-                                    Create Coupon&nbsp;&nbsp;
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        fill="currentColor"
-                                        class="bi bi-plus-square-fill mb-1"
-                                        viewBox="0 0 16 16"
+                                    <button
+                                        class="btn btn-primary form-control w-25 mx-auto mt-3"
+                                        type="submit"
+                                        disabled={loading || name.length < 5}
                                     >
-                                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
-                                    </svg>
-                                </button>
+                                        Create Coupon&nbsp;&nbsp;
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-plus-square-fill mb-1"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </form>
 
@@ -122,23 +147,35 @@ const CreateCouponPage = () => {
                                 {coupons.map((c) => (
                                     <tr key={c._id}>
                                         <td>{c.name}</td>
-                                        <td>{new Date(c.expiry).toLocaleDateString()}</td>
+                                        <td>
+                                            {new Date(
+                                                c.expiry
+                                            ).toLocaleDateString()}
+                                        </td>
                                         <td>{c.discount}%</td>
                                         <td>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="16"
-                                                height="16"
-                                                fill="currentColor"
-                                                class="bi bi-trash text-danger"
-                                                viewBox="0 0 16 16"
+                                            <span
+                                                className="btn btn-sm"
+                                                onClick={() =>
+                                                    handleRemove(c._id)
+                                                }
+                                                style={{ float: "center" }}
                                             >
-                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                                                />
-                                            </svg>
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    fill="currentColor"
+                                                    class="bi bi-trash text-danger"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                                                    />
+                                                </svg>
+                                            </span>
                                         </td>
                                     </tr>
                                 ))}
