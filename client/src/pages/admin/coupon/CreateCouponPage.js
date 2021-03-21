@@ -15,10 +15,21 @@ const CreateCouponPage = () => {
     const [name, setName] = useState("");
     const [expiry, setExpiry] = useState("");
     const [discount, setDiscount] = useState("");
-    const [loading, setLoading] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const { user } = useSelector((state) => ({ ...state }));
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        createCoupon({ name, expiry, discount }, user.token)
+            .then((res) => {
+                setLoading(false);
+                setName("");
+                setDiscount("");
+                setExpiry("");
+                toast.success(`Coupon ${res.data.name} is created!`);
+            })
+            .catch((err) => console.log("Creating Coupon Error", err));
     };
 
     return (
@@ -35,7 +46,7 @@ const CreateCouponPage = () => {
                                 Creating Coupon...
                             </h4>
                         ) : (
-                            <h4 className="d-flex justify-content-center">
+                            <h4 className="d-flex justify-content-center  text-muted">
                                 Create New Coupon
                             </h4>
                         )}

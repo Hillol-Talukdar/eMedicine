@@ -83,7 +83,7 @@ const CreateSubCategory = () => {
                                 Creating Subcategory...
                             </h4>
                         ) : (
-                            <h4 className="d-flex justify-content-center">
+                            <h4 className="d-flex justify-content-center text-muted">
                                 Create New Subcategory
                             </h4>
                         )}
