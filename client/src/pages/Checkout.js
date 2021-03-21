@@ -10,6 +10,7 @@ const Checkout = () => {
     const [total, setTotal] = useState(0);
     const [address, setAddress] = useState("Enter Shipping Address Here");
     const [addressSaveStatus, setAddressSaveStatus] = useState(false);
+    const [coupon, setCoupon] = useState("");
 
     const dispatch = useDispatch();
     const { user } = useSelector((state) => ({ ...state }));
@@ -46,6 +47,59 @@ const Checkout = () => {
         });
     };
 
+    const showAddress = () => (
+        <>
+            <ReactQuill
+                theme="snow"
+                value={address}
+                onChange={setAddress}
+                className="mx-2"
+                onFocus={() => setAddress("")}
+            />
+            <div className="d-grid gap-2 col-4 mx-auto">
+                <button
+                    className="btn btn-outline-primary mt-3"
+                    onClick={saveAddressToDb}
+                >
+                    Confirm Address
+                </button>
+            </div>
+        </>
+    );
+
+    const showProductSummury = () => {
+        return products.map((p, i) => (
+            <div key={i}>
+                <p>
+                    {p.product.title} x {p.count} = ৳{" "}
+                    {p.product.price * p.count}
+                </p>
+            </div>
+        ));
+    };
+
+    const applyDiscountCoupon = () => {
+        console.log("send coupon to backend", coupon);
+    };
+
+    const showApplyCoupon = () => (
+        <>
+            <input
+                onChange={(e) => setCoupon(e.target.value)}
+                value={coupon}
+                type="text"
+                className="form-control"
+                placeholder="Coupon"
+            />
+            <button
+                onClick={applyDiscountCoupon}
+                className="btn btn-primary mt-2"
+            >
+                Apply
+            </button>
+        </>
+    );
+
     return (
         <div className="row">
             <div className="col-md-8">
@@ -54,27 +108,13 @@ const Checkout = () => {
                 </h4>
                 <br />
                 <br />
-                <ReactQuill
-                    theme="snow"
-                    value={address}
-                    onChange={setAddress}
-                    className="mx-2"
-                    onFocus={() => setAddress("")}
-                />
-                <div className="d-grid gap-2 col-4 mx-auto">
-                    <button
-                        className="btn btn-outline-primary mt-3"
-                        onClick={saveAddressToDb}
-                    >
-                        Confirm Address
-                    </button>
-                </div>
+                {showAddress()}
                 <hr />
                 <h4 className="text-light text-center pt-3 pb-3 mb-0 mt-3 jumbotron bg-secondary">
                     Have Coupon?
                 </h4>
                 <br />
-                {/* Coupon input and apply Button */}
+                {showApplyCoupon()}
             </div>
 
             <div className="col-md-4">
@@ -83,14 +123,8 @@ const Checkout = () => {
                 <p>
                     <strong>Products ({products.length})</strong>
                 </p>
-                {products.map((p, i) => (
-                    <div key={i}>
-                        <p>
-                            {p.product.title} x {p.count} = ৳{" "}
-                            {p.product.price * p.count}
-                        </p>
-                    </div>
-                ))}
+                {showProductSummury()}
+
                 <hr />
                 <div className="row">
                     <div className="col-md-6">
