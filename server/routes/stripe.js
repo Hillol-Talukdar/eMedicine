@@ -6,7 +6,7 @@ const { createPaymentIntent } = require("../controllers/stripe.js");
 
 const { route } = require("./user");
 
-const { authCheck } = require("../middlewares");
+const { authCheck } = require("../middlewares/auth");
 
 router.post("/create-payment-intent", authCheck, createPaymentIntent);
 
