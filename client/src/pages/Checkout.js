@@ -151,9 +151,8 @@ const Checkout = ({ history }) => {
                 </h4>
                 <br />
                 {showApplyCoupon()}
-                <br />
                 {disountError && (
-                    <p className="bg-danger text-light text-center p-2">
+                    <p className="bg-danger text-light text-center w-25 mx-auto p-2 mt-3">
                         {disountError}
                     </p>
                 )}
@@ -169,25 +168,30 @@ const Checkout = ({ history }) => {
                 <hr />
                 <div className="row">
                     <div className="col-md-6">
-                        <div className="d-flex flex-row mt-2">
+                        <div className="d-flex flex-row mt-2 mb-2">
                             <b>Total Amount:&nbsp;</b>
                             <b className="h6">৳&nbsp;</b>
                             {total}
                         </div>
                         {totalAfterDiscount > 0 && (
                             <div>
-                                <p className="bg-success text-light text-center p-2">
-                                    Discount Applied! <br /> Total Payable:{" "}
+                                <div className="mb-1">
+                                    <b className="text-light bg-primary p-1">
+                                        Discount Applied!
+                                    </b>
+                                </div>
+                                <b>Total Payable: </b>
+                                <b className="text-primary mt-1 h5">
                                     <b className="h6">৳&nbsp;</b>
                                     {totalAfterDiscount}
-                                </p>
+                                </b>
                             </div>
                         )}
                     </div>
 
-                    <div className="col-md-6">
+                    <div className="col-md-6 my-auto">
                         <button
-                            className="btn btn-outline-primary w-75"
+                            className="btn btn-outline-primary w-75 my-auto"
                             disabled={!addressSaveStatus || !products.length}
                             onClick={() => history.push("/payment")}
                         >
