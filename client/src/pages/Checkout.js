@@ -16,7 +16,7 @@ const Checkout = () => {
     const [address, setAddress] = useState("Enter Shipping Address Here");
     const [addressSaveStatus, setAddressSaveStatus] = useState(false);
     const [coupon, setCoupon] = useState("");
-    const [totalAfterDiscount, setTotalAfterDiscount] = useState("");
+    const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
     const [disountError, setDisountError] = useState("");
 
     const dispatch = useDispatch();
@@ -50,6 +50,8 @@ const Checkout = () => {
         emptyCart(user.token).then((res) => {
             setProducts([]);
             setTotal(0);
+            setTotalAfterDiscount(0);
+            setCoupon("");
             toast.success(`Cart is cleared. Continue Shopping!"`);
         });
     };
@@ -104,18 +106,23 @@ const Checkout = () => {
     const showApplyCoupon = () => (
         <>
             <input
-                onChange={(e) => setCoupon(e.target.value)}
+                onChange={(e) => {
+                    setCoupon(e.target.value);
+                    setDisountError("");
+                }}
                 value={coupon}
                 type="text"
-                className="form-control"
+                className="form-control text-center"
                 placeholder="Coupon"
             />
-            <button
-                onClick={applyDiscountCoupon}
-                className="btn btn-primary mt-2"
-            >
-                Apply
-            </button>
+            <div className="d-grid gap-2 col-4 mx-auto">
+                <button
+                    onClick={applyDiscountCoupon}
+                    className="btn btn-outline-primary mt-3"
+                >
+                    Apply
+                </button>
+            </div>
         </>
     );
 
@@ -134,6 +141,12 @@ const Checkout = () => {
                 </h4>
                 <br />
                 {showApplyCoupon()}
+                <br />
+                {disountError && (
+                    <p className="bg-danger text-light text-center p-2">
+                        {disountError}
+                    </p>
+                )}
             </div>
 
             <div className="col-md-4">
@@ -143,7 +156,6 @@ const Checkout = () => {
                     <strong>Products ({products.length})</strong>
                 </p>
                 {showProductSummury()}
-
                 <hr />
                 <div className="row">
                     <div className="col-md-6">
@@ -152,6 +164,15 @@ const Checkout = () => {
                             <b className="h6">৳&nbsp;</b>
                             {total}
                         </div>
+                        {totalAfterDiscount > 0 && (
+                            <div>
+                                <p className="bg-success text-light text-center p-2">
+                                    Discount Applied! <br /> Total Payable:{" "}
+                                    <b className="h6">৳&nbsp;</b>
+                                    {totalAfterDiscount}
+                                </p>
+                            </div>
+                        )}
                     </div>
 
                     <div className="col-md-6">
