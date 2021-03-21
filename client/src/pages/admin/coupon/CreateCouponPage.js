@@ -57,12 +57,12 @@ const CreateCouponPage = () => {
     };
 
     return (
-        <div>
-            <div class="row">
-                <div class="col-md-2">
+        <div className="w-100">
+            <div className="row w-100">
+                <div className="col-md-2">
                     <AdminPageNav />
                 </div>
-                <div class="col mt-4">
+                <div className="col-md-10 mt-4">
                     <h1 className="text-primary text-center">eMedicine</h1>
                     <div className="mt-3">
                         {loading ? (
@@ -131,19 +131,22 @@ const CreateCouponPage = () => {
                         </form>
 
                         <br />
-                        <h4>{coupons.length} Coupons</h4>
+                        <h4 className="text-center  text-muted">
+                            {coupons.length} Coupons Are Available Now For
+                            Applying
+                        </h4>
 
-                        <table className="table table-bordered table-striped ">
-                            <thead className="table-secondary">
+                        <table className="table table-bordered table-striped mx-auto">
+                            <thead className="table-secondary text-center">
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">Expiry</th>
                                     <th scope="col">Discount</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">Remove</th>
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody className="text-center">
                                 {coupons.map((c) => (
                                     <tr key={c._id}>
                                         <td>{c.name}</td>
