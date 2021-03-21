@@ -1,8 +1,7 @@
 const express = require("express");
-
 const router = express.Router();
 
-const { createPaymentIntent } = require("../controllers/stripe.js");
+const { createPaymentIntent } = require("../controllers/stripe");
 
 const { route } = require("./user");
 
