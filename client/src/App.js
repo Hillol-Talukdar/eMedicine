@@ -19,6 +19,7 @@ import UserPrivateRoute from "./components/routes/UserPrivateRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import CreateCategory from "./pages/admin/category/CreateCategory";
 import UpdateCategory from "./pages/admin/category/UpdateCategory";
+import CreateCouponPage from "./pages/admin/coupon/CreateCouponPage";
 import CreateSubCategory from "./pages/admin/sub-category/CreateSubCategory";
 import UpdateSubCategory from "./pages/admin/sub-category/UpdateSubCategory";
 import CreateProduct from "./pages/admin/product/CreateProduct";
@@ -143,6 +144,11 @@ const App = () => {
                 <Route exact path="/shop" component={Shop} />
                 <Route exact path="/cart" component={Cart} />
                 <Route exact path="/checkout" component={Checkout} />
+                <AdminRoute
+                    exact
+                    path="/admin/coupon"
+                    component={CreateCouponPage}
+                />
             </Switch>
         </>
     );
