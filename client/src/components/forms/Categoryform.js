@@ -10,7 +10,7 @@ const Categoryform = ({
     placeholder,
 }) => (
     <form
-        class="d-flex align-items-center flex-column"
+    className="d-flex align-items-center flex-column"
         onSubmit={submitHandler}
     >
         <input
@@ -25,13 +25,13 @@ const Categoryform = ({
         />
 
         <div
-            class="mx-auto mt-3"
+            className="mx-auto mt-3"
             data-toggle="tooltip"
             data-placement="top"
             title="Name which contains atleast 2 character will enable this button"
         >
             <button
-                class="btn btn-primary"
+                className="btn btn-primary"
                 type="submit"
                 disabled={loading || name.length < 2}
             >
