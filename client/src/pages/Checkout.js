@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const Checkout = () => {
+const Checkout = ({ history }) => {
     const [products, setProducts] = useState([]);
     const [total, setTotal] = useState(0);
     const [address, setAddress] = useState("Enter Shipping Address Here");
@@ -94,11 +94,21 @@ const Checkout = () => {
             // console.log("RES ON COUPON APPLIED", res.data);
             if (res.data) {
                 setTotalAfterDiscount(res.data);
-                //update reddux coupon applied
+
+                //update reddux coupon applied true/false
+                dispatch({
+                    type: "COUPON_APPLIED",
+                    payload: true,
+                });
             }
             if (res.data.err) {
                 setDisountError(res.data.err);
-                //update reddux coupon applied
+
+                //update reddux coupon applied true/false
+                dispatch({
+                    type: "COUPON_APPLIED",
+                    payload: false,
+                });
             }
         });
     };
@@ -178,7 +188,8 @@ const Checkout = () => {
                     <div className="col-md-6">
                         <button
                             className="btn btn-outline-primary w-75"
-                            disabled={!saveAddressToDb || !products.length}
+                            disabled={!addressSaveStatus || !products.length}
+                            onClick={() => history.push("/payment")}
                         >
                             Place Order
                         </button>

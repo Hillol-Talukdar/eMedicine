@@ -29,6 +29,7 @@ import Product from "./pages/Product";
 import CategoryHome from "./pages/category/CategoryHome";
 import SubCategoryHome from "./pages/subCategory/SubCategoryHome";
 import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -149,6 +150,7 @@ const App = () => {
                     path="/admin/coupon"
                     component={CreateCouponPage}
                 />
+                <AdminRoute exact path="/payment" component={Payment} />
             </Switch>
         </>
     );
