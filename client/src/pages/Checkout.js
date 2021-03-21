@@ -137,7 +137,7 @@ const Checkout = ({ history }) => {
     );
 
     return (
-        <div className="row">
+        <div className="row w-100">
             <div className="col-md-8">
                 <h4 className="text-light text-center pt-3 pb-3 mb-0 jumbotron bg-secondary">
                     Shipping Address

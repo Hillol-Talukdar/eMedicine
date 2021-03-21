@@ -280,7 +280,7 @@ const Shop = () => {
 
     return (
         <div className="container.fluid">
-            <div className="row">
+            <div className="row w-100">
                 <div className="col-md-3">
                     <h4 className="text-center pt-2 pb-2 mt-3 mb-3 jumbotron">
                         Search
