@@ -210,6 +210,7 @@ const Shop = () => {
         brands.map((brnd) => (
             <>
                 <Radio
+                    key={brnd}
                     value={brnd}
                     name={brnd}
                     checked={brnd === brand}
