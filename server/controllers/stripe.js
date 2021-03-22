@@ -25,7 +25,7 @@ exports.createPaymentIntent = async (req, res) => {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-        amount: cartTotal * 100,
+        amount: finalAmount,
         currency: "bdt",
     });
 
