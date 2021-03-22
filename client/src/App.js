@@ -57,7 +57,7 @@ const App = () => {
                             },
                         });
                     })
-                    .catch();
+                    .catch((err) => console.log(err));
             }
         });
 
@@ -144,13 +144,13 @@ const App = () => {
                 />
                 <Route exact path="/shop" component={Shop} />
                 <Route exact path="/cart" component={Cart} />
-                <Route exact path="/checkout" component={Checkout} />
+                <UserPrivateRoute exact path="/checkout" component={Checkout} />
                 <AdminRoute
                     exact
                     path="/admin/coupon"
                     component={CreateCouponPage}
                 />
-                <AdminRoute exact path="/payment" component={Payment} />
+                <UserPrivateRoute exact path="/payment" component={Payment} />
             </Switch>
         </>
     );
