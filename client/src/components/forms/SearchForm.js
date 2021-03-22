@@ -36,9 +36,9 @@ const SearchForm = () => {
                     onClick={handleSubmit}
                     style={{
                         cursor: "pointer",
-                        fontSize: "23px",
+                        fontSize: "18px",
                         marginLeft: "10px",
-                        marginTop: "10px",
+                        marginTop: "14px",
                     }}
                 />
             </div>
