@@ -38,7 +38,7 @@ const SearchForm = () => {
                         cursor: "pointer",
                         fontSize: "18px",
                         marginLeft: "10px",
-                        marginTop: "14px",
+                        marginTop: "15px",
                     }}
                 />
             </div>
