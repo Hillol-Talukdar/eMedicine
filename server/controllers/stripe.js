@@ -5,7 +5,7 @@ const Coupon = require("../models/coupon");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 exports.createPaymentIntent = async (req, res) => {
-    // later apply coupon
+    const { couponApplied } = req.body;
 
     // later calculate price
     const user = await User.findOne({ email: req.user.email }).exec();
@@ -31,5 +31,8 @@ exports.createPaymentIntent = async (req, res) => {
 
     res.send({
         clientSecret: paymentIntent.client_secret,
+        cartTotal,
+        totalAfterDiscount,
+        payable: finalAmount,
     });
 };
