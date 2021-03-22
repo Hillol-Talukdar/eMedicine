@@ -27,9 +27,9 @@ const History = () => {
             <thead className="table-secondary text-center">
                 <tr>
                     <th scope="col">Title</th>
-                    <th scope="col">Price</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Count</th>
+                    <th scope="col">Price</th>
                     <th scope="col">Shipping</th>
                 </tr>
             </thead>
@@ -40,9 +40,9 @@ const History = () => {
                         <td>
                             <b>{p.product.title}</b>
                         </td>
-                        <td>{p.product.price}</td>
                         <td>{p.product.brand}</td>
                         <td>{p.count}</td>
+                        <td>{p.product.price}</td>
                         <td>
                             {p.product.shipping === "Yes" ? (
                                 <CheckCircleOutlined
