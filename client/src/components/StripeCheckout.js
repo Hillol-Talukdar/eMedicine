@@ -3,6 +3,13 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useSelector, useDispatch } from "react-redux";
 import { createPaymentIntent } from "../functions/stripe";
 import { Link } from "react-router-dom";
+import { Card } from "antd";
+import {
+    DownSquareOutlined,
+    CheckOutlined,
+    SwapOutlined,
+} from "@ant-design/icons";
+import defaultCoverImage from "../images/defaultCoverImage.png";
 
 const StripeCheckout = ({ history }) => {
     const dispatch = useDispatch();
@@ -14,12 +21,20 @@ const StripeCheckout = ({ history }) => {
     const [disabled, setDisabled] = useState(true);
     const [clientSecret, setClientSecret] = useState("");
 
+    const [cartTotal, setCartTotal] = useState(0);
+    const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
+    const [payable, setPayable] = useState(0);
+
     const stripe = useStripe();
     const elements = useElements();
 
     useEffect(() => {
         createPaymentIntent(user.token, coupon).then((res) => {
             setClientSecret(res.data.clientSecret);
+            //response received on successful payment
+            setCartTotal(res.data.cartTotal);
+            setTotalAfterDiscount(res.data.totalAfterDiscount);
+            setPayable(res.data.payable);
         });
     }, []);
 
@@ -72,14 +87,50 @@ const StripeCheckout = ({ history }) => {
 
     return (
         <>
-            <p
-                className={
-                    succeeded ? "result-message" : "result-message hidden"
-                }
-            >
-                Payment Successful!{" "}
-                <Link to="/user/history">Check in purchase history.</Link>
-            </p>
+            {!succeeded && (
+                <div>
+                    {coupon && totalAfterDiscount !== undefined ? (
+                        <p className="h6 alert alert-success mb-1">{`Total Amount After Discount: ৳ ${totalAfterDiscount}`}</p>
+                    ) : (
+                        <p className="alert alert-danger mb-1">
+                            No coupon is applied
+                        </p>
+                    )}
+                </div>
+            )}
+            <div className="text-center mb-1">
+                <Card
+                    cover={
+                        <img
+                            src={defaultCoverImage}
+                            style={{
+                                height: "200px",
+                                objectFit: "cover",
+                                marginBottom: "-50px",
+                            }}
+                        />
+                    }
+                    actions={[
+                        <>
+                            <DownSquareOutlined
+                                className="text-muted mt-2 mb-1"
+                                style={{ fontSize: "19px" }}
+                            />{" "}
+                            <br /> <p className="h6">Total: ৳ {cartTotal}</p>
+                        </>,
+                        <>
+                            <CheckOutlined
+                                className="text-primary mt-2 mb-1"
+                                style={{ fontSize: "18px" }}
+                            />{" "}
+                            <br />{" "}
+                            <p className="h6 text-primary">
+                                Total payable : ৳ {(payable / 100).toFixed(2)}
+                            </p>
+                        </>,
+                    ]}
+                />
+            </div>
             <form
                 id="payment-form"
                 className="stripe-form"
@@ -108,6 +159,15 @@ const StripeCheckout = ({ history }) => {
                         {error}
                     </div>
                 )}
+                <br />
+                <p
+                    className={
+                        succeeded ? "result-message" : "result-message hidden"
+                    }
+                >
+                    Payment Successful!{" "}
+                    <Link to="/user/history">Check in purchase history.</Link>
+                </p>
             </form>
         </>
     );
