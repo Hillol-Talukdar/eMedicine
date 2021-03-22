@@ -64,13 +64,13 @@ const History = () => {
             fileName="invoice.pdf"
             className="btn btn-sm btn-block btn-outline-primary"
         >
-            Download PDF
+            Download Invoice PDF
         </PDFDownloadLink>
     );
 
     const showEachOrders = () =>
         orders.map((order, i) => (
-            <div key={i} className="m-5 p-3 card">
+            <div key={i} className="m-4 p-3 card">
                 <ShowPaymentInfo order={order} />
 
                 {showOrderInTable(order)}
@@ -87,11 +87,11 @@ const History = () => {
                 <div className="col-md-2">
                     <UserPageNavbar />
                 </div>
-                <div className="col text-center">
+                <div className="col text-center mt-4">
                     <h4>
                         {orders.length > 0
-                            ? "User purchase orders"
-                            : "No purchase orders"}
+                            ? "Your Order History"
+                            : "No Purchase Orders"}
                     </h4>
 
                     {showEachOrders()}

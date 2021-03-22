@@ -27,9 +27,9 @@ const Cart = ({ history }) => {
     };
 
     const showCartItems = () => (
-        <table className="table table-bordered">
-            <thead className="thead-light">
-                <tr className="table-dark">
+        <table className="table table-bordered table-striped mx-auto">
+            <thead className="table-secondary">
+                <tr className="">
                     <th className="text-center" scope="col">
                         Product Image
                     </th>
@@ -85,8 +85,8 @@ const Cart = ({ history }) => {
                     {cart.map((c, i) => (
                         <div key={i}>
                             <p>
-                                {c.title} x {c.count} = &nbsp;৳ {c.price * c.count}
-                                
+                                {c.title} x {c.count} = &nbsp;৳{" "}
+                                {c.price * c.count}
                             </p>
                         </div>
                     ))}
