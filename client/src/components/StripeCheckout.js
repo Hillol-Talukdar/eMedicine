@@ -112,22 +112,27 @@ const StripeCheckout = ({ history }) => {
                     }
                     actions={[
                         <>
-                            <DownSquareOutlined
-                                className="text-muted mt-2 mb-1"
-                                style={{ fontSize: "19px" }}
-                            />{" "}
-                            <br /> <p className="h6">Total: ৳ {cartTotal}</p>
+                            <div className="mx-auto">
+                                <DownSquareOutlined
+                                    className="text-muted mt-2 mb-1"
+                                    style={{ fontSize: "19px" }}
+                                />{" "}
+                                <br />{" "}
+                                <p className="h6">Total: ৳ {cartTotal}</p>
+                            </div>
                         </>,
-                        <>
+                        <div>
                             <CheckOutlined
                                 className="text-primary mt-2 mb-1"
-                                style={{ fontSize: "18px" }}
+                                style={{
+                                    fontSize: "18px",
+                                }}
                             />{" "}
                             <br />{" "}
                             <p className="h6 text-primary">
                                 Total payable : ৳ {(payable / 100).toFixed(2)}
                             </p>
-                        </>,
+                        </div>,
                     ]}
                 />
             </div>
