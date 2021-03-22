@@ -41,24 +41,24 @@ const Invoice = ({ order }) => (
 
             <Text style={styles.text}>
                 <Text>
-                    Date: {"         "}
+                    Date:{"               "}
                     {new Date(
                         order.paymentIntent.created * 1000
                     ).toLocaleString()}
                 </Text>
                 {"\n"}
                 <Text>
-                    Order Id: {"         "}
+                    Order Id:{"         "}
                     {order.paymentIntent.id}
                 </Text>
                 {"\n"}
                 <Text>
-                    Order Status: {"         "}
+                    Order Status:{"  "}
                     {order.orderStatus}
                 </Text>
                 {"\n"}
                 <Text>
-                    Total Paid: {"         "}
+                    Total Paid:{"       "}
                     {order.paymentIntent.amount}
                 </Text>
             </Text>
