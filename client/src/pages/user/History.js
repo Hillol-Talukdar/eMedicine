@@ -15,11 +15,45 @@ const History = () => {
 
     const loadUserOrders = () =>
         getUserOrders(user.token).then((res) => {
-            console.log(JSON.stringify(res.data, null, 4));
+            // console.log(JSON.stringify(res.data, null, 4));
             setOrders(res.data);
         });
 
-    const showOrderInTable = (order) => <p>each order and it's product</p>;
+    const showOrderInTable = (order) => (
+        <table className="table table-bordered table-striped mx-auto">
+            <thead className="table-secondary text-center">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Count</th>
+                    <th scope="col">Shipping</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {order.products.map((p, i) => (
+                    <tr key={i}>
+                        <td>
+                            <b>{p.product.title}</b>
+                        </td>
+                        <td>{p.product.price}</td>
+                        <td>{p.product.brand}</td>
+                        <td>{p.count}</td>
+                        <td>
+                            {p.product.shipping === "Yes" ? (
+                                <CheckCircleOutlined
+                                    style={{ color: "green" }}
+                                />
+                            ) : (
+                                <CloseCircleOutlined style={{ color: "red" }} />
+                            )}
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    );
 
     const showEachOrders = () =>
         orders.map((order, i) => (
@@ -37,12 +71,12 @@ const History = () => {
         ));
 
     return (
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-2">
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-md-2">
                     <UserPageNavbar />
                 </div>
-                <div class="col text-center">
+                <div className="col text-center">
                     <h4>
                         {orders.length > 0
                             ? "User purchase orders"
