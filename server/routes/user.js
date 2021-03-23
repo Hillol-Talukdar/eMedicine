@@ -14,6 +14,9 @@ const {
     applyCouponToUserCart,
     createOrder,
     orders,
+    addToWishlist,
+    wishlist,
+    removeFromWishlist,
 } = require("../controllers/user");
 
 //save cart
