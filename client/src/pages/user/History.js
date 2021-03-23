@@ -84,7 +84,7 @@ const History = () => {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-2 border">
                     <UserPageNavbar />
                 </div>
                 <div className="col text-center mt-4">

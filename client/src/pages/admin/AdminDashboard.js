@@ -29,7 +29,7 @@ const AdminDashboard = () => {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-2 border">
                     <AdminPageNav />
                 </div>
                 <div className="col mt-4 mx-5">
