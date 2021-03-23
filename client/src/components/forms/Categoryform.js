@@ -33,7 +33,7 @@ const Categoryform = ({
             <button
                 className="btn btn-primary"
                 type="submit"
-                disabled={loading || name.length < 2}
+                disabled={loading}
             >
                 {btnName}&nbsp;&nbsp;{btnIcon}
             </button>
