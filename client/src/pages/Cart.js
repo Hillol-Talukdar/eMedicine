@@ -26,6 +26,23 @@ const Cart = ({ history }) => {
             .catch((err) => console.log("cart save err", err));
     };
 
+    const saveCashOrderNow = () => {
+        // console.log("cart", JSON.stringify(cart, null, 4));
+        dispatch({
+            type: "COD",
+            payload: true,
+        });
+
+        userCart(cart, user.token)
+            .then((res) => {
+                // console.log("cart POST RES", res);
+                if (res.data.ok) {
+                    history.push("/checkout");
+                }
+            })
+            .catch((err) => console.log("cart save err", err));
+    };
+
     const showCartItems = () => (
         <table className="table table-bordered table-striped mx-auto">
             <thead className="table-secondary">
@@ -99,13 +116,23 @@ const Cart = ({ history }) => {
                     </div>
                     <hr />
                     {user ? (
-                        <button
-                            onClick={saveOrderNow}
-                            disabled={!cart.length}
-                            className="btn btn-primary btn-sm"
-                        >
-                            Proceed to Checkout
-                        </button>
+                        <>
+                            <button
+                                onClick={saveOrderNow}
+                                disabled={!cart.length}
+                                className="btn btn-primary btn-sm"
+                            >
+                                Proceed to Checkout
+                            </button>
+                            <br />
+                            <button
+                                onClick={saveCashOrderNow}
+                                disabled={!cart.length}
+                                className="btn btn-warning btn-sm"
+                            >
+                                Pay Cash on Delivery
+                            </button>
+                        </>
                     ) : (
                         <button className="btn btn-primary btn-sm">
                             <Link
