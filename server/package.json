@@ -21,7 +21,8 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
     "slugify": "^1.4.7",
-    "stripe": "^8.138.0"
+    "stripe": "^8.138.0",
+    "uniqueid": "^1.0.0"
   },
   "devDependencies": {},
   "description": ""

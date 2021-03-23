@@ -116,7 +116,7 @@ const Cart = ({ history }) => {
                     </div>
                     <hr />
                     {user ? (
-                        <>
+                        <div className="d-flex justify-content-between">
                             <button
                                 onClick={saveOrderNow}
                                 disabled={!cart.length}
@@ -124,15 +124,15 @@ const Cart = ({ history }) => {
                             >
                                 Proceed to Checkout
                             </button>
-                            <br />
+
                             <button
                                 onClick={saveCashOrderNow}
                                 disabled={!cart.length}
-                                className="btn btn-warning btn-sm"
+                                className="btn btn-secondary btn-sm"
                             >
                                 Pay Cash on Delivery
                             </button>
-                        </>
+                        </div>
                     ) : (
                         <button className="btn btn-primary btn-sm">
                             <Link
