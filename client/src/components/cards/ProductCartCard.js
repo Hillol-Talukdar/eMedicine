@@ -90,18 +90,18 @@ const ProductCartCard = ({ prod }) => {
                     {prod.shipping === "Yes" ? (
                         <CheckSquareOutlined
                             style={{ fontSize: "21px" }}
-                            className="text-success"
+                            className="text-success mt-2"
                         />
                     ) : (
                         <CloseSquareOutlined
                             style={{ fontSize: "21px" }}
-                            className="text-danger"
+                            className="text-danger mt-2"
                         />
                     )}
                 </td>
                 <td className="text-center">
                     <CloseCircleOutlined
-                        style={{ fontSize: "21px" }}
+                        style={{ fontSize: "22px" }}
                         className="btn text-danger"
                         onClick={handleRemove}
                     />

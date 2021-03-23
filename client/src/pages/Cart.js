@@ -87,7 +87,7 @@ const Cart = ({ history }) => {
                         </h6>
                     </h4>
                     {!cart.length ? (
-                        <h6>
+                        <h6 className="mb-3">
                             No Product Found In Your Cart.{" "}
                             <Link to="/shop">Continue Shopping!</Link>
                         </h6>
