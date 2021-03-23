@@ -169,8 +169,11 @@ const Checkout = ({ history }) => {
 
                     // empty cart from backend
                     emptyCart(user.token);
-                    
+
                     // redirect
+                    setTimeout(() => {
+                        history.push("/user/history");
+                    }, 1000);
                 }
             }
         );
