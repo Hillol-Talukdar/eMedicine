@@ -144,7 +144,7 @@ const Header = () => {
                     style={{ float: "right" }}
                     title={user.email && " ".concat(user.email.split("@")[0])}
                 >
-                    {user && user.role === "subscriber" && (
+                    {user && user.role === "user" && (
                         <Menu.Item>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
