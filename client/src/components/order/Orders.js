@@ -65,6 +65,9 @@ const Orders = ({ orders, handleStatusChange }) => {
                                     <option value="Not Processed">
                                         Not Processed
                                     </option>
+                                    <option value="Cash On Delivery">
+                                        Cash On Delivery
+                                    </option>
                                     <option value="Processing">
                                         Processing
                                     </option>
