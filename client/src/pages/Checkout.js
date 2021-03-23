@@ -5,6 +5,7 @@ import {
     emptyCart,
     saveAddress,
     applyCoupon,
+    createCashOrderForUser,
 } from "../functions/user";
 import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
@@ -20,7 +21,7 @@ const Checkout = ({ history }) => {
     const [disountError, setDisountError] = useState("");
 
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => ({ ...state }));
+    const { user, COD } = useSelector((state) => ({ ...state }));
 
     useEffect(() => {
         getUserCart(user.token).then((res) => {
@@ -136,6 +137,14 @@ const Checkout = ({ history }) => {
         </>
     );
 
+    const createCashOrder = () => {
+        createCashOrderForUser(user.token).then((res) => {
+            console.log("USER CASH PRDER CREATED RES", res);
+            //empty cart from redux, local storage, reset coupon, COD, redirect
+            //
+        });
+    };
+
     return (
         <div className="row w-100">
             <div className="col-md-8">
@@ -190,13 +199,27 @@ const Checkout = ({ history }) => {
                     </div>
 
                     <div className="col-md-6 my-auto">
-                        <button
-                            className="btn btn-outline-primary w-75 my-auto"
-                            disabled={!addressSaveStatus || !products.length}
-                            onClick={() => history.push("/payment")}
-                        >
-                            Place Order
-                        </button>
+                        {COD ? (
+                            <button
+                                className="btn btn-outline-primary w-75 my-auto"
+                                disabled={
+                                    !addressSaveStatus || !products.length
+                                }
+                                onClick={createCashOrder}
+                            >
+                                Place Order
+                            </button>
+                        ) : (
+                            <button
+                                className="btn btn-outline-primary w-75 my-auto"
+                                disabled={
+                                    !addressSaveStatus || !products.length
+                                }
+                                onClick={() => history.push("/payment")}
+                            >
+                                Place Order
+                            </button>
+                        )}
                     </div>
                 </div>
                 <hr />
