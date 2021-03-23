@@ -22,6 +22,7 @@ const Checkout = ({ history }) => {
 
     const dispatch = useDispatch();
     const { user, COD } = useSelector((state) => ({ ...state }));
+    const couponTrueOrFalse = useSelector((state) => state.coupon);
 
     useEffect(() => {
         getUserCart(user.token).then((res) => {
@@ -138,11 +139,13 @@ const Checkout = ({ history }) => {
     );
 
     const createCashOrder = () => {
-        createCashOrderForUser(user.token, COD).then((res) => {
-            console.log("USER CASH PRDER CREATED RES", res);
-            //empty cart from redux, local storage, reset coupon, COD, redirect
-            //
-        });
+        createCashOrderForUser(user.token, COD, couponTrueOrFalse).then(
+            (res) => {
+                console.log("USER CASH PRDER CREATED RES", res);
+                //empty cart from redux, local storage, reset coupon, COD, redirect
+                //
+            }
+        );
     };
 
     return (
